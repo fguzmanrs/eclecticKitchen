@@ -20,6 +20,10 @@ $('document').ready(function(){
     
     searchBtnHandler();
 
+    /**********************************/
+    /*           EVENT HANDLER        */
+    /**********************************/
+
     async function searchBtnHandler(){
 
         await getRecipesFromAPI();
@@ -30,6 +34,10 @@ $('document').ready(function(){
         console.log('recipes arr: ', state.recipes);
     }
     
+    /**********************************/
+    /*              API               */
+    /**********************************/
+
     async function getRecipesFromAPI(){
         
         await $.ajax({
@@ -39,7 +47,11 @@ $('document').ready(function(){
         }).then(function(response){ state.rawData = response });
     
     }
-   
+
+    /**********************************/
+    /*              FUNCTION          */
+    /**********************************/
+
     function createRecipesArr(){
     
         var recipesArr = [];
@@ -53,33 +65,52 @@ $('document').ready(function(){
                 // 1. add id, title, img to RecipeObj
                 recipeObj.id = rawRecipe.id;
                 recipeObj.title = rawRecipe.title;
-                recipeObj.img = rawRecipe.image;
-            
+                recipeObj.img = resizeImg(rawRecipe.image);
+
                 // 2. add used ingredients arr to RecipeObj
                 recipeObj.usedIngredients = createIngArr(rawRecipe.usedIngredients);
-
+                
                 // 3. add missed ingredients arr to RecipeObj
                 recipeObj.missedIngredients = createIngArr(rawRecipe.missedIngredients);
             
             recipesArr.push(recipeObj);
         }
+
+        // Save the created array to state database
         state.recipes = recipesArr;
     }
 
-    // Take only ingredient's name property
+
+
+    /**********************************/
+    /*              UTILITY           */
+    /**********************************/
+
+    // Take only ingredient's NAME property
     function createIngArr(ingArr){ 
-        return ingArr.map( function(el){ return el.name });
+
+        var newArr = ingArr.map( function(el){ return el.name });
+            
+            // delete duplicated elements
+            newArr = Array.from(new Set(newArr));
+        
+        return newArr;
     }
 
+    function resizeImg(str){
 
+        // Change default size(312x231) to max-size(636x393)
+        return str.replace("312x231", "636x393");
+
+    }
 
 
 // end
 })
 // Todo
-    // duplicated ingredient element deleting function
-    
-    // image: data[i].image, data **312x231 => change to https://spoonacular.com/recipeImages/{ID}-636x393.{TYPE}
+    // duplicated ingredient element deleting function - done
+
+    // image: data[i].image, data **312x231 => change to https://spoonacular.com/recipeImages/{ID}-636x393.{TYPE} - done
 
     // 2. Add an instruction property to each recipe {}. format: [step1,step2,step3...]
 
