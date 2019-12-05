@@ -4,14 +4,12 @@
     // 06238180649d43e0bffc9f3ac6536dc3
 
 var state ={
-            recipeArr: [],
-            currentRecipe : {
-                                id: null, // Francisco will need this id for detailed recipe
-                                title:"",
-                                usedIng: [],
-                                missedIng: [],
-                                img:""
-                            }
+            numOfRequest: 10, // how many recipe will you get from server? 1-100
+            // numOfRender: 3,
+            rawData: [],
+            // recipeIds:[],
+            recipes: [],
+            // currentRecipes : []
             }
 
 $('document').ready(function(){
@@ -19,50 +17,70 @@ $('document').ready(function(){
     var apiKey = "bb5452cb4b074d1a899410830c863f29"
     var ingredients = "tomato,butter,milk,cucumber,egg,sour cream"
     
-    $.ajax({
     
-        url: `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&number=10&ranking=1&ignorePantry=true&ingredients=${ingredients}`
-    
-    }).then(function(response){
+    searchBtnHandler();
 
-        console.log(response);
-        state.recipeArr = response;
+    async function searchBtnHandler(){
 
-        var l = response.length;
+        await getRecipesFromAPI();
+        console.log('raw data: ', state.rawData);
         
+        // Take only necessary info from raw data and create each recipe {}. Then add it to one recipes [].
+        createRecipesArr();
+        console.log('recipes arr: ', state.recipes);
+    }
+    
+    async function getRecipesFromAPI(){
+        
+        await $.ajax({
+        
+            url: `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&number=${state.numOfRequest}&ranking=1&ignorePantry=true&ingredients=${ingredients}`
+        
+        }).then(function(response){ state.rawData = response });
+    
+    }
+   
+    function createRecipesArr(){
+    
+        var recipesArr = [];
+
+        var l = state.rawData.length;
         for( var i=0; i < l ; i++){
+        
+            var rawRecipe = state.rawData[i];
+            var recipeObj = {}; // format: { id: , title: , usedIng: , missedIng: , img: }
+        
+                // 1. add id, title, img to RecipeObj
+                recipeObj.id = rawRecipe.id;
+                recipeObj.title = rawRecipe.title;
+                recipeObj.img = rawRecipe.image;
+            
+                // 2. add used ingredients arr to RecipeObj
+                recipeObj.usedIngredients = createIngArr(rawRecipe.usedIngredients);
 
-            var recipe = response[i];
-
-            state.currentRecipe.id = recipe.id;
-            state.currentRecipe.title = recipe.title;
-
-           
-
-            state.currentRecipe.img = recipe.image;
-
+                // 3. add missed ingredients arr to RecipeObj
+                recipeObj.missedIngredients = createIngArr(rawRecipe.missedIngredients);
+            
+            recipesArr.push(recipeObj);
         }
-        // add ing list arr
-        createIngArr(state.currentRecipe.usedIng, recipe.usedIngredients);
-        createIngArr(state.currentRecipe.missedIng, recipe.missedIngredients);
-        console.log(state.currentRecipe.usedIng, state.currentRecipe.missedIng);
+        state.recipes = recipesArr;
+    }
 
-    // DATA NEEDED
-    // title, usedIngredients, missedIngredients
+    // Take only ingredient's name property
+    function createIngArr(ingArr){ 
+        return ingArr.map( function(el){ return el.name });
+    }
+
+
+
+
+// end
+})
+// Todo
+    // duplicated ingredient element deleting function
+    
     // image: data[i].image, data **312x231 => change to https://spoonacular.com/recipeImages/{ID}-636x393.{TYPE}
 
-    // DATABASE NEED TO CHANGE to 3 main lists 
-    })
-})
+    // 2. Add an instruction property to each recipe {}. format: [step1,step2,step3...]
 
-function createIngArr(addTo, ingArr){
-            
-    var l = ingArr.length;
-
-    for( var i =0 ; i < l ; i++ ){
-
-        addTo.push(ingArr[i].name);
-
-    }
-}
-   
+    // 3. recipe validator (*Pass only when it has instructions): return valid recipe arr
