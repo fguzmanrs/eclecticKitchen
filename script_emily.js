@@ -15,36 +15,62 @@ var state ={
 $('document').ready(function(){
 
     var apiKey = "bb5452cb4b074d1a899410830c863f29"
-    var ingredients = "tomato,butter,milk,cucumber,egg,sour cream"
+    // var ingredients = "tomato,butter,milk,cucumber,egg,sour cream"
     
-    
-    searchBtnHandler();
+    // searchBtnHandler();
 
     /**********************************/
     /*           EVENT HANDLER        */
     /**********************************/
 
-    async function searchBtnHandler(){
-
-        await getRecipesFromAPI();
-        console.log('raw data: ', state.rawData);
+    async function searchBtnHandler(e){
         
-        // Take only necessary info from raw data and create each recipe {}. Then add it to one recipes [].
-        createRecipesArr();
-        console.log('recipes arr: ', state.recipes);
+        e.preventDefault();
+        
+        var inputIngredients = $('#inputIng').val().trim();
+        console.log(inputIngredients);
+        
+        if(inputIngredients){
+
+            await getRecipesFromAPI(inputIngredients);
+            console.log('raw data: ', state.rawData);
+            
+            // Take only necessary info from raw data and create each recipe {}. Then add all recipes {}s to one [].
+            createRecipesArr();
+            console.log('recipes arr: ', state.recipes);
+
+        }else{
+            // ** Need to change this alert to modal later
+            alert('Please enter at least one valid ingredient.');
+            
+        }
+    
     }
     
     /**********************************/
     /*              API               */
     /**********************************/
 
-    async function getRecipesFromAPI(){
+    async function getRecipesFromAPI(ingredients){
         
+
         await $.ajax({
-        
-            url: `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&number=${state.numOfRequest}&ranking=1&ignorePantry=true&ingredients=${ingredients}`
-        
-        }).then(function(response){ state.rawData = response });
+                        url: `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&number=${state.numOfRequest}&ranking=1&ignorePantry=true&ingredients=${ingredients}`,
+                        method: 'GET'
+                    })
+                .then(function(response){ state.rawData = response })
+                .catch(function(err){
+
+                    // ** Need to change this alert to modal later
+                    alert('An error occured. Please try again later.');
+                    throw new Error("Unkown server error occured while getting recipes.");
+
+                })
+
+        if(state.rawData.length === 0){
+            // ** Need to change this alert to modal later
+            alert('Please enter at least one valid ingredient.');
+        }
     
     }
 
@@ -80,8 +106,6 @@ $('document').ready(function(){
         state.recipes = recipesArr;
     }
 
-
-
     /**********************************/
     /*              UTILITY           */
     /**********************************/
@@ -104,6 +128,13 @@ $('document').ready(function(){
 
     }
 
+    /**********************************/
+    /*               EVENT            */
+    /**********************************/
+
+    $('#searchBtn').click(searchBtnHandler);
+
+
 
 // end
 })
@@ -115,3 +146,5 @@ $('document').ready(function(){
     // 2. Add an instruction property to each recipe {}. format: [step1,step2,step3...]
 
     // 3. recipe validator (*Pass only when it has instructions): return valid recipe arr
+
+    // 4. change alert to modal
