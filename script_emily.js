@@ -1,15 +1,13 @@
     // https://api.spoonacular.com/recipes/findByIngredients
     // api keys: bb5452cb4b074d1a899410830c863f29
-    // d0aef524cfc14d6ba3f35bc68ab620b9
-    // 06238180649d43e0bffc9f3ac6536dc3
+    //           d0aef524cfc14d6ba3f35bc68ab620b9
+    //           06238180649d43e0bffc9f3ac6536dc3
 
 var state ={
             numOfRequest: 10, // how many recipe will you get from server? 1-100
-            // numOfRender: 3,
+            numOfRender: 3,
             rawData: [],
-            // recipeIds:[],
             recipes: [],
-            // currentRecipes : []
             }
 
 $('document').ready(function(){
@@ -44,7 +42,9 @@ $('document').ready(function(){
             alert('Please enter at least one valid ingredient.');
             
         }
-    
+        
+        // Render recipes to DOM
+        renderRecipesList();
     }
     
     /**********************************/
@@ -53,7 +53,6 @@ $('document').ready(function(){
 
     async function getRecipesFromAPI(ingredients){
         
-
         await $.ajax({
                         url: `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&number=${state.numOfRequest}&ranking=1&ignorePantry=true&ingredients=${ingredients}`,
                         method: 'GET'
@@ -86,12 +85,13 @@ $('document').ready(function(){
         for( var i=0; i < l ; i++){
         
             var rawRecipe = state.rawData[i];
-            var recipeObj = {}; // format: { id: , title: , usedIng: , missedIng: , img: }
+            var recipeObj = {}; // format: { id: , title: , usedIng: , missedIng: , imgSmall: ,imgLarge: }
         
                 // 1. add id, title, img to RecipeObj
                 recipeObj.id = rawRecipe.id;
                 recipeObj.title = rawRecipe.title;
-                recipeObj.img = resizeImg(rawRecipe.image);
+                recipeObj.imgSmall = rawRecipe.image;
+                recipeObj.imgLarge = resizeImg(rawRecipe.image);
 
                 // 2. add used ingredients arr to RecipeObj
                 recipeObj.usedIngredients = createIngArr(rawRecipe.usedIngredients);
@@ -105,7 +105,22 @@ $('document').ready(function(){
         // Save the created array to state database
         state.recipes = recipesArr;
     }
+    function renderRecipesList(){
 
+        for( var i=0 ; i<state.numOfRender ; i++ ) {
+            
+            var recipeObj = state.recipes[i];
+
+            var html = `<div class="recipe-card" id="recipe">
+                            <h2>${recipeObj.title}</h2>
+                            <img id="recipe-image" src="${recipeObj.imgSmall}"></img>
+                        </div>`
+
+            $('#recipes').append(html);
+            
+        }
+        
+    }
     /**********************************/
     /*              UTILITY           */
     /**********************************/
@@ -139,12 +154,12 @@ $('document').ready(function(){
 // end
 })
 // Todo
+    // ajax : getting data - done
     // duplicated ingredient element deleting function - done
-
     // image: data[i].image, data **312x231 => change to https://spoonacular.com/recipeImages/{ID}-636x393.{TYPE} - done
+    // render to DOM - done
 
+    // 1. render input list to DOM
     // 2. Add an instruction property to each recipe {}. format: [step1,step2,step3...]
-
     // 3. recipe validator (*Pass only when it has instructions): return valid recipe arr
-
     // 4. change alert to modal
