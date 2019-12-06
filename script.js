@@ -25,17 +25,19 @@ async function searchBtnHandler(e){
     
     e.preventDefault();
     
-    var inputIngredients = $('#inputIng').val().trim();
-    console.log(inputIngredients);
+    clearSearchList();
+
+    var inputIngredients = $('#inputIng').val().trim(); console.log(inputIngredients);
     
     if(inputIngredients){
 
-        await getRecipesFromAPI(inputIngredients);
-        console.log('raw data: ', state.rawData);
+        await getRecipesFromAPI(inputIngredients); console.log('raw data: ', state.rawData);
         
         // Take only necessary info from raw data and create each recipe {}. Then add all recipes {}s to one [].
-        createRecipesArr();
-        console.log('recipes arr: ', state.recipes);
+        createRecipesArr(); console.log('recipes arr: ', state.recipes);
+        
+        // Lender 
+        renderSearchList(inputIngredients);
 
     }else{
         // ** Need to change this alert to modal later
@@ -148,6 +150,17 @@ function renderIngredients(addTo, order, arr){
     }
     
 }
+function renderSearchList(str){
+    
+    var arr = str.split(',');
+    
+    arr.forEach(function(el){
+        
+        var li = `<li>${el}</li>`;
+        $('#searchList').append(li);
+
+    })
+}
 
 /**********************************/
 /*              UTILITY           */
@@ -170,7 +183,9 @@ function resizeImg(str){
     return str.replace("312x231", "636x393");
 
 }
-
+function clearSearchList(){
+    $('#searchList').empty();
+}
 /**********************************/
 /*               EVENT            */
 /**********************************/
@@ -209,16 +224,19 @@ function getInstructionsByRecipeId(recipeId) {
 // end
 })
 // Todo
-// ajax : getting data - done
-// duplicated ingredient element deleting function - done
-// image: data[i].image, data **312x231 => change to https://spoonacular.com/recipeImages/{ID}-636x393.{TYPE} - done
-// render to DOM - done
+    // ajax : getting data - done
+    // duplicated ingredient element deleting function - done
+    // image: data[i].image, data **312x231 => change to https://spoonacular.com/recipeImages/{ID}-636x393.{TYPE} - done
+    // render to DOM - done
+    // render used ingredients and missing ingredients to DOM - done
+    
+    // render input list to DOM - done
 
-// used & missed ingredients accuracy matter : chocolate !== semi-sweet chocolate, dark chocolate candy bars... 
-// render used ingredients and missing ingredients to DOM
-// render input list to DOM
-// Add an instruction property to each recipe {}. format: [step1,step2,step3...]
-// recipe validator (*Pass only when it has instructions): return valid recipe arr
-// change alert to modal
+    // used & missed ingredients accuracy matter : chocolate !== semi-sweet chocolate, dark chocolate candy bars... 
+   
+    // Add an instruction property to each recipe {}. format: [step1,step2,step3...] - Francisco
+    // recipe validator (*Pass only when it has instructions, less than 10 missing ingredient?)
+    // change alert to modal
+    // loader animation
 
 
