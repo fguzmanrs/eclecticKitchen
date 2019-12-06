@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+
+
     <title>Eclectic Kitchen</title>
 </head>
 
@@ -17,16 +21,16 @@
         </section>
         <section>
             <div id="search-card">
-                <input type="search" placeholder="">
+                <input type="search" placeholder="" id="inputIng">
                 <ul>
                     <li></li>
                 </ul>
-                <button>Search</button>
+                <button id="searchBtn">Search</button>
             </div>
         </section>
     </div>
 
-    <div class="main-card">
+    <div class="main-card" id="recipes">
 
         <div class="recipe-card" id="recipe1">
             <h2>Recipe #1</h2>
@@ -44,7 +48,9 @@
         </div>
 
     </div>
-   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+
 </body>
 <!--x-->
 <!--As a small icon floater
