@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body {
     background-color: #81c14b;
 }
@@ -61,3 +62,68 @@ body {
 
 
 /*beige color: #ECBA82 */
+=======
+body {
+    background-color: #81c14b;
+}
+
+.card {
+    height: 800px;
+    width: 32%;
+    background-color: #fafafa;
+    float: left;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px 0px;
+}
+
+.main-card{
+    height: 800px;
+    width: 64%;
+    background-color: #fafafa;
+    float: left;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px 0px;
+    overflow: hidden;
+}
+
+
+.dropdown{
+    width: 80%;
+    height: 200px;
+    margin-top: 25px;
+    margin-left: 50px;
+    margin-bottom: 100px;
+    text-align: center;
+    background-color: #81c14b;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px 0px;
+}
+
+#search-card {
+    width: 80%;
+    height: 450px;
+    background-color: #2E933C;
+    margin-left: 50px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px 0px;
+}
+
+.recipe-card {
+    text-align: center;
+    height: 400px;
+    width: 85%;
+    /* background-color: #ecba82; */
+    border-radius: 10px;
+    margin: 70px;
+    background-image: url(./images/-U4wBbx6u0Q.jpg);
+    background-size: cover;
+
+}
+
+
+
+
+/*beige color: #ECBA82 */
+>>>>>>> a75e576b08c9bda8f0248561782eab3d5da9823c
