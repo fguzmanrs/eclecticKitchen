@@ -17,39 +17,52 @@
         
         <h2 id="ingredient-title">What's in Your Kitchen?</h2>
 
-        <div id="ingredient-listing">
-
-            <div id="search-card">
-                <input type="search" placeholder="Search for ingredient ... ">
-                <ul id="ingredient-list">
-                    <li class="ingredient" id="search-ingredient"> Ingredient 1 </li>
-                    <li class="ingredient" id="search-ingredient"> Ingredient 1 </li>
-                    <li class="ingredient" id="search-ingredient"> Ingredient 1 </li>
-                </ul>
-            </div>
+        <div id="search-card" id="ingredient-listing">
+            <input type="search" placeholder="Search for ingredient ... ">
+            <ul id="ingredient-list">
+                <!-- li need x(delete) option -->
+                <li class="ingredient" id="search-ingredient"> Ingredient 1 </li>
+                <li class="ingredient" id="search-ingredient"> Ingredient 1 </li>
+                <li class="ingredient" id="search-ingredient"> Ingredient 1 </li>
+            </ul>
         </div>
 
         <button id="searchBtn">Search</button>
 
     </section>
 
-    <section class="container" id="main">
+    <section class="container" id="recipe-result">
 
-        <div class="recipe-card" id="recipe1">
-            <h2>Recipe #1</h2>
-            <image id="recipe-image1"></image>
+        <h2> Recipe Results: </h2>
+
+        <!-- back arrow option -->
+
+        <div class="recipe-card" id="recipe">
+            <image id="recipe-image"></image>
+            <h3>Recipe Name</h3>
         </div>
 
-        <div class="recipe-card" id="recipe1">
-            <h2>Recipe #2</h2>
-            <image id="recipe-image2" id="recipe2"></image>
+        <div class="recipe-card" id="recipe">
+            <image id="recipe-image" id="recipe"></image>
+            <h3>Recipe Name</h3>
         </div>
 
-        <div class="recipe-card" id="recipe3">
-            <h2>Recipe #3</h2>
-            <image id="recipe-image3"></image>
+        <div class="recipe-card" id="recipe">
+            <image id="recipe-image"></image>
+            <h3>Recipe Name</h3>
         </div>
 
+    </section>
+
+    <section class="container" id="recipe-screen">
+        
+        <!-- back arrow option -->
+
+        <div class="recipe-card" id="recipe">
+            <image id="recipe-image"></image>
+            <h3>Recipe Name</h3>
+        </div>
+        
     </section>
    
     <!-- jQuery library -->
