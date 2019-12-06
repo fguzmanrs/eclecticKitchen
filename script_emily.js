@@ -107,20 +107,48 @@ $('document').ready(function(){
     }
     function renderRecipesList(){
 
+        $('#recipes').empty();
+        
         for( var i=0 ; i<state.numOfRender ; i++ ) {
-            
+                
             var recipeObj = state.recipes[i];
-
-            var html = `<div class="recipe-card" id="recipe">
+            
+            var recipe = `<div class="recipe">
                             <h2>${recipeObj.title}</h2>
-                            <img id="recipe-image" src="${recipeObj.imgSmall}"></img>
+                            <img class="recipe__image" src="${recipeObj.imgSmall}"></img>
+                            <div class="recipe__detail">
+                                <ul class="ingredients--used"></ul>
+                                <ul class="ingredients--missed"></ul>
+                                <ul class="instructions"></ul>
                         </div>`
 
-            $('#recipes').append(html);
-            
+            $('#recipes').append(recipe);
+            console.log(recipeObj.usedIngredients,recipeObj.missedIngredients);
+
+            renderIngredients('.ingredients--used',i,recipeObj.usedIngredients);
+            renderIngredients('.ingredients--missed',i,recipeObj.missedIngredients);
+        }
+
+    }
+        
+    function renderIngredients(addTo, order, arr){
+
+        var l = arr.length;
+        
+        if(l>0){
+
+            var list = "";
+
+            for( var i=0 ; i<l ; i++ ){
+    
+                list = list + `<li>${arr[i]}</li>`; 
+                
+            }
+            $(`${addTo}`).eq(order).append(list);
         }
         
     }
+    
     /**********************************/
     /*              UTILITY           */
     /**********************************/
@@ -159,7 +187,9 @@ $('document').ready(function(){
     // image: data[i].image, data **312x231 => change to https://spoonacular.com/recipeImages/{ID}-636x393.{TYPE} - done
     // render to DOM - done
 
-    // 1. render input list to DOM
-    // 2. Add an instruction property to each recipe {}. format: [step1,step2,step3...]
-    // 3. recipe validator (*Pass only when it has instructions): return valid recipe arr
-    // 4. change alert to modal
+    // used & missed ingredients accuracy matter : chocolate !== semi-sweet chocolate, dark chocolate candy bars... 
+    // render used ingredients and missing ingredients to DOM
+    // render input list to DOM
+    // Add an instruction property to each recipe {}. format: [step1,step2,step3...]
+    // recipe validator (*Pass only when it has instructions): return valid recipe arr
+    // change alert to modal
