@@ -13,7 +13,7 @@ body {
     background-color: #81c14b;
 }
 
-.container {
+.card {
     height: 800px;
     width: 32%;
     background-color: #fafafa;
@@ -23,7 +23,7 @@ body {
     box-shadow: 1px 1px 2px 0px;
 }
 
-#main {
+.main-card{
     height: 800px;
     width: 64%;
     background-color: #fafafa;
@@ -43,13 +43,36 @@ body {
     box-shadow: 1px 1px 2px 0px;
 }
 
+#addBtn{
+    display: none;
+}
+input:invalid+span:after {
+    position: absolute;
+    content: '✖';
+    padding-left: 5px;
+}
+  
+input:valid+span:after {
+    position: absolute;
+    content: '✓';
+    padding-left: 5px;
+}
+
 .recipe-card {
     text-align: center;
     height: 400px;
     width: 85%;
-    background-color: #ecba82;
+    /* background-color: #ecba82; */
     border-radius: 10px;
     margin: 70px;
     background-image: url(./images/-U4wBbx6u0Q.jpg);
     background-size: cover;
+
+}
+
+/********************************************/
+/*        Search input validation          */
+
+body {
+    background-color: #81c14b;
 }

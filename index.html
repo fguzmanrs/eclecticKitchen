@@ -13,59 +13,24 @@
 </head>
 
 <body>
+    <div class="card">
+      <section>
+            <h2 id="ingredient-title">What's in Your Kitchen?</h2>
+            <form id="search-card" class="container" id="sidebar-ingredient">
+                <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="2-20 characters"> 
+                <span class="validity"></span>
+                <button id="addBtn">add</button>
+                <ul id="searchList"></ul>
+                <button id="searchBtn">Search</button>
+            </form>
+        </section>
+    </div>
 
-  <section class="container" id="sidebar-ingredient">
-        
-        <h2 id="ingredient-title">What's in Your Kitchen?</h2>
+  <section> 
+    <h2> Recipe Results: </h2>
+    <div class="main-card" id="recipes">
+  </section>
 
-        <div id="search-card" id="ingredient-listing">
-            <input type="search" placeholder="Search for ingredient ... ">
-            <ul id="ingredient-list">
-                <!-- li need x(delete) option -->
-                <li class="ingredient" id="search-ingredient"> Ingredient 1 </li>
-                <li class="ingredient" id="search-ingredient"> Ingredient 1 </li>
-                <li class="ingredient" id="search-ingredient"> Ingredient 1 </li>
-            </ul>
-        </div>
-
-        <button id="searchBtn">Search</button>
-
-    </section>
-
-    <section class="container" id="recipe-result">
-
-        <h2> Recipe Results: </h2>
-
-        <!-- back arrow option -->
-
-        <div class="recipe-card" id="recipe">
-            <image id="recipe-image"></image>
-            <h3>Recipe Name</h3>
-        </div>
-
-        <div class="recipe-card" id="recipe">
-            <image id="recipe-image" id="recipe"></image>
-            <h3>Recipe Name</h3>
-        </div>
-
-        <div class="recipe-card" id="recipe">
-            <image id="recipe-image"></image>
-            <h3>Recipe Name</h3>
-        </div>
-
-    </section>
-
-    <section class="container" id="recipe-screen">
-        
-        <!-- back arrow option -->
-
-        <div class="recipe-card" id="recipe">
-            <image id="recipe-image"></image>
-            <h3>Recipe Name</h3>
-        </div>
-        
-    </section>
-   
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
