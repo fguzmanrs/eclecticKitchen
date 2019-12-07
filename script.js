@@ -16,12 +16,12 @@ $('document').ready(function () {
     //var apiKey = " d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
     //var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
     //var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
-    // var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
-    // d453036a9eeb46a1b474c7043973a767 //xapienx.com
-    // f4abc8a8916747b3a3976addc1321ab0 //birulaplanet.com
+    //var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
+    //var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
+    //var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
 
     var apiKey = "0421115dd3974c7f9338166f3e907824"; //Emily2
-    
+
     /**********************************/
     /*           EVENT HANDLER        */
     /**********************************/
@@ -141,9 +141,7 @@ $('document').ready(function () {
 
 
             for (let j = 0; j < state.recipes[i].steps.length; ++j)
-                li = li + "<li>" + state.recipes[i].steps[j] + "</li>"
-
-                console.log(li);
+                li += "<li>" + state.recipes[i].steps[j] + "</li>"
 
             var recipeObj = state.recipes[i];
             var recipe = `<div class="recipe" data-recipe="recipe${i}">
@@ -156,12 +154,9 @@ $('document').ready(function () {
                     </div>`
 
             $('#recipes').append(recipe);
-            // console.log(recipeObj.usedIngredients, recipeObj.missedIngredients);
-
             renderIngredients('.ingredients--used', i, recipeObj.usedIngredients);
             renderIngredients('.ingredients--missed', i, recipeObj.missedIngredients);
         }
-
     }
 
     function renderIngredients(addTo, order, arr) {
@@ -250,6 +245,13 @@ $('document').ready(function () {
 
     // ====================================
     // ffortizn
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems, options);
+      });
+    
+    
     // PASS 2: Validate against preparation steps (note empty)
     // if not empty then populate preparation steps on object
     async function getInstructionsByRecipeId(recipeId, k) {
@@ -288,6 +290,7 @@ $('document').ready(function () {
         });
     }
 
+    $('.modal').modal();
     init();
 
 
