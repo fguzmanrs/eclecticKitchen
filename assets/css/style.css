@@ -1,8 +1,19 @@
+/*Color codes:
+    main:
+        dollar green: #8CC65B
+        snow: #F9FBFA
+    font: 
+        dark jungle green: 
+    highlights:
+        vermillion (pop): #DD3506
+        pale gold (muted): #EDC08D
+ */
+
 body {
     background-color: #81c14b;
 }
 
-.card {
+.container {
     height: 800px;
     width: 32%;
     background-color: #fafafa;
@@ -12,7 +23,7 @@ body {
     box-shadow: 1px 1px 2px 0px;
 }
 
-.main-card{
+#main {
     height: 800px;
     width: 64%;
     background-color: #fafafa;
@@ -21,19 +32,6 @@ body {
     border-radius: 10px;
     box-shadow: 1px 1px 2px 0px;
     overflow: hidden;
-}
-
-
-.dropdown{
-    width: 80%;
-    height: 200px;
-    margin-top: 25px;
-    margin-left: 50px;
-    margin-bottom: 100px;
-    text-align: center;
-    background-color: #81c14b;
-    border-radius: 10px;
-    box-shadow: 1px 1px 2px 0px;
 }
 
 #search-card {
@@ -49,15 +47,9 @@ body {
     text-align: center;
     height: 400px;
     width: 85%;
-    /* background-color: #ecba82; */
+    background-color: #ecba82;
     border-radius: 10px;
     margin: 70px;
     background-image: url(./images/-U4wBbx6u0Q.jpg);
     background-size: cover;
-
 }
-
-
-
-
-/*beige color: #ECBA82 */

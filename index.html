@@ -5,51 +5,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-
+    <!-- Compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="assets/css/style.css">  
 
     <title>Eclectic Kitchen</title>
 </head>
 
 <body>
 
-    <div class="card">
-        <section>
-            <div class="dropdown">Select Your Cuisine</div>
-        </section>
-        <section>
-            <div id="search-card">
-                <input type="search" placeholder="" id="inputIng">
-                <ul>
-                    <li></li>
-                </ul>
-                <button id="searchBtn">Search</button>
-            </div>
-        </section>
-    </div>
+  <section class="container" id="sidebar-ingredient">
+        
+        <h2 id="ingredient-title">What's in Your Kitchen?</h2>
 
-    <div class="main-card" id="recipes">
-
-        <div class="recipe-card" id="recipe1">
-            <h2>Recipe #1</h2>
-            <image id="recipe-image1"></image>
+        <div id="search-card" id="ingredient-listing">
+            <input type="search" placeholder="Search for ingredient ... ">
+            <ul id="ingredient-list">
+                <!-- li need x(delete) option -->
+                <li class="ingredient" id="search-ingredient"> Ingredient 1 </li>
+                <li class="ingredient" id="search-ingredient"> Ingredient 1 </li>
+                <li class="ingredient" id="search-ingredient"> Ingredient 1 </li>
+            </ul>
         </div>
 
-        <div class="recipe-card" id="recipe1">
-            <h2>Recipe #2</h2>
-            <image id="recipe-image2" id="recipe2"></image>
+        <button id="searchBtn">Search</button>
+
+    </section>
+
+    <section class="container" id="recipe-result">
+
+        <h2> Recipe Results: </h2>
+
+        <!-- back arrow option -->
+
+        <div class="recipe-card" id="recipe">
+            <image id="recipe-image"></image>
+            <h3>Recipe Name</h3>
         </div>
 
-        <div class="recipe-card" id="recipe3">
-            <h2>Recipe #3</h2>
-            <image id="recipe-image3"></image>
+        <div class="recipe-card" id="recipe">
+            <image id="recipe-image" id="recipe"></image>
+            <h3>Recipe Name</h3>
         </div>
 
-    </div>
+        <div class="recipe-card" id="recipe">
+            <image id="recipe-image"></image>
+            <h3>Recipe Name</h3>
+        </div>
+
+    </section>
+
+    <section class="container" id="recipe-screen">
+        
+        <!-- back arrow option -->
+
+        <div class="recipe-card" id="recipe">
+            <image id="recipe-image"></image>
+            <h3>Recipe Name</h3>
+        </div>
+        
+    </section>
+   
+    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </body>
 <!--x-->
