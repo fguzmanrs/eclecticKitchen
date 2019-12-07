@@ -3,6 +3,7 @@
 //           d0aef524cfc14d6ba3f35bc68ab620b9
 //           06238180649d43e0bffc9f3ac6536dc3
 
+
 var state = {
     searchIngredients: [],
     numOfRequest: 3, // how many recipe will you get from server? 1-100
@@ -19,7 +20,11 @@ $('document').ready(function () {
     //var apiKey = " d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
     //var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
     //var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
-    var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
+    //var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
+    var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
+    //var apiKey = " f4abc8a8916747b3a3976addc1321ab0;" //birulaplanet.com
+    //var apiKey = " 0421115dd3974c7f9338166f3e907824;" // Emily2
+
     /**********************************/
     /*           EVENT HANDLER        */
     /**********************************/
@@ -143,14 +148,16 @@ $('document').ready(function () {
                 console.log(li);
 
             var recipeObj = state.recipes[i];
-            var recipe = `<div class="recipe">
-                        <h2>${recipeObj.title}</h2>
-                        <img class="recipe__image" src="${recipeObj.imgSmall}"></img>
-                        <div class="recipe__detail">
-                            <ul class="ingredients--used"></ul>
-                            <ul class="ingredients--missed"></ul>
-                            <ul class="instructions" hidden="hidden">${li}</ul>
-                    </div>`
+            var recipe = `<div class="recipe-card">
+                            <div class="recipe">
+                                <h2>${recipeObj.title}</h2>
+                                <img class="recipe__image" src="${recipeObj.imgSmall}"></img>
+                                <div class="recipe__detail">
+                                <ul class="ingredients--used"></ul>
+                                <ul class="ingredients--missed"></ul>
+                                <ul class="instructions" hidden="hidden">${li}</ul>
+                            </div>
+                        </div>`
 
             $('#recipes').append(recipe);
             // console.log(recipeObj.usedIngredients, recipeObj.missedIngredients);
