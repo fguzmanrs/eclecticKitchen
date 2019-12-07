@@ -5,22 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-
+    <!-- Compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="assets/css/style.css">  
 
     <title>Eclectic Kitchen</title>
 </head>
 
 <body>
-
     <div class="card">
-        <!-- <section>
-            <div class="dropdown">Select Your Cuisine</div>
-        </section> -->
-        <section>
-            <form id="search-card">
+      <section>
+            <h2 id="ingredient-title">What's in Your Kitchen?</h2>
+            <form id="search-card" class="container" id="sidebar-ingredient">
                 <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="2-20 characters"> 
                 <span class="validity"></span>
                 <button id="addBtn">add</button>
@@ -30,26 +26,16 @@
         </section>
     </div>
 
+  <section> 
+    <h2> Recipe Results: </h2>
     <div class="main-card" id="recipes">
+  </section>
 
-        <!-- <div class="recipe-card" id="recipe1">
-            <h2>Recipe #1</h2>
-            <image id="recipe-image1"></image>
-        </div>
-
-        <div class="recipe-card" id="recipe1">
-            <h2>Recipe #2</h2>
-            <image id="recipe-image2" id="recipe2"></image>
-        </div>
-
-        <div class="recipe-card" id="recipe3">
-            <h2>Recipe #3</h2>
-            <image id="recipe-image3"></image>
-        </div> -->
-
-    </div>
+    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </body>
 <!--x-->
