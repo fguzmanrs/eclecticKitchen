@@ -21,7 +21,7 @@ $('document').ready(function () {
     // f4abc8a8916747b3a3976addc1321ab0 //birulaplanet.com
 
     var apiKey = "0421115dd3974c7f9338166f3e907824"; //Emily2
-    
+
     /**********************************/
     /*           EVENT HANDLER        */
     /**********************************/
@@ -39,7 +39,7 @@ $('document').ready(function () {
         state.searchIngredients.push(inputIngredient);
 
         // 3. Save input data to local storage
-        // saveToLocalStorage(inputIngredients);
+        saveToLocalStorage(state.searchIngredients);
 
         // 4. Clear input text
         $('#inputIng').val("");
@@ -204,14 +204,30 @@ $('document').ready(function () {
         }
     }
     function init() {
-        // importFromLocalStorage()
+
+        importFromLocalStorage();
+
+        var l = state.searchIngredients.length;
+
+        if(l>0){
+            
+            for(var i=0 ; i<l ; i++){
+                renderSearchList(state.searchIngredients[i]);
+            }
+        }
+
     }
     function importFromLocalStorage() {
 
+        var loadedData = localStorage.getItem('ingredients');
+
+        if(loadedData){
+            state.searchIngredients = JSON.parse(loadedData);
+        }
     }
     function saveToLocalStorage(str) {
 
-        localStorage.setItem('ingredients', str);
+        localStorage.setItem('ingredients', JSON.stringify(str));
 
     }
     /**********************************/
@@ -233,9 +249,6 @@ $('document').ready(function () {
         // Change default size(312x231) to max-size(636x393)
         return str.replace("312x231", "636x393");
 
-    }
-    function clearSearchList() {
-        $('#searchList').empty();
     }
 
     /**********************************/
