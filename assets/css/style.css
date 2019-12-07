@@ -1,3 +1,14 @@
+/*Color codes:
+    main:
+        dollar green: #8CC65B
+        snow: #F9FBFA
+    font: 
+        dark jungle green: 
+    highlights:
+        vermillion (pop): #DD3506
+        pale gold (muted): #EDC08D
+ */
+
 body {
     background-color: #81c14b;
 }
@@ -23,19 +34,6 @@ body {
     overflow: hidden;
 }
 
-
-.dropdown{
-    width: 80%;
-    height: 200px;
-    margin-top: 25px;
-    margin-left: 50px;
-    margin-bottom: 100px;
-    text-align: center;
-    background-color: #81c14b;
-    border-radius: 10px;
-    box-shadow: 1px 1px 2px 0px;
-}
-
 #search-card {
     width: 80%;
     height: 450px;
@@ -43,6 +41,21 @@ body {
     margin-left: 50px;
     border-radius: 10px;
     box-shadow: 1px 1px 2px 0px;
+}
+
+#addBtn{
+    display: none;
+}
+input:invalid+span:after {
+    position: absolute;
+    content: '✖';
+    padding-left: 5px;
+}
+  
+input:valid+span:after {
+    position: absolute;
+    content: '✓';
+    padding-left: 5px;
 }
 
 .recipe-card {
@@ -57,7 +70,9 @@ body {
 
 }
 
+/********************************************/
+/*        Search input validation          */
 
-
-
-/*beige color: #ECBA82 */
+body {
+    background-color: #81c14b;
+}

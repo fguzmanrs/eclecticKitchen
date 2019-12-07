@@ -5,47 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Compiled and minified CSS -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="assets/css/style.css">  
+
     <title>Eclectic Kitchen</title>
 </head>
 
 <body>
-
     <div class="card">
-        <section>
-            <div class="dropdown">Select Your Cuisine<br> #81c14b </div>
-        </section>
-        <section>
-            <div id="search-card">
-                <input type="search" placeholder="">
-                #2E933C
-                <ul>
-                    <li></li>
-                </ul>
-                <button>Search</button>
-            </div>
+      <section>
+            <h2 id="ingredient-title">What's in Your Kitchen?</h2>
+            <form id="search-card" class="container" id="sidebar-ingredient">
+                <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="2-20 characters"> 
+                <span class="validity"></span>
+                <button id="addBtn">add</button>
+                <ul id="searchList"></ul>
+                <button id="searchBtn">Search</button>
+            </form>
         </section>
     </div>
 
-    <div class="main-card">
+  <section> 
+    <h2> Recipe Results: </h2>
+    <div class="main-card" id="recipes">
+  </section>
 
-        <div class="recipe-card" id="recipe1">
-            <h2>Recipe #1</h2>
-            <image src="https://source.unsplash.com/200x200/?food" id="recipe-image1"></image>
-        </div>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-        <div class="recipe-card" id="recipe1">
-            <h2>#ECBA82</h2>
-            <image id="recipe-image2" id="recipe2"></image>
-        </div>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
-        <div class="recipe-card" id="recipe3">
-            <h2>Recipe #3</h2>
-            <image id="recipe-image3"></image>
-        </div>
-
-    </div>
-   
 </body>
 <!--x-->
 <!--As a small icon floater
