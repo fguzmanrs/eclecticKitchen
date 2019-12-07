@@ -14,9 +14,6 @@ var state = {
 
 
 $('document').ready(function () {
-    //var apiKey = "0421115dd3974c7f9338166f3e907824"; // Emily2
-    //var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
-    //var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx
     //var apiKey = " d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
     //var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
     //var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
@@ -148,7 +145,7 @@ $('document').ready(function () {
                 console.log(li);
 
             var recipeObj = state.recipes[i];
-            var recipe = `<div class="recipe-card">
+            var recipe = `
                             <div class="recipe">
                                 <h2>${recipeObj.title}</h2>
                                 <img class="recipe__image" src="${recipeObj.imgSmall}"></img>
@@ -157,7 +154,7 @@ $('document').ready(function () {
                                 <ul class="ingredients--missed"></ul>
                                 <ul class="instructions" hidden="hidden">${li}</ul>
                             </div>
-                        </div>`
+                        `
 
             $('#recipes').append(recipe);
             // console.log(recipeObj.usedIngredients, recipeObj.missedIngredients);
