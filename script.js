@@ -4,23 +4,24 @@
 //           06238180649d43e0bffc9f3ac6536dc3
 
 var state = {
-    searchIngredients:[],
-    numOfRequest: 10, // how many recipe will you get from server? 1-100
-    numOfRender: 3,
+    searchIngredients: [],
+    numOfRequest: 3, // how many recipe will you get from server? 1-100
+    numOfRender: 1,
     rawData: [],
     recipes: [],
 }
 
 
-$('document').ready(function(){
+$('document').ready(function () {
+    //var apiKey = " d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
+    //var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
+    //var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
+    var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
+    /**********************************/
+    /*           EVENT HANDLER        */
+    /**********************************/
 
-var apiKey = "bb5452cb4b074d1a899410830c863f29"
-
-/**********************************/
-/*           EVENT HANDLER        */
-/**********************************/
-
-    function addIngredientToList(e){
+    function addIngredientToList(e) {
 
         e.preventDefault();
 
@@ -39,35 +40,35 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
         $('#inputIng').val("");
 
     }
-    async function searchBtnHandler(e){
-        
+    async function searchBtnHandler(e) {
+
         e.preventDefault();
-        
-        if(state.searchIngredients.length > 0){
+
+        if (state.searchIngredients.length > 0) {
 
             await getRecipesByIngredients(state.searchIngredients);
-        
+
             // Take only necessary info from raw data and create each recipe {}. Then add all recipes {}s to one [].
-            createRecipesArr(); 
-      
+            createRecipesArr();
+
             // PASS2: validate/populate preparation steps into object
-            for(var i = 0; i<state.recipes.length;++i)
-            await getInstructionsByRecipeId(state.recipes[i].id,i);
-    
+            for (var i = 0; i < state.recipes.length; ++i)
+                await getInstructionsByRecipeId(state.recipes[i].id, i);
+
             // PASS3: Render recipes to DOM
             renderRecipesList();
 
         }
-        else{
+        else {
             // Need to change alert to modal or tooltip
             alert("Please add at least one ingredient.");
         }
 
     }
 
-/**********************************/
-/*              API               */
-/**********************************/
+    /**********************************/
+    /*              API               */
+    /**********************************/
 
     async function getRecipesByIngredients(ingredients) {
 
@@ -92,9 +93,9 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
 
     }
 
-/**********************************/
-/*              FUNCTION          */
-/**********************************/
+    /**********************************/
+    /*              FUNCTION          */
+    /**********************************/
 
     function createRecipesArr() {
 
@@ -125,20 +126,27 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
         state.recipes = recipesArr;
     }
     function renderRecipesList() {
-
+        var li = "";
         $('#recipes').empty();
 
         for (var i = 0; i < state.numOfRender; i++) {
+            // check for 'complete' recipe meaning: recipe with preparation steps 
+            if (state.recipes[i].doRender === false) break;
+
+
+            for (let j = 0; j < state.recipes[i].steps.length; ++j)
+                li = li + "<li>" + state.recipes[i].steps[j] + "</li>"
+
+                console.log(li);
 
             var recipeObj = state.recipes[i];
-
             var recipe = `<div class="recipe">
                         <h2>${recipeObj.title}</h2>
                         <img class="recipe__image" src="${recipeObj.imgSmall}"></img>
                         <div class="recipe__detail">
                             <ul class="ingredients--used"></ul>
                             <ul class="ingredients--missed"></ul>
-                            <ul class="instructions"></ul>
+                            <ul class="instructions" hidden="hidden">${li}</ul>
                     </div>`
 
             $('#recipes').append(recipe);
@@ -164,9 +172,9 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
             $(`${addTo}`).eq(order).append(list);
         }
 
-    } 
-    function renderSearchList(str){
-             
+    }
+    function renderSearchList(str) {
+
         var li = `<li data-ingredient="${str}">
                     ${str}
                     <span class="delete"> &#215; </span>
@@ -175,35 +183,35 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
         $('#searchList').append(li);
 
     }
-    function deleteIngredient(e){
-        
-        if(e.target.matches('span[class=delete]')){
+    function deleteIngredient(e) {
+
+        if (e.target.matches('span[class=delete]')) {
 
             var li = $(e.target).closest('li');
-            
+
             // Delete the ingredient from state data
             var ingredient = li.attr('data-ingredient');
             var index = state.searchIngredients.indexOf(ingredient);
-            state.searchIngredients.splice(index,1);
-            
+            state.searchIngredients.splice(index, 1);
+
             // Delete from DOM
             li.remove();
         }
     }
-    function init(){
+    function init() {
         // importFromLocalStorage()
     }
-    function importFromLocalStorage(){
+    function importFromLocalStorage() {
 
     }
-    function saveToLocalStorage(str){
+    function saveToLocalStorage(str) {
 
-        localStorage.setItem('ingredients',str);
+        localStorage.setItem('ingredients', str);
 
     }
-/**********************************/
-/*              UTILITY           */
-/**********************************/
+    /**********************************/
+    /*              UTILITY           */
+    /**********************************/
 
     // Take only ingredient's NAME property
     function createIngArr(ingArr) {
@@ -221,13 +229,13 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
         return str.replace("312x231", "636x393");
 
     }
-    function clearSearchList(){
+    function clearSearchList() {
         $('#searchList').empty();
     }
 
-/**********************************/
-/*               EVENT            */
-/**********************************/
+    /**********************************/
+    /*               EVENT            */
+    /**********************************/
 
     $('#searchBtn').click(searchBtnHandler);
     $('#search-card').submit(addIngredientToList);
@@ -239,36 +247,35 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
     // if not empty then populate preparation steps on object
     async function getInstructionsByRecipeId(recipeId, k) {
         var arr = [];
-        var apiKey = "5aac1a10cd874816809acc6f2d2fa006";
-        var queryURL = "https://api.spoonacular.com/recipes/" + recipeId + "/analyzedInstructions?apiKey=" + apiKey;
+        console.log("apiKey: " + apiKey);
+        var queryURL = `https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKey}`;
 
         await $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (data) {
-            console.log("instructions raw data:", data);
+            //console.log("instructions raw data:", data);
             var i, j;
-            
+
             // Traverse steps on response and push in an array, then return array
             for (i = 0; i < data.length; ++i)
                 for (j = 0; j < data[i].steps.length; ++j)
                     arr.push(data[i].steps[j].step);
 
-
             // PASS2 : Validate/Populate
-            // try catch
+            // Implement try/catch (maybe?)
 
             // VALIDATE
-            // if empty turn flag
-            // if response has data then populate object
+            // if no steps then doRender = False (do not render in next step)
 
-            // arr.forEach(element => {
-            //     console.log(element);
-            // });
-            //state.recipes.push(arr);
-            //state.recipes[k].instructions = arr;
+            state.recipes[k].doRender = false;
 
-            state.recipes[k].steps = arr;
+            if (arr.length > 0) {
+                // Response has data then populate object
+                state.recipes[k].steps = arr;
+                // Preparation steps found, set render flag to true
+                state.recipes[k].doRender = true;
+            }
             //console.log("ff" + state.recipes[k].steps);
             //return arr;
         });
@@ -277,7 +284,7 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
     init();
 
 
-/********************** end **************************/
+    /********************** end **************************/
 })
 // Todo
     // ajax : getting data - done
