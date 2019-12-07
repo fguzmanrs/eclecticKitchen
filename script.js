@@ -39,7 +39,7 @@ $('document').ready(function () {
         state.searchIngredients.push(inputIngredient);
 
         // 3. Save input data to local storage
-        // saveToLocalStorage(inputIngredients);
+        saveToLocalStorage(state.searchIngredients);
 
         // 4. Clear input text
         $('#inputIng').val("");
@@ -201,14 +201,30 @@ $('document').ready(function () {
         }
     }
     function init() {
-        // importFromLocalStorage()
+
+        importFromLocalStorage();
+
+        var l = state.searchIngredients.length;
+
+        if(l>0){
+            
+            for(var i=0 ; i<l ; i++){
+                renderSearchList(state.searchIngredients[i]);
+            }
+        }
+
     }
     function importFromLocalStorage() {
 
+        var loadedData = localStorage.getItem('ingredients');
+
+        if(loadedData){
+            state.searchIngredients = JSON.parse(loadedData);
+        }
     }
     function saveToLocalStorage(str) {
 
-        localStorage.setItem('ingredients', str);
+        localStorage.setItem('ingredients', JSON.stringify(str));
 
     }
     /**********************************/
@@ -230,9 +246,6 @@ $('document').ready(function () {
         // Change default size(312x231) to max-size(636x393)
         return str.replace("312x231", "636x393");
 
-    }
-    function clearSearchList() {
-        $('#searchList').empty();
     }
 
     /**********************************/
