@@ -130,6 +130,7 @@ $('document').ready(function () {
         // Save the created array to state database
         state.recipes = recipesArr;
     }
+
     function renderRecipesList() {
         var li = "";
         $('#recipes').empty();
@@ -145,13 +146,13 @@ $('document').ready(function () {
                 console.log(li);
 
             var recipeObj = state.recipes[i];
-            var recipe = `<div class="recipe">
+            var recipe = `<div class="recipe" data-recipe="recipe${i}">
                         <h2>${recipeObj.title}</h2>
-                        <img class="recipe__image" src="${recipeObj.imgSmall}"></img>
-                        <div class="recipe__detail">
-                            <ul class="ingredients--used"></ul>
-                            <ul class="ingredients--missed"></ul>
-                            <ul class="instructions" hidden="hidden">${li}</ul>
+                        <img class="recipe__image" src="${recipeObj.imgSmall}" data-recipe__image="recipe__image${i}"></img>
+                        <div class="recipe__detail" data-recipe__detail="recipe__detail${i}">
+                            <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
+                            <ul class="ingredients--missed" data-ingredients--missed="ingredients--missed${i}"></ul>
+                            <ul class="instructions" hidden="hidden" data-instructions="instructions${i}">${li}</ul>
                     </div>`
 
             $('#recipes').append(recipe);
@@ -162,6 +163,7 @@ $('document').ready(function () {
         }
 
     }
+
     function renderIngredients(addTo, order, arr) {
 
         var l = arr.length;
