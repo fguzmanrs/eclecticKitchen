@@ -23,7 +23,7 @@ body {
     box-shadow: 1px 1px 2px 0px;
 }
 
-.main-card{
+.main-card {
     height: 800px;
     width: 64%;
     background-color: #fafafa;
@@ -46,6 +46,7 @@ body {
 #addBtn{
     display: none;
 }
+
 input:invalid+span:after {
     position: absolute;
     content: '✖';
@@ -68,11 +69,4 @@ input:valid+span:after {
     background-image: url(./images/-U4wBbx6u0Q.jpg);
     background-size: cover;
 
-}
-
-/********************************************/
-/*        Search input validation          */
-
-body {
-    background-color: #81c14b;
 }
