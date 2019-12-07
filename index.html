@@ -16,17 +16,17 @@
 <body>
 
     <div class="card">
-        <section>
+        <!-- <section>
             <div class="dropdown">Select Your Cuisine</div>
-        </section>
+        </section> -->
         <section>
-            <div id="search-card">
-                <input type="search" placeholder="" id="inputIng">
-                <ul id="searchList">
-                    <li></li>
-                </ul>
+            <form id="search-card">
+                <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="2-20 characters"> 
+                <span class="validity"></span>
+                <button id="addBtn">add</button>
+                <ul id="searchList"></ul>
                 <button id="searchBtn">Search</button>
-            </div>
+            </form>
         </section>
     </div>
 

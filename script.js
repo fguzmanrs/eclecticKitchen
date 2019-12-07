@@ -4,6 +4,7 @@
 //           06238180649d43e0bffc9f3ac6536dc3
 
 var state = {
+    searchIngredients:[],
     numOfRequest: 10, // how many recipe will you get from server? 1-100
     numOfRender: 3,
     rawData: [],
@@ -19,38 +20,48 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
 /*           EVENT HANDLER        */
 /**********************************/
 
+    function addIngredientToList(e){
+
+        e.preventDefault();
+
+        var inputIngredient = $('#inputIng').val().trim(); console.log(inputIngredient);
+
+        // 1. Lender search list
+        renderSearchList(inputIngredient);
+
+        // 2. Save input to state data
+        state.searchIngredients.push(inputIngredient);
+
+        // 3. Save input data to local storage
+        // saveToLocalStorage(inputIngredients);
+
+        // 4. Clear input text
+        $('#inputIng').val("");
+
+    }
     async function searchBtnHandler(e){
         
         e.preventDefault();
         
-        clearSearchList();
+        if(state.searchIngredients.length > 0){
 
-        var inputIngredients = $('#inputIng').val().trim(); console.log(inputIngredients);
+            await getRecipesByIngredients(state.searchIngredients);
         
-        if(inputIngredients){
-
-            await getRecipesFromAPI(inputIngredients); console.log('raw data: ', state.rawData);
-            
             // Take only necessary info from raw data and create each recipe {}. Then add all recipes {}s to one [].
             createRecipesArr(); 
-            
-            // Lender search list
-            renderSearchList(inputIngredients);
+      
+            // PASS2: validate/populate preparation steps into object
+            for(var i = 0; i<state.recipes.length;++i)
+            await getInstructionsByRecipeId(state.recipes[i].id,i);
+    
+            // PASS3: Render recipes to DOM
+            renderRecipesList();
 
-        }else{
-
-            // ** Need to change this alert to modal later
-            alert('Please enter at least one valid ingredient.');
-            
         }
-
-        // PASS2: validate/populate preparation steps into object
-        for(var i = 0; i<state.recipes.length;++i)
-        await getInstructionsByRecipeId(state.recipes[i].id,i);
-
-
-        // PASS3: Render recipes to DOM
-        renderRecipesList();
+        else{
+            // Need to change alert to modal or tooltip
+            alert("Please add at least one ingredient.");
+        }
 
     }
 
@@ -58,7 +69,7 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
 /*              API               */
 /**********************************/
 
-    async function getRecipesFromAPI(ingredients) {
+    async function getRecipesByIngredients(ingredients) {
 
         await $.ajax({
             url: `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&number=${state.numOfRequest}&ranking=1&ignorePantry=true&ingredients=${ingredients}`,
@@ -69,13 +80,14 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
 
                 // ** Need to change this alert to modal later
                 alert('An error occured. Please try again later.');
-                throw new Error("Unkown server error occured while getting recipes.");
+                throw new Error("Unkown server error occured while getting recipes. The app has been stopped.");
 
             })
 
         if (state.rawData.length === 0) {
             // ** Need to change this alert to modal later
-            alert('Please enter at least one valid ingredient.');
+            alert('Cannot find any recipe with your input. Please make sure that you enter at least one valid ingredient.');
+            throw new Error("No recipe returned. The app has been stopped.");
         }
 
     }
@@ -154,18 +166,41 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
 
     } 
     function renderSearchList(str){
-    
-        var arr = str.split(',');
-        
-        arr.forEach(function(el){
-            
-            var li = `<li>${el}</li>`;
+             
+        var li = `<li data-ingredient="${str}">
+                    ${str}
+                    <span class="delete"> &#215; </span>
+                  </li>`;
 
-            $('#searchList').append(li);
+        $('#searchList').append(li);
 
-        })
     }
+    function deleteIngredient(e){
+        
+        if(e.target.matches('span[class=delete]')){
 
+            var li = $(e.target).closest('li');
+            
+            // Delete the ingredient from state data
+            var ingredient = li.attr('data-ingredient');
+            var index = state.searchIngredients.indexOf(ingredient);
+            state.searchIngredients.splice(index,1);
+            
+            // Delete from DOM
+            li.remove();
+        }
+    }
+    function init(){
+        // importFromLocalStorage()
+    }
+    function importFromLocalStorage(){
+
+    }
+    function saveToLocalStorage(str){
+
+        localStorage.setItem('ingredients',str);
+
+    }
 /**********************************/
 /*              UTILITY           */
 /**********************************/
@@ -195,6 +230,8 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
 /**********************************/
 
     $('#searchBtn').click(searchBtnHandler);
+    $('#search-card').submit(addIngredientToList);
+    $('#searchList').click(deleteIngredient);
 
     // ====================================
     // ffortizn
@@ -237,7 +274,7 @@ var apiKey = "bb5452cb4b074d1a899410830c863f29"
         });
     }
 
-
+    init();
 
 
 /********************** end **************************/
