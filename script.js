@@ -145,15 +145,17 @@ $('document').ready(function () {
                 console.log(li);
 
             var recipeObj = state.recipes[i];
-            var recipe = `<div class="recipe-card">
-                            <div class="recipe">
-                                <h2>${recipeObj.title}</h2>
-                                <img class="recipe__image" src="${recipeObj.imgSmall}"></img>
-                                <div class="recipe__detail">
-                                <ul class="ingredients--used"></ul>
-                                <ul class="ingredients--missed"></ul>
-                                <ul class="instructions" hidden="hidden">${li}</ul>
-                            </div>
+            var recipe = `<div class="row">
+                            <div class="col s12 m7>
+                                <div class="recipe" >
+                                    <h2>${recipeObj.title}</h2>
+                                    <img class="recipe__image" src="${recipeObj.imgSmall}"></img>
+                                    <span class="card-title">
+                                    <div class="recipe__detail">
+                                    <ul class="ingredients--used"></ul>
+                                    <ul class="ingredients--missed"></ul>
+                                    <ul class="instructions" hidden="hidden">${li}</ul>
+                                </div>
                         </div>`
 
             $('#recipes').append(recipe);
