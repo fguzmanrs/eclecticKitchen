@@ -3,6 +3,7 @@
 //           d0aef524cfc14d6ba3f35bc68ab620b9
 //           06238180649d43e0bffc9f3ac6536dc3
 
+
 var state = {
     searchIngredients: [],
     numOfRequest: 3, // how many recipe will you get from server? 1-100
@@ -17,10 +18,9 @@ $('document').ready(function () {
     //var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
     //var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
     //var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
-    //var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
-    //var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
-
-    var apiKey = "0421115dd3974c7f9338166f3e907824"; //Emily2
+    var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
+    //var apiKey = " f4abc8a8916747b3a3976addc1321ab0;" //birulaplanet.com
+    //var apiKey = " 0421115dd3974c7f9338166f3e907824;" // Emily2
 
     /**********************************/
     /*           EVENT HANDLER        */
@@ -144,14 +144,18 @@ $('document').ready(function () {
                 li += "<li>" + state.recipes[i].steps[j] + "</li>"
 
             var recipeObj = state.recipes[i];
-            var recipe = `<div class="recipe" data-recipe="recipe${i}">
-                        <h2>${recipeObj.title}</h2>
-                        <img class="recipe__image" src="${recipeObj.imgSmall}" data-recipe__image="recipe__image${i}"></img>
-                        <div class="recipe__detail" data-recipe__detail="recipe__detail${i}">
-                            <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
-                            <ul class="ingredients--missed" data-ingredients--missed="ingredients--missed${i}"></ul>
-                            <ul class="instructions" hidden="hidden" data-instructions="instructions${i}">${li}</ul>
-                    </div>`
+            var recipe = `<div class="row">
+                            <div class="col s12 m7>
+                                <div class="recipe" data-recipe="recipe${i}">
+                                    <h2>${recipeObj.title}</h2>
+                                    <img class="recipe__image" src="${recipeObj.imgSmall}" data-recipe__image="recipe__image${i}"></img>
+                                    <span class="card-title">
+                                    <div class="recipe__detail" data-recipe__detail="recipe__detail${i}">
+                                    <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
+                                    <ul class="ingredients--missed" data-ingredients--missed="ingredients--missed${i}"></ul>
+                                    <ul class="instructions" hidden="hidden" data-instructions="instructions${i}">${li}</ul>
+                                </div>
+                        </div>`
 
             $('#recipes').append(recipe);
             renderIngredients('.ingredients--used', i, recipeObj.usedIngredients);

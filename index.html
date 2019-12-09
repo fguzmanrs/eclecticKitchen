@@ -13,23 +13,23 @@
 </head>
 
 <body>
-    <div class="card">
+    <div class="tarjeta" id="left-card">
       <section>
             <h2 id="ingredient-title">What's in Your Kitchen?</h2>
-            <form id="search-card" class="container" id="sidebar-ingredient">
+            <form id="search-card" class="container">
                 <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="2-20 characters"> 
                 <span class="validity"></span>
                 <button id="addBtn">add</button>
                 <ul id="searchList"></ul>
                 <button id="searchBtn">Search</button>
             </form>
-        </section>
+      </section>      
     </div>
 
-  <section> 
-    <h2> Recipe Results: </h2>
-    <div class="main-card" id="recipes">
-  </section>
+    <div class="tarjeta" id="recipes">
+      <h2> Recipe Results: </h2>
+    </div>
+
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
