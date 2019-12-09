@@ -47,3 +47,13 @@ input:valid+span:after {
     content: '✓';
     padding-left: 5px;
 }
+
+.icon {
+    display: inline-block;
+    transform: translateY(6px);
+    width: .8em;
+    height: .8em;
+    stroke-width: 0;
+    stroke: none;
+    fill: rgb(209, 0, 0);
+  }

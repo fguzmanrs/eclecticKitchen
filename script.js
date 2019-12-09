@@ -1,8 +1,3 @@
-// https://api.spoonacular.com/recipes/findByIngredients
-// api keys: bb5452cb4b074d1a899410830c863f29
-//           d0aef524cfc14d6ba3f35bc68ab620b9
-//           06238180649d43e0bffc9f3ac6536dc3
-
 
 var state = {
     searchIngredients: [],
@@ -63,6 +58,8 @@ $('document').ready(function () {
             // PASS3: Render recipes to DOM
             renderRecipesList();
 
+            //! temperary call to save API call
+            localStorage.setItem('tempRecipes', JSON.stringify(state.recipes));
         }
         else {
             // Need to change alert to modal or tooltip
@@ -147,14 +144,23 @@ $('document').ready(function () {
             var recipe = `<div class="row">
                             <div class="col s12 m7>
                                 <div class="recipe" data-recipe="recipe${i}">
-                                    <h2>${recipeObj.title}</h2>
+                                    <h2>
+                                        ${recipeObj.title}
+                                        <span class="like">
+                                            <svg class="icon icon-heart-plus">
+                                                <use xlink:href="./assets/icons/sprite.svg#icon-heart-plus"></use>
+                                            </svg>
+                                        </span>
+                                    </h2>
                                     <img class="recipe__image" src="${recipeObj.imgSmall}" data-recipe__image="recipe__image${i}"></img>
                                     <span class="card-title">
                                     <div class="recipe__detail" data-recipe__detail="recipe__detail${i}">
-                                    <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
-                                    <ul class="ingredients--missed" data-ingredients--missed="ingredients--missed${i}"></ul>
-                                    <ul class="instructions" hidden="hidden" data-instructions="instructions${i}">${li}</ul>
+                                        <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
+                                        <ul class="ingredients--missed" data-ingredients--missed="ingredients--missed${i}"></ul>
+                                        <ul class="instructions" hidden="hidden" data-instructions="instructions${i}">${li}</ul>
+                                    </div>
                                 </div>
+                            </div>
                         </div>`
 
             $('#recipes').append(recipe);
@@ -195,13 +201,16 @@ $('document').ready(function () {
 
             var li = $(e.target).closest('li');
 
-            // Delete the ingredient from state data
+            // Delete the ingredient from state data & local storage
             var ingredient = li.attr('data-ingredient');
             var index = state.searchIngredients.indexOf(ingredient);
+
             state.searchIngredients.splice(index, 1);
+            saveToLocalStorage(state.searchIngredients);
 
             // Delete from DOM
             li.remove();
+
         }
     }
     function init() {
@@ -215,6 +224,14 @@ $('document').ready(function () {
             for(var i=0 ; i<l ; i++){
                 renderSearchList(state.searchIngredients[i]);
             }
+        }
+
+    //! Temperary code to save API call
+        var loadedData = localStorage.getItem('tempRecipes');
+
+        if(loadedData){
+            state.recipes = JSON.parse(loadedData);
+            renderRecipesList();
         }
 
     }
