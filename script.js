@@ -63,7 +63,7 @@ $('document').ready(function () {
             // PASS3: Render recipes to DOM
             renderRecipesList();
 
-//! ********* Inserted for temperary call to save API call
+//! [For Test] Inserted for temperary call to save API calls
             // localStorage.setItem('tempRecipes', JSON.stringify(state.recipes));
 //! **********************************************************
         }
@@ -74,53 +74,51 @@ $('document').ready(function () {
 
     }
     function favoriteMenuHandler(){
-        // render
-        console.log('hover')
         
+        // Need to work...
+        console.log('hover');
+
     }
     function favoriteIconHandler(e){
-        //
 
+        // If heart icon is clicked
         if(e.target.matches('.icon, .icon *')){
 
             console.log('clicked', e.target);
 
-            // Find which recipe is clicked
+            // 1. Find which recipe is clicked
             var recipeHTML = $(e.target).closest('.recipe');
             var recipeIndex = recipeHTML.attr('data-recipe');
             var recipeObj = state.recipes[recipeIndex];
 
-            // Toggle the recipe's property 'isLiked' value (true or false)
+            // 2. Toggle the recipe's property 'isLiked' value (true or false)
             recipeObj.isLiked = recipeObj.isLiked ? false : true;
             
-            // render heart (toggle)
-            console.log('finded: ', recipeHTML.find('use'));
-            console.log("use's attr: ", recipeHTML.find('use').attr('xlink:href'));
-
-            var useHTML = recipeHTML.find('use')
+            // 3. Toggle heart icone +,- shape
+            var useHTML = recipeHTML.find('use');
             var path = useHTML.attr('xlink:href').split('-')[2];
             
-            useHTML.attr('xlink:href',`./assets/icons/sprite.svg#icon-heart-${ path === "plus" ? 'minus' : 'plus' }`)
+            useHTML.attr('xlink:href',`./assets/icons/sprite.svg#icon-heart-${ path === "plus" ? 'minus' : 'plus' }`);
             
   
-            // save the likes to state data 
+            // 4. Save likes to state data 
+
             if(recipeObj.isLiked){ // if isLiked === true
-                state.likes.push(recipeObj);
-                console.log('new like added: ', state.likes)
+
+                state.likes.push(recipeObj); console.log('new like obj added: ', state.likes);
+
             }
             else{ // if isLiked === false
 
                 var index = state.likes.findIndex(function(el){
-                    return el.id === recipeObj.id
-                })
+                                return el.id === recipeObj.id;
+                            })
                 
-                console.log('like index', index);
-
-                    state.likes.splice(index, 1);
-                    console.log('after spliced: ', state.likes);
+                    state.likes.splice(index, 1); console.log('updated like obj after deleting: ', state.likes);
                 
             }
-            // save the likes to local storage
+
+            // 5. Save likes to local storage
             saveToLocalStorage('likes', state.likes);
 
         }
@@ -146,6 +144,7 @@ $('document').ready(function () {
             })
 
         if (state.rawData.length === 0) {
+
             // ** Need to change this alert to modal later
             alert('Cannot find any recipe with your input. Please make sure that you enter at least one valid ingredient.');
             throw new Error("No recipe returned. The app has been stopped.");
@@ -189,12 +188,13 @@ $('document').ready(function () {
         state.recipes = recipesArr;
     }
     function renderRecipesList() { 
+
         var li = "";
         $('#recipes').empty();
 
         for (var i = 0; i < state.numOfRender; i++) {
        
-//! part to comment out when saving API call
+//! [For Test] part to comment out when saving API calls
             // check for 'complete' recipe meaning: recipe with preparation steps 
             if (state.recipes[i].doRender === false) break;
 
@@ -290,9 +290,9 @@ $('document').ready(function () {
             }
         }
 
-//! Inserted for Temperary code to save API call 
+//![For Test] Inserted for Temperary code to save API call 
         // var loadedData = localStorage.getItem('tempRecipes');
-        // // console.log('loadedData: ', loadedData)
+        // console.log('loadedData: ', loadedData)
         // if(loadedData){
         //     state.recipes = JSON.parse(loadedData);
         //     renderRecipesList();
@@ -317,8 +317,7 @@ $('document').ready(function () {
 
         var likedIds = state.likes.map(function(el){ return el.id });
 
-        // if obj has the same id of likedIds obj, return true
-        console.log(likedIds, obj.id);
+        // If obj has the same id of likedIds obj, return true
         var index = likedIds.indexOf(obj.id);
         
         return index === -1 ? false : true;
