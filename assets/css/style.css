@@ -56,4 +56,5 @@ input:valid+span:after {
     stroke-width: 0;
     stroke: none;
     fill: rgb(209, 0, 0);
+    cursor: pointer;
   }

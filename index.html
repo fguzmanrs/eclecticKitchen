@@ -15,7 +15,13 @@
 <body>
     <div class="tarjeta" id="left-card">
       <section>
-            <h2 id="ingredient-title">What's in Your Kitchen?</h2>
+            <h2 id="ingredient-title">What's in Your Kitchen?
+                <div id="favoriteMenu">
+                    <svg class="icon icon-heart">
+                        <use xlink:href="./assets/icons/sprite.svg#icon-heart"></use>
+                    </svg>
+                </div>
+            </h2>
             <form id="search-card" class="container">
                 <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="2-20 characters"> 
                 <span class="validity"></span>

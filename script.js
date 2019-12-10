@@ -1,10 +1,11 @@
 
 var state = {
     searchIngredients: [],
-    numOfRequest: 3, // how many recipe will you get from server? 1-100
-    numOfRender: 1,
+    numOfRequest: 10, // how many recipe will you get from server? 1-100
+    numOfRender: 3,
     rawData: [],
     recipes: [],
+    likes:[]
 }
 
 
@@ -27,15 +28,19 @@ $('document').ready(function () {
 
         var inputIngredient = $('#inputIng').val().trim(); console.log(inputIngredient);
 
-        // 1. Lender search list
-        renderSearchList(inputIngredient);
+        // Only proceed when the input is not duplicated
+        if(state.searchIngredients.indexOf(inputIngredient) === -1){
 
-        // 2. Save input to state data
-        state.searchIngredients.push(inputIngredient);
+            // 1. Lender search list
+            renderSearchList(inputIngredient);
 
-        // 3. Save input data to local storage
-        saveToLocalStorage(state.searchIngredients);
+            // 2. Save input to state data
+            state.searchIngredients.push(inputIngredient);
 
+            // 3. Save input data to local storage
+            saveToLocalStorage('ingredients', state.searchIngredients);
+        }
+       
         // 4. Clear input text
         $('#inputIng').val("");
 
@@ -58,14 +63,67 @@ $('document').ready(function () {
             // PASS3: Render recipes to DOM
             renderRecipesList();
 
-            //! temperary call to save API call
-            localStorage.setItem('tempRecipes', JSON.stringify(state.recipes));
+//! ********* Inserted for temperary call to save API call
+            // localStorage.setItem('tempRecipes', JSON.stringify(state.recipes));
+//! **********************************************************
         }
         else {
             // Need to change alert to modal or tooltip
             alert("Please add at least one ingredient.");
         }
 
+    }
+    function favoriteMenuHandler(){
+        // render
+        console.log('hover')
+        
+    }
+    function favoriteIconHandler(e){
+        //
+
+        if(e.target.matches('.icon, .icon *')){
+
+            console.log('clicked', e.target);
+
+            // Find which recipe is clicked
+            var recipeHTML = $(e.target).closest('.recipe');
+            var recipeIndex = recipeHTML.attr('data-recipe');
+            var recipeObj = state.recipes[recipeIndex];
+
+            // Toggle the recipe's property 'isLiked' value (true or false)
+            recipeObj.isLiked = recipeObj.isLiked ? false : true;
+            
+            // render heart (toggle)
+            console.log('finded: ', recipeHTML.find('use'));
+            console.log("use's attr: ", recipeHTML.find('use').attr('xlink:href'));
+
+            var useHTML = recipeHTML.find('use')
+            var path = useHTML.attr('xlink:href').split('-')[2];
+            
+            useHTML.attr('xlink:href',`./assets/icons/sprite.svg#icon-heart-${ path === "plus" ? 'minus' : 'plus' }`)
+            
+  
+            // save the likes to state data 
+            if(recipeObj.isLiked){ // if isLiked === true
+                state.likes.push(recipeObj);
+                console.log('new like added: ', state.likes)
+            }
+            else{ // if isLiked === false
+
+                var index = state.likes.findIndex(function(el){
+                    return el.id === recipeObj.id
+                })
+                
+                console.log('like index', index);
+
+                    state.likes.splice(index, 1);
+                    console.log('after spliced: ', state.likes);
+                
+            }
+            // save the likes to local storage
+            saveToLocalStorage('likes', state.likes);
+
+        }
     }
 
     /**********************************/
@@ -121,39 +179,45 @@ $('document').ready(function () {
             // 3. add missed ingredients arr to RecipeObj
             recipeObj.missedIngredients = createIngArr(rawRecipe.missedIngredients);
 
+            // 4. add like factor
+            recipeObj.isLiked = isLikedOrNot(recipeObj);
+
             recipesArr.push(recipeObj);
         }
 
         // Save the created array to state database
         state.recipes = recipesArr;
     }
-
-    function renderRecipesList() {
+    function renderRecipesList() { 
         var li = "";
         $('#recipes').empty();
 
         for (var i = 0; i < state.numOfRender; i++) {
+       
+//! part to comment out when saving API call
             // check for 'complete' recipe meaning: recipe with preparation steps 
             if (state.recipes[i].doRender === false) break;
 
-
+            // create preparation steps HTML
             for (let j = 0; j < state.recipes[i].steps.length; ++j)
                 li += "<li>" + state.recipes[i].steps[j] + "</li>"
+//! ******************************************************/
 
             var recipeObj = state.recipes[i];
+            console.log('rendered recipe:', recipeObj.isLiked)
             var recipe = `<div class="row">
-                            <div class="col s12 m7>
-                                <div class="recipe" data-recipe="recipe${i}">
+                            <div class="col s12 m7">
+                                <div class="recipe" data-recipe="${i}">
                                     <h2>
                                         ${recipeObj.title}
-                                        <span class="like">
-                                            <svg class="icon icon-heart-plus">
-                                                <use xlink:href="./assets/icons/sprite.svg#icon-heart-plus"></use>
+                                        <span class="favoriteIcon">
+                                            <svg class="icon">
+                                                <use xlink:href="./assets/icons/sprite.svg#icon-heart-${recipeObj.isLiked ? 'minus' : 'plus'}" class="iconImg"></use>
                                             </svg>
                                         </span>
                                     </h2>
-                                    <img class="recipe__image" src="${recipeObj.imgSmall}" data-recipe__image="recipe__image${i}"></img>
-                                    <span class="card-title">
+                                    <img class="recipe__image" src="${recipeObj.imgSmall}" data-recipe__image="recipe__image${i}">
+                                    <span class="card-title"></span>
                                     <div class="recipe__detail" data-recipe__detail="recipe__detail${i}">
                                         <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
                                         <ul class="ingredients--missed" data-ingredients--missed="ingredients--missed${i}"></ul>
@@ -168,7 +232,6 @@ $('document').ready(function () {
             renderIngredients('.ingredients--missed', i, recipeObj.missedIngredients);
         }
     }
-
     function renderIngredients(addTo, order, arr) {
 
         var l = arr.length;
@@ -206,7 +269,7 @@ $('document').ready(function () {
             var index = state.searchIngredients.indexOf(ingredient);
 
             state.searchIngredients.splice(index, 1);
-            saveToLocalStorage(state.searchIngredients);
+            saveToLocalStorage('ingredients', state.searchIngredients);
 
             // Delete from DOM
             li.remove();
@@ -215,38 +278,51 @@ $('document').ready(function () {
     }
     function init() {
 
-        importFromLocalStorage();
+        importFromLocalStorage('ingredients', 'searchIngredients');
+        importFromLocalStorage('likes', 'likes');
 
+        // Render stored search list to DOM
         var l = state.searchIngredients.length;
 
         if(l>0){
-            
             for(var i=0 ; i<l ; i++){
                 renderSearchList(state.searchIngredients[i]);
             }
         }
 
-    //! Temperary code to save API call
-        var loadedData = localStorage.getItem('tempRecipes');
+//! Inserted for Temperary code to save API call 
+        // var loadedData = localStorage.getItem('tempRecipes');
+        // // console.log('loadedData: ', loadedData)
+        // if(loadedData){
+        //     state.recipes = JSON.parse(loadedData);
+        //     renderRecipesList();
+        // }
+//! ***********************************************************        
+    }
+    function importFromLocalStorage(item,addTo) {
+
+        var loadedData = localStorage.getItem(item);
 
         if(loadedData){
-            state.recipes = JSON.parse(loadedData);
-            renderRecipesList();
-        }
-
-    }
-    function importFromLocalStorage() {
-
-        var loadedData = localStorage.getItem('ingredients');
-
-        if(loadedData){
-            state.searchIngredients = JSON.parse(loadedData);
+            state[addTo] = JSON.parse(loadedData);
         }
     }
-    function saveToLocalStorage(str) {
+    function saveToLocalStorage(addTo,data) {
 
-        localStorage.setItem('ingredients', JSON.stringify(str));
+        // var duplicateDeletedArr = Array.from(new Set(data));
+        localStorage.setItem(addTo, JSON.stringify(data));
 
+    }
+    function isLikedOrNot(obj){
+
+        var likedIds = state.likes.map(function(el){ return el.id });
+
+        // if obj has the same id of likedIds obj, return true
+        console.log(likedIds, obj.id);
+        var index = likedIds.indexOf(obj.id);
+        
+        return index === -1 ? false : true;
+        
     }
     /**********************************/
     /*              UTILITY           */
@@ -276,6 +352,12 @@ $('document').ready(function () {
     $('#searchBtn').click(searchBtnHandler);
     $('#search-card').submit(addIngredientToList);
     $('#searchList').click(deleteIngredient);
+
+    // Favorite menu button
+    $('#favoriteMenu').mouseenter(favoriteMenuHandler);
+
+    // Each recipe's favorite button
+    $('#recipes').click(favoriteIconHandler);
 
     // ====================================
     // ffortizn
