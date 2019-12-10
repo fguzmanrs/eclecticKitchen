@@ -22,6 +22,10 @@ $('document').ready(function () {
     /*           EVENT HANDLER        */
     /**********************************/
 
+    
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, {});
+
     function addIngredientToList(e) {
 
         e.preventDefault();
@@ -75,8 +79,35 @@ $('document').ready(function () {
     }
     function favoriteMenuHandler(){
         
-        // Need to work...
-        console.log('hover');
+        var l = state.likes.length;
+        
+        $('#modal-list').empty();
+
+        if(l>0){
+            var list = "";
+
+            for(var i = 0; i < l ; i++){
+    
+                var like = state.likes[i];
+    
+                list += `<li class="favorite__list">
+                                <img src="${like.imgSmall}" class="favorite__img">
+                                <div>
+                                    <h6 class="favorite__title">${like.title}</h6>
+                                    <p class="favorite__ing">Used ingredients: ${like.usedIngredients}</p>
+                                </div>
+                          </li>`
+            }
+    
+        }
+        else{
+            var list = '<h6> There is no favorite added.</h6>'
+        }
+
+        $('#modal-list').append(list);
+
+        var instance = M.Modal.getInstance(document.querySelector('#modal-favorite'));
+        instance.open();
 
     }
     function favoriteIconHandler(e){
@@ -353,7 +384,7 @@ $('document').ready(function () {
     $('#searchList').click(deleteIngredient);
 
     // Favorite menu button
-    $('#favoriteMenu').mouseenter(favoriteMenuHandler);
+    $('#favoriteMenu').on('click', favoriteMenuHandler);
 
     // Each recipe's favorite button
     $('#recipes').click(favoriteIconHandler);
@@ -361,10 +392,10 @@ $('document').ready(function () {
     // ====================================
     // ffortizn
     
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.modal');
-        var instances = M.Modal.init(elems, options);
-      });
+    // document.addEventListener('DOMContentLoaded', function() {
+        // var elems = document.querySelectorAll('.modal');
+        // var instances = M.Modal.init(elems, {});
+    //   });
     
     
     // PASS 2: Validate against preparation steps (note empty)

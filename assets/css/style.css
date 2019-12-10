@@ -51,10 +51,23 @@ input:valid+span:after {
 .icon {
     display: inline-block;
     transform: translateY(6px);
-    width: .8em;
-    height: .8em;
+    width: 1.3em;
+    height: 1.3em;
     stroke-width: 0;
     stroke: none;
     fill: rgb(209, 0, 0);
     cursor: pointer;
   }
+
+.favorite__list{
+    display: flex;
+    margin-bottom: 1em;
+}
+.favorite__img{
+    min-width: 5em;
+    height: 5em;
+    margin-right: 1em;
+}
+.favorite__title{
+    margin: 0;
+}

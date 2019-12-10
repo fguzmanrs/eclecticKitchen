@@ -16,11 +16,12 @@
     <div class="tarjeta" id="left-card">
       <section>
             <h2 id="ingredient-title">What's in Your Kitchen?
-                <div id="favoriteMenu">
+                <a id="favoriteMenu" class="btn modal-trigger" href="#modal-favorite">
+                    My Favorite 
                     <svg class="icon icon-heart">
                         <use xlink:href="./assets/icons/sprite.svg#icon-heart"></use>
                     </svg>
-                </div>
+                </a>
             </h2>
             <form id="search-card" class="container">
                 <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="2-20 characters"> 
@@ -36,6 +37,12 @@
       <h2> Recipe Results: </h2>
     </div>
 
+    <div id="modal-favorite" class="modal">
+        <div class="modal-content">
+          <h4>My Favorite</h4>
+          <ul id="modal-list"></ul>
+        </div>
+    </div>
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
