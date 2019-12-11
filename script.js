@@ -12,11 +12,11 @@ var state = {
 
 $('document').ready(function () {
     // var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
-    //var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
-    var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
-    //var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
+    // var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
+    // var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
+    // var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
     // var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
-    //var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
+    var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
     // var apiKey = "0421115dd3974c7f9338166f3e907824"; // Emily2
 
     /**********************************/
@@ -122,17 +122,32 @@ $('document').ready(function () {
         state.currentModal.open();
 
     }
+
     function gotoFavoriteHandler(e) {
 
         if (e.target.matches('.favorite__list, .favorite__list *')) {
 
-            $('#recipes').empty();
+            state.currentCollapsible = M.Collapsible.getInstance(document.querySelector(''));
+            state.currentCollapsible.open();
 
-            var index = e.target.closest('a').getAttribute('href').slice(1);
-            console.log('likes arr index: ', index);
+        }
 
-            renderRecipe(state.likes[index]);
-            state.currentModal.close();
+    }
+    function togglePreparation(e) {
+
+        if (e.target.matches('.collapsible, .collapsible-accordion, collapsible-header, collapsible, *')) {
+
+            console.log("clicked");
+            console.log(e.target)
+
+            console.log(e.target.closest("ul"));
+            var instance = M.Collapsible.getInstance(document.querySelector());
+            instance.open(1);
+            // var index = e.target.closest('a').getAttribute('href').slice(1);
+            // console.log('likes arr index: ', index);
+
+            // renderRecipe(state.likes[index]);
+            // state.currentModal.close();
         }
 
     }
@@ -281,7 +296,12 @@ $('document').ready(function () {
                                     <div class="recipe__detail" data-recipe__detail="recipe__detail${i}">
                                         <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
                                         <ul class="ingredients--missed" data-ingredients--missed="ingredients--missed${i}"></ul>
-                                        <ul class="instructions" hidden="hidden" data-instructions="instructions${i}">${li}</ul>
+                                        <ul class="instructions modal collapsible collapsible-accordion"  data-instructions="instructions${i}">
+                                            <li>
+                                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>Preparation</div>
+                                                <div class="collapsible-body">${li}</span></div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -423,6 +443,8 @@ $('document').ready(function () {
 
     // Each recipe's favorite button
     $('#recipes').click(favoriteIconHandler);
+
+    $('#recipes').on('click', togglePreparation);
 
     // ====================================
     // ffortizn
