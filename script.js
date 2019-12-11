@@ -6,17 +6,18 @@ var state = {
     rawData: [],
     recipes: [],
     likes: [],
-    currentModal: null
+    currentModal: null,
+    currentCollap: null
 }
 
 
 $('document').ready(function () {
-    // var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
+    var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
     // var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
     // var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
     // var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
     // var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
-    var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
+    // var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
     // var apiKey = "0421115dd3974c7f9338166f3e907824"; // Emily2
 
     /**********************************/
@@ -119,38 +120,27 @@ $('document').ready(function () {
         $('#modal-list').append(list);
 
         state.currentModal = M.Modal.getInstance(document.querySelector('#modal-favorite'));
+        console.log("modal: ",state.currentModal)
         state.currentModal.open();
 
     }
 
     function gotoFavoriteHandler(e) {
 
-        if (e.target.matches('.favorite__list, .favorite__list *')) {
+        if(e.target.matches('.favorite__list, .favorite__list *')){
 
-            state.currentCollapsible = M.Collapsible.getInstance(document.querySelector(''));
-            state.currentCollapsible.open();
+            $('#recipes').empty();
 
+            if(state.currentModal){
+                var index = e.target.closest('a').getAttribute('href').slice(1);
+                console.log('likes arr index: ',index);
+
+                renderRecipe(state.likes[index]);
+                state.currentModal.close();
+            }
         }
-
     }
-    function togglePreparation(e) {
-
-        if (e.target.matches('.collapsible, .collapsible-accordion, collapsible-header, collapsible, *')) {
-
-            console.log("clicked");
-            console.log(e.target)
-
-            console.log(e.target.closest("ul"));
-            var instance = M.Collapsible.getInstance(document.querySelector());
-            instance.open(1);
-            // var index = e.target.closest('a').getAttribute('href').slice(1);
-            // console.log('likes arr index: ', index);
-
-            // renderRecipe(state.likes[index]);
-            // state.currentModal.close();
-        }
-
-    }
+    
     function favoriteIconHandler(e) {
 
         // If heart icon is clicked
@@ -270,18 +260,17 @@ $('document').ready(function () {
         }
     }
     function renderRecipe(obj, i = 0) {
-        //! [For Test] part to comment out when saving API calls
+ 
         // check for 'complete' recipe meaning: recipe with preparation steps 
         if (obj.doRender === false) return;
 
         // create preparation steps HTML
         var li = "";
         for (let j = 0; j < obj.steps.length; ++j)
-            li += "<li>" + obj.steps[j] + "</li>"
-        //! ******************************************************/
+            li += `<br>${j+1}. ${obj.steps[j]}<br>`;
 
         var recipe = `<div class="row">
-                            <div class="col s12 m7">
+                            <div class="col">
                                 <div class="recipe" data-recipe="${i}">
                                     <h2>
                                         ${obj.title}
@@ -291,15 +280,19 @@ $('document').ready(function () {
                                             </svg>
                                         </span>
                                     </h2>
-                                    <img class="recipe__image" src="${obj.imgSmall}" data-recipe__image="recipe__image${i}">
+                                    <img class="recipe__image" src="${obj.imgSmall}">
                                     <span class="card-title"></span>
-                                    <div class="recipe__detail" data-recipe__detail="recipe__detail${i}">
-                                        <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
-                                        <ul class="ingredients--missed" data-ingredients--missed="ingredients--missed${i}"></ul>
-                                        <ul class="instructions modal collapsible collapsible-accordion"  data-instructions="instructions${i}">
+                                    <div class="recipe__detail">
+                                        <ul class="ingredients--used"></ul>
+                                        <ul class="ingredients--missed"></ul>
+                                        <ul class="instructions collapsible" data-instructions=${i}>
                                             <li>
-                                                <div class="collapsible-header"><i class="material-icons">filter_drama</i>Preparation</div>
-                                                <div class="collapsible-body">${li}</span></div>
+                                                <div class="collapsible-header">
+                                                    Preparation
+                                                </div>
+                                                <div class="collapsible-body">
+                                                    <p>${li}</p>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
@@ -307,10 +300,14 @@ $('document').ready(function () {
                             </div>
                         </div>`
 
+                        // <i class="material-icons">filter_drama</i>
+
         $('#recipes').append(recipe);
         renderIngredients('.ingredients--used', i, obj.usedIngredients);
         renderIngredients('.ingredients--missed', i, obj.missedIngredients);
 
+        // Materialize Collapsible init
+        $('.collapsible').collapsible();
     }
     function renderIngredients(addTo, order, arr) {
 
@@ -357,10 +354,9 @@ $('document').ready(function () {
         }
     }
     function init() {
-
-        // Materialize framwork init
-        var elems = document.querySelectorAll('.modal');
-        M.Modal.init(elems, {});
+        
+        // Materialize all components init
+        M.AutoInit();
 
         // Load from local storage
         importFromLocalStorage('ingredients', 'searchIngredients');
@@ -377,7 +373,7 @@ $('document').ready(function () {
 
         //![For Test] Inserted for Temperary code to save API call 
         // var loadedData = localStorage.getItem('tempRecipes');
-        // console.log('loadedData: ', loadedData)
+
         // if(loadedData){
         //     state.recipes = JSON.parse(loadedData);
         //     renderRecipesList();
@@ -444,7 +440,7 @@ $('document').ready(function () {
     // Each recipe's favorite button
     $('#recipes').click(favoriteIconHandler);
 
-    $('#recipes').on('click', togglePreparation);
+    // $('#recipes').on('click', togglePreparation);
 
     // ====================================
     // ffortizn

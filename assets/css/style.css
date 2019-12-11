@@ -8,6 +8,13 @@
         vermillion (pop): #DD3506
         pale gold (muted): #EDC08D
  */
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     background-color: #81c14b;
@@ -69,5 +76,10 @@ input:valid+span:after {
     margin-right: 1em;
 }
 .favorite__title{
+    margin: 0;
+}
+.collapsible{
+    box-shadow: none;
+    -webkit-box-shadow: none;
     margin: 0;
 }
