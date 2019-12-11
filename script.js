@@ -316,7 +316,7 @@ $('document').ready(function () {
     }
     function renderSearchList(str) {
 
-        var li = `<li data-ingredient="${str}">
+        var li = `<li class="collection" data-ingredient="${str}">
                     ${str}
                     <span class="delete"> &#215; </span>
                   </li>`;
