@@ -60,15 +60,34 @@ input:valid+span:after {
     padding-left: 5px;
 }
 
-.recipe {
+#recipes {
+    padding: 20px;
+    height: auto;
+}
+
+/* .recipe {
     text-align: center;
     height: 400px;
     width: 85%;
-    /* background-color: #ecba82; */
+    background-color: #ecba82; 
     border-radius: 10px;
-    margin: 70px;
+    margin: 40px;
     background-image: url(./images/-U4wBbx6u0Q.jpg);
     background-size: cover;
+} */
 
+.ingredients--used {
+    list-style-type: none;
 }
 
+.ingredients--missed {
+    list-style-type: none;
+}
+
+.card-image {
+   /* height: 400px; */
+}
+
+img {
+    max-height: 400px;
+}
