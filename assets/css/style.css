@@ -48,6 +48,7 @@ body {
     display: none;
 }
 
+
 input:invalid+span:after {
     position: absolute;
     content: '✖';
