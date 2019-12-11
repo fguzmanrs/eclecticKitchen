@@ -23,9 +23,6 @@ $('document').ready(function () {
     /*           EVENT HANDLER        */
     /**********************************/
 
-    
-    var elems = document.querySelectorAll('.modal');
-    var instances = M.Modal.init(elems, {});
 
     function addIngredientToList(e) {
 
@@ -113,28 +110,24 @@ $('document').ready(function () {
         state.currentModal.open();
 
     }
-    function closeModalHandler(e){
+    function gotoFavoriteHandler(e){
+        
+        if(e.target.matches('.favorite__list, .favorite__list *')){
+            
+            $('#recipes').empty();
 
-        if(state.currentModal){
+            var index = e.target.closest('a').getAttribute('href').slice(1);
+            console.log('likes arr index: ',index);
+            
+            renderRecipe(state.likes[index]);
             state.currentModal.close();
         }
-    }
-    function gotoFavoriteHandler(){
-        
-        var index = location.href.split('#')[1];
-        console.log('hash changed!', index);
 
-        $('#recipes').empty();
-        renderRecipe(state.likes[index]);
-        
-        // location.href=location.href.split('#')[0];
     }
     function favoriteIconHandler(e){
 
         // If heart icon is clicked
         if(e.target.matches('.icon, .icon *')){
-
-            console.log('clicked', e.target);
 
             // 1. Find which recipe is clicked
             var recipeHTML = $(e.target).closest('.recipe');
@@ -332,7 +325,12 @@ $('document').ready(function () {
         }
     }
     function init() {
+        
+        // Materialize framwork init
+        var elems = document.querySelectorAll('.modal');
+        M.Modal.init(elems, {});
 
+        // Load from local storage
         importFromLocalStorage('ingredients', 'searchIngredients');
         importFromLocalStorage('likes', 'likes');
 
@@ -409,13 +407,10 @@ $('document').ready(function () {
 
     // Favorite menu button
     $('#favoriteMenu').on('click', favoriteMenuHandler);
-    $('#modal-list').on('click', closeModalHandler);
-
+    $('#modal-list').on('click', gotoFavoriteHandler);
 
     // Each recipe's favorite button
     $('#recipes').click(favoriteIconHandler);
-
-    $(window).on('hashchange', gotoFavoriteHandler);
 
     // ====================================
     // ffortizn
@@ -464,7 +459,7 @@ $('document').ready(function () {
         });
     }
 
-    $('.modal').modal();
+    // $('.modal').modal();
     init();
 
 
