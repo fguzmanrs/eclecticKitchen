@@ -117,3 +117,21 @@ img {
 .favorite__title{
     margin: 0;
 }
+
+#recipes {
+    height: auto;
+    min-height: 800px;
+}
+
+h5 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.card .card-image img {
+    border-radius: 10px 10px 0px 0px;
+}
