@@ -59,7 +59,7 @@ input:valid+span:after {
     cursor: pointer;
   }
 
-.favorite__list{
+.favorite__list > *{
     display: flex;
     margin-bottom: 1em;
 }

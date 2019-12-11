@@ -5,18 +5,19 @@ var state = {
     numOfRender: 3,
     rawData: [],
     recipes: [],
-    likes:[]
+    likes:[],
+    currentModal: null
 }
 
 
 $('document').ready(function () {
-    //var apiKey = " d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
-    //var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
+    // var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
+    var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
     //var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
     //var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
-    var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
-    //var apiKey = " f4abc8a8916747b3a3976addc1321ab0;" //birulaplanet.com
-    //var apiKey = " 0421115dd3974c7f9338166f3e907824;" // Emily2
+    // var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
+    //var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
+    // var apiKey = "0421115dd3974c7f9338166f3e907824"; // Emily2
 
     /**********************************/
     /*           EVENT HANDLER        */
@@ -52,7 +53,7 @@ $('document').ready(function () {
     async function searchBtnHandler(e) {
 
         e.preventDefault();
-
+// location.href = '#search'
         if (state.searchIngredients.length > 0) {
 
             await getRecipesByIngredients(state.searchIngredients);
@@ -91,12 +92,14 @@ $('document').ready(function () {
                 var like = state.likes[i];
     
                 list += `<li class="favorite__list">
+                            <a href="#${i}">
                                 <img src="${like.imgSmall}" class="favorite__img">
                                 <div>
                                     <h6 class="favorite__title">${like.title}</h6>
                                     <p class="favorite__ing">Used ingredients: ${like.usedIngredients}</p>
                                 </div>
-                          </li>`
+                            </a>
+                        </li>`
             }
     
         }
@@ -106,9 +109,25 @@ $('document').ready(function () {
 
         $('#modal-list').append(list);
 
-        var instance = M.Modal.getInstance(document.querySelector('#modal-favorite'));
-        instance.open();
+        state.currentModal = M.Modal.getInstance(document.querySelector('#modal-favorite'));
+        state.currentModal.open();
 
+    }
+    function closeModalHandler(e){
+
+        if(state.currentModal){
+            state.currentModal.close();
+        }
+    }
+    function gotoFavoriteHandler(){
+        
+        var index = location.href.split('#')[1];
+        console.log('hash changed!', index);
+
+        $('#recipes').empty();
+        renderRecipe(state.likes[index]);
+        
+        // location.href=location.href.split('#')[0];
     }
     function favoriteIconHandler(e){
 
@@ -220,34 +239,39 @@ $('document').ready(function () {
     }
     function renderRecipesList() { 
 
-        var li = "";
         $('#recipes').empty();
 
         for (var i = 0; i < state.numOfRender; i++) {
-       
+            
+            var recipeObj = state.recipes[i];
+            
+            renderRecipe(recipeObj,i);
+
+        }
+    }
+    function renderRecipe(obj,i=0){
 //! [For Test] part to comment out when saving API calls
             // check for 'complete' recipe meaning: recipe with preparation steps 
-            if (state.recipes[i].doRender === false) break;
+            if (obj.doRender === false) return;
 
             // create preparation steps HTML
-            for (let j = 0; j < state.recipes[i].steps.length; ++j)
-                li += "<li>" + state.recipes[i].steps[j] + "</li>"
+            var li = "";
+            for (let j = 0; j < obj.steps.length; ++j)
+                li += "<li>" + obj.steps[j] + "</li>"
 //! ******************************************************/
-
-            var recipeObj = state.recipes[i];
-            console.log('rendered recipe:', recipeObj.isLiked)
+      
             var recipe = `<div class="row">
                             <div class="col s12 m7">
                                 <div class="recipe" data-recipe="${i}">
                                     <h2>
-                                        ${recipeObj.title}
+                                        ${obj.title}
                                         <span class="favoriteIcon">
                                             <svg class="icon">
-                                                <use xlink:href="./assets/icons/sprite.svg#icon-heart-${recipeObj.isLiked ? 'minus' : 'plus'}" class="iconImg"></use>
+                                                <use xlink:href="./assets/icons/sprite.svg#icon-heart-${obj.isLiked ? 'minus' : 'plus'}" class="iconImg"></use>
                                             </svg>
                                         </span>
                                     </h2>
-                                    <img class="recipe__image" src="${recipeObj.imgSmall}" data-recipe__image="recipe__image${i}">
+                                    <img class="recipe__image" src="${obj.imgSmall}" data-recipe__image="recipe__image${i}">
                                     <span class="card-title"></span>
                                     <div class="recipe__detail" data-recipe__detail="recipe__detail${i}">
                                         <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
@@ -259,9 +283,9 @@ $('document').ready(function () {
                         </div>`
 
             $('#recipes').append(recipe);
-            renderIngredients('.ingredients--used', i, recipeObj.usedIngredients);
-            renderIngredients('.ingredients--missed', i, recipeObj.missedIngredients);
-        }
+            renderIngredients('.ingredients--used', i, obj.usedIngredients);
+            renderIngredients('.ingredients--missed', i, obj.missedIngredients);
+
     }
     function renderIngredients(addTo, order, arr) {
 
@@ -385,9 +409,13 @@ $('document').ready(function () {
 
     // Favorite menu button
     $('#favoriteMenu').on('click', favoriteMenuHandler);
+    $('#modal-list').on('click', closeModalHandler);
+
 
     // Each recipe's favorite button
     $('#recipes').click(favoriteIconHandler);
+
+    $(window).on('hashchange', gotoFavoriteHandler);
 
     // ====================================
     // ffortizn
