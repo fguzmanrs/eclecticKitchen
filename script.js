@@ -427,12 +427,6 @@ $('document').ready(function () {
     // ====================================
     // ffortizn
 
-    // document.addEventListener('DOMContentLoaded', function() {
-    // var elems = document.querySelectorAll('.modal');
-    // var instances = M.Modal.init(elems, {});
-    //   });
-
-
     // PASS 2: Validate against preparation steps (note empty)
     // if not empty then populate preparation steps on object
     async function getInstructionsByRecipeId(recipeId, k) {
@@ -476,20 +470,6 @@ $('document').ready(function () {
 
 
     /********************** end **************************/
-})
-// Todo
-    // ajax : getting data - done
-    // duplicated ingredient element deleting function - done
-    // image: data[i].image, data **312x231 => change to https://spoonacular.com/recipeImages/{ID}-636x393.{TYPE} - done
-    // render to DOM - done
-    // render used ingredients and missing ingredients to DOM - done
-    // render input list to DOM - done
-    // Add an instruction property to each recipe {}. format: [step1,step2,step3...] - Francisco - done
-
-    // used & missed ingredients accuracy matter : chocolate !== semi-sweet chocolate, dark chocolate candy bars... 
-
-    // recipe validator (*Pass only when it has instructions, less than 10 missing ingredient?)
-    // change alert to modal
-    // loader animation
+});
 
 
