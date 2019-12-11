@@ -5,18 +5,18 @@ var state = {
     numOfRender: 3,
     rawData: [],
     recipes: [],
-    likes:[],
+    likes: [],
     currentModal: null
 }
 
 
 $('document').ready(function () {
     // var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
-    // var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
-    // var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
-    // var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
+    //var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
+    var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
+    //var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
     // var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
-    // var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
+    //var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
     // var apiKey = "0421115dd3974c7f9338166f3e907824"; // Emily2
 
     /**********************************/
@@ -31,7 +31,7 @@ $('document').ready(function () {
         var inputIngredient = $('#inputIng').val().trim(); console.log(inputIngredient);
 
         // Only proceed when the input is not duplicated
-        if(state.searchIngredients.indexOf(inputIngredient) === -1){
+        if (state.searchIngredients.indexOf(inputIngredient) === -1) {
 
             // 1. Lender search list
             renderSearchList(inputIngredient);
@@ -42,7 +42,7 @@ $('document').ready(function () {
             // 3. Save input data to local storage
             saveToLocalStorage('ingredients', state.searchIngredients);
         }
-       
+
         // 4. Clear input text
         $('#inputIng').val("");
 
@@ -50,13 +50,25 @@ $('document').ready(function () {
     async function searchBtnHandler(e) {
 
         e.preventDefault();
-// location.href = '#search'
+        // location.href = '#search'
         if (state.searchIngredients.length > 0) {
 
             await getRecipesByIngredients(state.searchIngredients);
 
             // Take only necessary info from raw data and create each recipe {}. Then add all recipes {}s to one [].
             createRecipesArr();
+
+            // animation for waiting
+
+            $('#recipes').empty();
+            var waiting = `<div class="row">
+                            <br><br><br><br>
+                            <div class="progress">
+                               <div class="indeterminate"></div>
+                            </div>
+                        </div>`
+
+            $('#recipes').append(waiting);
 
             // PASS2: validate/populate preparation steps into object
             for (var i = 0; i < state.recipes.length; ++i)
@@ -65,9 +77,9 @@ $('document').ready(function () {
             // PASS3: Render recipes to DOM
             renderRecipesList();
 
-//! [For Test] Inserted for temperary call to save API calls
+            //! [For Test] Inserted for temperary call to save API calls
             // localStorage.setItem('tempRecipes', JSON.stringify(state.recipes));
-//! **********************************************************
+            //! **********************************************************
         }
         else {
             // Need to change alert to modal or tooltip
@@ -75,19 +87,19 @@ $('document').ready(function () {
         }
 
     }
-    function favoriteMenuHandler(){
-        
+    function favoriteMenuHandler() {
+
         var l = state.likes.length;
-        
+
         $('#modal-list').empty();
 
-        if(l>0){
+        if (l > 0) {
             var list = "";
 
-            for(var i = 0; i < l ; i++){
-    
+            for (var i = 0; i < l; i++) {
+
                 var like = state.likes[i];
-    
+
                 list += `<li class="favorite__list">
                             <a href="#${i}">
                                 <img src="${like.imgSmall}" class="favorite__img">
@@ -98,9 +110,9 @@ $('document').ready(function () {
                             </a>
                         </li>`
             }
-    
+
         }
-        else{
+        else {
             var list = '<h6> There is no favorite added.</h6>'
         }
 
@@ -110,24 +122,24 @@ $('document').ready(function () {
         state.currentModal.open();
 
     }
-    function gotoFavoriteHandler(e){
-        
-        if(e.target.matches('.favorite__list, .favorite__list *')){
-            
+    function gotoFavoriteHandler(e) {
+
+        if (e.target.matches('.favorite__list, .favorite__list *')) {
+
             $('#recipes').empty();
 
             var index = e.target.closest('a').getAttribute('href').slice(1);
-            console.log('likes arr index: ',index);
-            
+            console.log('likes arr index: ', index);
+
             renderRecipe(state.likes[index]);
             state.currentModal.close();
         }
 
     }
-    function favoriteIconHandler(e){
+    function favoriteIconHandler(e) {
 
         // If heart icon is clicked
-        if(e.target.matches('.icon, .icon *')){
+        if (e.target.matches('.icon, .icon *')) {
 
             // 1. Find which recipe is clicked
             var recipeHTML = $(e.target).closest('.recipe');
@@ -136,29 +148,29 @@ $('document').ready(function () {
 
             // 2. Toggle the recipe's property 'isLiked' value (true or false)
             recipeObj.isLiked = recipeObj.isLiked ? false : true;
-            
+
             // 3. Toggle heart icone +,- shape
             var useHTML = recipeHTML.find('use');
             var path = useHTML.attr('xlink:href').split('-')[2];
-            
-            useHTML.attr('xlink:href',`./assets/icons/sprite.svg#icon-heart-${ path === "plus" ? 'minus' : 'plus' }`);
-            
-  
+
+            useHTML.attr('xlink:href', `./assets/icons/sprite.svg#icon-heart-${path === "plus" ? 'minus' : 'plus'}`);
+
+
             // 4. Save likes to state data 
 
-            if(recipeObj.isLiked){ // if isLiked === true
+            if (recipeObj.isLiked) { // if isLiked === true
 
                 state.likes.push(recipeObj); console.log('new like obj added: ', state.likes);
 
             }
-            else{ // if isLiked === false
+            else { // if isLiked === false
 
-                var index = state.likes.findIndex(function(el){
-                                return el.id === recipeObj.id;
-                            })
-                
-                    state.likes.splice(index, 1); console.log('updated like obj after deleting: ', state.likes);
-                
+                var index = state.likes.findIndex(function (el) {
+                    return el.id === recipeObj.id;
+                })
+
+                state.likes.splice(index, 1); console.log('updated like obj after deleting: ', state.likes);
+
             }
 
             // 5. Save likes to local storage
@@ -230,15 +242,15 @@ $('document').ready(function () {
         // Save the created array to state database
         state.recipes = recipesArr;
     }
-    function renderRecipesList() { 
+    function renderRecipesList() {
 
         $('#recipes').empty();
 
         for (var i = 0; i < state.numOfRender; i++) {
-            
+
             var recipeObj = state.recipes[i];
-            
-            renderRecipe(recipeObj,i);
+
+            renderRecipe(recipeObj, i);
 
         }
     }
@@ -281,9 +293,9 @@ $('document').ready(function () {
                             </div>
                         </div>`
 
-            $('#recipes').append(recipe);
-            renderIngredients('.ingredients--used', i, obj.usedIngredients);
-            renderIngredients('.ingredients--missed', i, obj.missedIngredients);
+        $('#recipes').append(recipe);
+        renderIngredients('.ingredients--used', i, obj.usedIngredients);
+        renderIngredients('.ingredients--missed', i, obj.missedIngredients);
 
     }
     function renderIngredients(addTo, order, arr) {
@@ -331,7 +343,7 @@ $('document').ready(function () {
         }
     }
     function init() {
-        
+
         // Materialize framwork init
         var elems = document.querySelectorAll('.modal');
         M.Modal.init(elems, {});
@@ -343,44 +355,44 @@ $('document').ready(function () {
         // Render stored search list to DOM
         var l = state.searchIngredients.length;
 
-        if(l>0){
-            for(var i=0 ; i<l ; i++){
+        if (l > 0) {
+            for (var i = 0; i < l; i++) {
                 renderSearchList(state.searchIngredients[i]);
             }
         }
 
-//![For Test] Inserted for Temperary code to save API call 
+        //![For Test] Inserted for Temperary code to save API call 
         // var loadedData = localStorage.getItem('tempRecipes');
         // console.log('loadedData: ', loadedData)
         // if(loadedData){
         //     state.recipes = JSON.parse(loadedData);
         //     renderRecipesList();
         // }
-//! ***********************************************************        
+        //! ***********************************************************        
     }
-    function importFromLocalStorage(item,addTo) {
+    function importFromLocalStorage(item, addTo) {
 
         var loadedData = localStorage.getItem(item);
 
-        if(loadedData){
+        if (loadedData) {
             state[addTo] = JSON.parse(loadedData);
         }
     }
-    function saveToLocalStorage(addTo,data) {
+    function saveToLocalStorage(addTo, data) {
 
         // var duplicateDeletedArr = Array.from(new Set(data));
         localStorage.setItem(addTo, JSON.stringify(data));
 
     }
-    function isLikedOrNot(obj){
+    function isLikedOrNot(obj) {
 
-        var likedIds = state.likes.map(function(el){ return el.id });
+        var likedIds = state.likes.map(function (el) { return el.id });
 
         // If obj has the same id of likedIds obj, return true
         var index = likedIds.indexOf(obj.id);
-        
+
         return index === -1 ? false : true;
-        
+
     }
     /**********************************/
     /*              UTILITY           */
@@ -420,13 +432,13 @@ $('document').ready(function () {
 
     // ====================================
     // ffortizn
-    
+
     // document.addEventListener('DOMContentLoaded', function() {
-        // var elems = document.querySelectorAll('.modal');
-        // var instances = M.Modal.init(elems, {});
+    // var elems = document.querySelectorAll('.modal');
+    // var instances = M.Modal.init(elems, {});
     //   });
-    
-    
+
+
     // PASS 2: Validate against preparation steps (note empty)
     // if not empty then populate preparation steps on object
     async function getInstructionsByRecipeId(recipeId, k) {
