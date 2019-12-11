@@ -142,21 +142,32 @@ $('document').ready(function () {
             for (let j = 0; j < state.recipes[i].steps.length; ++j)
                 li = li + "<li>" + state.recipes[i].steps[j] + "</li>"
 
-                console.log(li);
+            console.log(li);
 
             var recipeObj = state.recipes[i];
             var recipe = `<div class="row">
-                            <div class="col s12 m7>
-                                <div class="recipe" >
-                                    <h2>${recipeObj.title}</h2>
-                                    <img class="recipe__image" src="${recipeObj.imgSmall}"></img>
-                                    <span class="card-title">
-                                    <div class="recipe__detail">
-                                    <ul class="ingredients--used"></ul>
-                                    <ul class="ingredients--missed"></ul>
-                                    <ul class="instructions" hidden="hidden">${li}</ul>
+                            <div class="col s12 m7">
+                                <div class="card">
+
+                                    <div class="recipe card-image waves-effect waves-block waves-light">
+                                        <img class="recipe__image activator" src="${recipeObj.imgSmall}">
+                                    </div>
+
+                                    <div class="card-content">
+                                        <span class="card-title activator grey-text text-darken-4">${recipeObj.title}<i class="material-icons right">more_vert</i></span>
+                                    </div>
+
+                                    <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">${recipeObj.title}><i class="material-icons right">close</i></span>
+                                        <div class="recipe__detail">
+                                            <ul class="ingredients--used"></ul>
+                                            <ul class="ingredients--missed"></ul>
+                                            <ul class="instructions" hidden="hidden">${li}</ul>
+                                        </div>
+                                    </div>
                                 </div>
-                        </div>`
+                            </div>
+            </div>`
 
             $('#recipes').append(recipe);
             // console.log(recipeObj.usedIngredients, recipeObj.missedIngredients);
