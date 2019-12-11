@@ -254,20 +254,21 @@ $('document').ready(function () {
 
         }
     }
-    function renderRecipe(obj, i = 0) {
-        //! [For Test] part to comment out when saving API calls
-        // check for 'complete' recipe meaning: recipe with preparation steps 
-        if (obj.doRender === false) return;
+    function renderRecipe(obj,i=0){
+//! [For Test] part to comment out when saving API calls
+            // check for 'complete' recipe meaning: recipe with preparation steps 
+            if (obj.doRender === false) return;
 
-        // create preparation steps HTML
-        var li = "";
-        for (let j = 0; j < obj.steps.length; ++j)
-            li += "<li>" + obj.steps[j] + "</li>"
-        //! ******************************************************/
-
-        var recipe = `<div class="row">
-                            <div class="col s12 m7">
-                                <div class="recipe" data-recipe="${i}">
+            // create preparation steps HTML
+            var li = "";
+            for (let j = 0; j < obj.steps.length; ++j)
+                li += "<li>" + obj.steps[j] + "</li>"
+//! ******************************************************/
+      
+            var recipe = `<div class="row">
+                            <div class="col s12 m12">
+                                
+                                <div class="recipe card" data-recipe="${i}">
                                     <h2>
                                         ${obj.title}
                                         <span class="favoriteIcon">
@@ -276,9 +277,14 @@ $('document').ready(function () {
                                             </svg>
                                         </span>
                                     </h2>
-                                    <img class="recipe__image" src="${obj.imgSmall}" data-recipe__image="recipe__image${i}">
-                                    <span class="card-title"></span>
-                                    <div class="recipe__detail" data-recipe__detail="recipe__detail${i}">
+
+                                    <div class="card-image">
+                                        <img class="recipe__image" src="${obj.imgSmall}" data-recipe__image="recipe__image${i}">
+                                        <span class="card-title"></span>
+                                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
+                                    </div>
+                                    
+                                    <div class="recipe__detail card-content" data-recipe__detail="recipe__detail${i}">
                                         <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
                                         <ul class="ingredients--missed" data-ingredients--missed="ingredients--missed${i}"></ul>
                                         <ul class="instructions" hidden="hidden" data-instructions="instructions${i}">${li}</ul>
