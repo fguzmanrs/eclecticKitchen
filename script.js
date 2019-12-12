@@ -13,9 +13,9 @@ var state = {
 
 $('document').ready(function () {
 
-    var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
+    // var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
     // var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
-    // var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
+    var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
     // var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
     // var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
     // var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
@@ -78,7 +78,7 @@ $('document').ready(function () {
             renderRecipesList();
 
             //! [For Test] Insert for render test when API keys run out.(saving search result)
-            // localStorage.setItem('tempRecipes', JSON.stringify(state.recipes));
+            localStorage.setItem('tempRecipes', JSON.stringify(state.recipes));
             //! **********************************************************
         }
         else {
@@ -313,20 +313,24 @@ $('document').ready(function () {
         for (let j = 0; j < obj.steps.length; ++j)
             li += `<br>${j+1}. ${obj.steps[j]}<br>`;
 
-        var recipe = `<div class="row">
+            var recipe = `<div class="row">
                             <div class="col">
-                                <div class="recipe" data-recipe="${i}">
-                                    <h2>
-                                        ${obj.title}
-                                        <span class="favoriteIcon">
-                                            <svg class="icon">
-                                                <use xlink:href="./assets/icons/sprite.svg#icon-heart-${obj.isLiked ? 'minus' : 'plus'}" class="iconImg"></use>
-                                            </svg>
-                                        </span>
-                                    </h2>
-                                    <img class="recipe__image" src="${obj.imgSmall}">
-                                    <span class="card-title"></span>
-                                    <div class="recipe__detail">
+                                
+                                <div class="recipe card" data-recipe="${i}">
+                                    <div class="card-image">
+                                        <img class="recipe__image" src="${obj.imgLarge}" data-recipe__image="recipe__image${i}">
+                                        <span class="card-title"></span>
+                                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
+                                    </div>
+                                    <div class="recipe__detail card-content" data-recipe__detail="recipe__detail${i}">
+                                        <h5>
+                                            ${obj.title}
+                                            <span class="favoriteIcon">
+                                                <svg class="icon">
+                                                    <use xlink:href="./assets/icons/sprite.svg#icon-heart-${obj.isLiked ? 'minus' : 'plus'}" class="iconImg"></use>
+                                                </svg>
+                                            </span>
+                                        </h5>
                                         <ul class="ingredients--used"></ul>
                                         <ul class="ingredients--missed"></ul>
                                         <ul class="instructions collapsible" data-instructions=${i}>
@@ -339,8 +343,9 @@ $('document').ready(function () {
                                                 </div>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div> 
                                 </div>
+
                             </div>
                         </div>`
 
@@ -369,7 +374,7 @@ $('document').ready(function () {
     }
     function renderSearchList(str) {
 
-        var li = `<li data-ingredient="${str}">
+        var li = `<li class="collection" data-ingredient="${str}">
                     ${str}
                     <span class="delete"> &#215; </span>
                   </li>`;
@@ -414,12 +419,12 @@ $('document').ready(function () {
         }
 
         //![For Test] Insert for render test when API keys run out.(saving search result)
-        // var loadedData = localStorage.getItem('tempRecipes');
+        var loadedData = localStorage.getItem('tempRecipes');
 
-        // if(loadedData){
-        //     state.recipes = JSON.parse(loadedData);
-        //     renderRecipesList();
-        // }
+        if(loadedData){
+            state.recipes = JSON.parse(loadedData);
+            renderRecipesList();
+        }
         //! ***********************************************************        
     }
     function importFromLocalStorage(item, addTo) {
