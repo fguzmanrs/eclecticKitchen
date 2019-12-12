@@ -13,7 +13,7 @@ var state = {
 
 $('document').ready(function () {
 
-    var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9l"; //FGuzman
+    var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
     // var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
     // var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
     // var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
