@@ -242,6 +242,11 @@ $('document').ready(function () {
 
         }
     }
+// render recipe image larger
+    $(document).ready(function(){
+        $('.materialboxed').materialbox();
+      });
+
     function renderRecipe(obj,i=0){
 //! [For Test] part to comment out when saving API calls
             // check for 'complete' recipe meaning: recipe with preparation steps 
@@ -267,7 +272,7 @@ $('document').ready(function () {
                                     </h2>
 
                                     <div class="card-image">
-                                        <img class="recipe__image" src="${obj.imgSmall}" data-recipe__image="recipe__image${i}">
+                                        <img class="recipe__image materialboxed" width="650"" src="${obj.imgSmall}" data-recipe__image="recipe__image${i}">
                                         <span class="card-title"></span>
                                         <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
                                     </div>
@@ -421,6 +426,11 @@ $('document').ready(function () {
 
     // Each recipe's favorite button
     $('#recipes').click(favoriteIconHandler);
+
+    // Recipe image enlarges
+    $(document).ready(function(){
+        $('.materialboxed').materialbox();
+      });
 
     // ====================================
     // ffortizn
