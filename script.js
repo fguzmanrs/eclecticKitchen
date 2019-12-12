@@ -1,8 +1,8 @@
 
 var state = {
     searchIngredients: [],
-    numOfRequest: 10, // how many recipe will you get from server? 1-100
-    numOfRender: 3,
+    numOfRequest: 10, //how many recipe to get from server? (1-100)
+    numOfRender: 3, //how many recipe to render to DOM
     rawData: [],
     recipes: [],
     likes: [],
@@ -12,18 +12,18 @@ var state = {
 
 
 $('document').ready(function () {
-    var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
+
+    var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9l"; //FGuzman
     // var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
     // var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
     // var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
     // var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
     // var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
-    // var apiKey = "0421115dd3974c7f9338166f3e907824"; // Emily2
+    // var apiKey = "0421115dd3974c7f9338166f3e907824"; //Emily2
 
     /**********************************/
     /*           EVENT HANDLER        */
     /**********************************/
-
 
     function addIngredientToList(e) {
 
@@ -31,7 +31,7 @@ $('document').ready(function () {
 
         var inputIngredient = $('#inputIng').val().trim(); console.log(inputIngredient);
 
-        // Only proceed when the input is not duplicated
+        // Proceed only when the input is not duplicated
         if (state.searchIngredients.indexOf(inputIngredient) === -1) {
 
             // 1. Lender search list
@@ -51,16 +51,15 @@ $('document').ready(function () {
     async function searchBtnHandler(e) {
 
         e.preventDefault();
-        // location.href = '#search'
+
         if (state.searchIngredients.length > 0) {
 
             await getRecipesByIngredients(state.searchIngredients);
 
-            // Take only necessary info from raw data and create each recipe {}. Then add all recipes {}s to one [].
+            // Take only necessary info from raw data and create each recipe obj. Then add all recipe objs to one arr.
             createRecipesArr();
 
             // animation for waiting
-
             $('#recipes').empty();
             var waiting = `<div class="row">
                             <br><br><br><br>
@@ -78,13 +77,15 @@ $('document').ready(function () {
             // PASS3: Render recipes to DOM
             renderRecipesList();
 
-            //! [For Test] Inserted for temperary call to save API calls
+            //! [For Test] Insert for render test when API keys run out.(saving search result)
             // localStorage.setItem('tempRecipes', JSON.stringify(state.recipes));
             //! **********************************************************
         }
         else {
-            // Need to change alert to modal or tooltip
-            alert("Please add at least one ingredient.");
+
+            var message = "No ingredient entered! Please add at least one ingredient to search recipes.";
+            errorAlertModal(message);
+
         }
 
     }
@@ -94,6 +95,7 @@ $('document').ready(function () {
 
         $('#modal-list').empty();
 
+        // Render favorite recipe list
         if (l > 0) {
             var list = "";
 
@@ -120,27 +122,29 @@ $('document').ready(function () {
         $('#modal-list').append(list);
 
         state.currentModal = M.Modal.getInstance(document.querySelector('#modal-favorite'));
-        console.log("modal: ",state.currentModal)
         state.currentModal.open();
 
     }
-
     function gotoFavoriteHandler(e) {
-
+        
+        // When favorite recipe is clicked
         if(e.target.matches('.favorite__list, .favorite__list *')){
 
             $('#recipes').empty();
 
             if(state.currentModal){
-                var index = e.target.closest('a').getAttribute('href').slice(1);
-                console.log('likes arr index: ',index);
 
+                // Find which recipe is clicked
+                var index = e.target.closest('a').getAttribute('href').slice(1);
+
+                // Render that recipe to DOM
                 renderRecipe(state.likes[index]);
+
+                // Close modal
                 state.currentModal.close();
             }
         }
     }
-    
     function favoriteIconHandler(e) {
 
         // If heart icon is clicked
@@ -174,7 +178,8 @@ $('document').ready(function () {
                     return el.id === recipeObj.id;
                 })
 
-                state.likes.splice(index, 1); console.log('updated like obj after deleting: ', state.likes);
+                state.likes.splice(index, 1); 
+                console.log('updated like obj after deleting: ', state.likes);
 
             }
 
@@ -185,7 +190,7 @@ $('document').ready(function () {
     }
 
     /**********************************/
-    /*              API               */
+    /*              APIs              */
     /**********************************/
 
     async function getRecipesByIngredients(ingredients) {
@@ -197,19 +202,58 @@ $('document').ready(function () {
             .then(function (response) { state.rawData = response })
             .catch(function (err) {
 
-                // ** Need to change this alert to modal later
-                alert('An error occured. Please try again later.');
-                throw new Error("Unkown server error occured while getting recipes. The app has been stopped.");
+                var message = "An error occured while geting recipes from server. Please try again later.";
+                errorAlertModal(message);
+
+                throw new Error("🚧 Unkown server error occured while getting recipes. The app is stopped.");
 
             })
 
         if (state.rawData.length === 0) {
 
-            // ** Need to change this alert to modal later
-            alert('Cannot find any recipe with your input. Please make sure that you enter at least one valid ingredient.');
-            throw new Error("No recipe returned. The app has been stopped.");
+            var message = "We cannot find any recipe with your ingredient. Please make sure that you enter at least one valid ingredient.";
+            errorAlertModal(message);
+
+            throw new Error("🚧 No recipe returned. The app is stopped.");
+
         }
 
+    }
+    async function getInstructionsByRecipeId(recipeId, k) {
+        // PASS 2: Validate against preparation steps (note empty)
+        // if not empty then populate preparation steps on object
+        var arr = [];
+        console.log("apiKey: " + apiKey);
+        var queryURL = `https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKey}`;
+
+        await $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (data) {
+
+            var i, j;
+
+            // Traverse steps on response and push in an array, then return array
+            for (i = 0; i < data.length; ++i)
+                for (j = 0; j < data[i].steps.length; ++j)
+                    arr.push(data[i].steps[j].step);
+
+            // PASS2 : Validate/Populate
+            // Implement try/catch (maybe?)
+
+            // VALIDATE
+            // if no steps then doRender = False (do not render in next step)
+
+            state.recipes[k].doRender = false;
+
+            if (arr.length > 0) {
+                // Response has data then populate object
+                state.recipes[k].steps = arr;
+                // Preparation steps found, set render flag to true
+                state.recipes[k].doRender = true;
+            }
+
+        });
     }
 
     /**********************************/
@@ -300,8 +344,6 @@ $('document').ready(function () {
                             </div>
                         </div>`
 
-                        // <i class="material-icons">filter_drama</i>
-
         $('#recipes').append(recipe);
         renderIngredients('.ingredients--used', i, obj.usedIngredients);
         renderIngredients('.ingredients--missed', i, obj.missedIngredients);
@@ -355,7 +397,7 @@ $('document').ready(function () {
     }
     function init() {
         
-        // Materialize all components init
+        // Initiate all Materialize components
         M.AutoInit();
 
         // Load from local storage
@@ -371,7 +413,7 @@ $('document').ready(function () {
             }
         }
 
-        //![For Test] Inserted for Temperary code to save API call 
+        //![For Test] Insert for render test when API keys run out.(saving search result)
         // var loadedData = localStorage.getItem('tempRecipes');
 
         // if(loadedData){
@@ -402,6 +444,14 @@ $('document').ready(function () {
         var index = likedIds.indexOf(obj.id);
 
         return index === -1 ? false : true;
+
+    }
+    function errorAlertModal(message){
+
+        var instance = M.Modal.getInstance(document.querySelector('#modal-alert'));
+        
+        $('#modal-message').text(message);
+        instance.open();
 
     }
     /**********************************/
@@ -440,54 +490,8 @@ $('document').ready(function () {
     // Each recipe's favorite button
     $('#recipes').click(favoriteIconHandler);
 
-    // $('#recipes').on('click', togglePreparation);
-
-    // ====================================
-    // ffortizn
-
-    // PASS 2: Validate against preparation steps (note empty)
-    // if not empty then populate preparation steps on object
-    async function getInstructionsByRecipeId(recipeId, k) {
-        var arr = [];
-        console.log("apiKey: " + apiKey);
-        var queryURL = `https://api.spoonacular.com/recipes/${recipeId}/analyzedInstructions?apiKey=${apiKey}`;
-
-        await $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (data) {
-            //console.log("instructions raw data:", data);
-            var i, j;
-
-            // Traverse steps on response and push in an array, then return array
-            for (i = 0; i < data.length; ++i)
-                for (j = 0; j < data[i].steps.length; ++j)
-                    arr.push(data[i].steps[j].step);
-
-            // PASS2 : Validate/Populate
-            // Implement try/catch (maybe?)
-
-            // VALIDATE
-            // if no steps then doRender = False (do not render in next step)
-
-            state.recipes[k].doRender = false;
-
-            if (arr.length > 0) {
-                // Response has data then populate object
-                state.recipes[k].steps = arr;
-                // Preparation steps found, set render flag to true
-                state.recipes[k].doRender = true;
-            }
-            //console.log("ff" + state.recipes[k].steps);
-            //return arr;
-        });
-    }
-
-    // $('.modal').modal();
     init();
 
-
-    /********************** end **************************/
 });
 
 
