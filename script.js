@@ -126,8 +126,8 @@ $('document').ready(function () {
 
     }
     function gotoFavoriteHandler(e) {
-        
-        // When favorite recipe is clicked
+
+        // If favorite recipe list is clicked, render details to DOM
         if(e.target.matches('.favorite__list, .favorite__list *')){
 
             $('#recipes').empty();
@@ -148,7 +148,7 @@ $('document').ready(function () {
     function favoriteIconHandler(e) {
 
         // If heart icon is clicked
-        if (e.target.matches('.icon, .icon *')) {
+        if (e.target.matches('.icon-heart, .icon-heart *')) {
 
             // 1. Find which recipe is clicked
             var recipeHTML = $(e.target).closest('.recipe');
@@ -159,7 +159,7 @@ $('document').ready(function () {
             recipeObj.isLiked = recipeObj.isLiked ? false : true;
 
             // 3. Toggle heart icone +,- shape
-            var useHTML = recipeHTML.find('use');
+            var useHTML = recipeHTML.find('use[id="icon-heart-img"]');
             var path = useHTML.attr('xlink:href').split('-')[2];
 
             useHTML.attr('xlink:href', `./assets/icons/sprite.svg#icon-heart-${path === "plus" ? 'minus' : 'plus'}`);
@@ -312,38 +312,52 @@ $('document').ready(function () {
         var li = "";
         for (let j = 0; j < obj.steps.length; ++j)
             li += `<br>${j+1}. ${obj.steps[j]}<br>`;
-
+{/* <span class="card-title"></span> */}
             var recipe = `<div class="row">
                             <div class="col">
                                 
                                 <div class="recipe card" data-recipe="${i}">
                                     <div class="card-image">
                                         <img class="recipe__image" src="${obj.imgLarge}" data-recipe__image="recipe__image${i}">
-                                        <span class="card-title"></span>
-                                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
+                                        <a class="activator btn-floating halfway-fab waves-effect waves-light green">
+                                            <i class="activator material-icons">
+                                                <svg class="activator icon icon-cook">
+                                                    <use class="activator" id="icon-cook-img" xlink:href="./assets/icons/sprite.svg#icon-cook"></use>
+                                                </svg>
+                                            </i>
+                                        </a>
                                     </div>
-                                    <div class="recipe__detail card-content" data-recipe__detail="recipe__detail${i}">
+                                    <div class="recipe__detail card-content">
                                         <h5>
                                             ${obj.title}
                                             <span class="favoriteIcon">
-                                                <svg class="icon">
-                                                    <use xlink:href="./assets/icons/sprite.svg#icon-heart-${obj.isLiked ? 'minus' : 'plus'}" class="iconImg"></use>
+                                                <svg class="icon icon-heart">
+                                                    <use xlink:href="./assets/icons/sprite.svg#icon-heart-${obj.isLiked ? 'minus' : 'plus'}" id="icon-heart-img"></use>
                                                 </svg>
                                             </span>
                                         </h5>
-                                        <ul class="ingredients--used"></ul>
-                                        <ul class="ingredients--missed"></ul>
-                                        <ul class="instructions collapsible" data-instructions=${i}>
-                                            <li>
-                                                <div class="collapsible-header">
-                                                    Preparation
-                                                </div>
-                                                <div class="collapsible-body">
-                                                    <p>${li}</p>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                        <div class="recipe__detail--ingredient"> 
+                                            <div><h6>Used Ingredients</h6><ul class="ingredients--used"></ul></div>
+                                            
+                                            <div><h6>Missed Ingredients</h6><ul class="ingredients--missed"></ul></div>
+                                        </div>
+                                        <div>
+                                            <ul class="instructions collapsible" data-instructions=${i}>
+                                                <li>
+                                                    <div class="collapsible-header">
+                                                        <h6>Preparation<h6>
+                                                    </div>
+                                                    <div class="collapsible-body">
+                                                        <p>${li}</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div> 
+                                    <div class="card-reveal">
+                                        <span class="card-title grey-text text-darken-4">How to cook<i class="material-icons right" id="icon-close">x</i></span>
+                                        <p>${li}</p>
+                                    </div>
                                 </div>
 
                             </div>
@@ -401,7 +415,19 @@ $('document').ready(function () {
         }
     }
     function init() {
-        
+
+        //![For Test] Insert for render test when API keys run out.(saving search result)
+        $('#modal-list').empty();
+        localStorage.removeItem('likes');
+
+        var loadedData = localStorage.getItem('tempRecipes');
+
+        if(loadedData){
+            state.recipes = JSON.parse(loadedData);
+            renderRecipesList();
+        }
+        //! ***********************************************************    
+
         // Initiate all Materialize components
         M.AutoInit();
 
@@ -417,15 +443,7 @@ $('document').ready(function () {
                 renderSearchList(state.searchIngredients[i]);
             }
         }
-
-        //![For Test] Insert for render test when API keys run out.(saving search result)
-        var loadedData = localStorage.getItem('tempRecipes');
-
-        if(loadedData){
-            state.recipes = JSON.parse(loadedData);
-            renderRecipesList();
-        }
-        //! ***********************************************************        
+   
     }
     function importFromLocalStorage(item, addTo) {
 
@@ -499,4 +517,7 @@ $('document').ready(function () {
 
 });
 
-
+// tempRecipes
+/*
+[{"id":527567,"title":"Pineapple Orange Banana Popsicles","imgSmall":"https://spoonacular.com/recipeImages/527567-312x231.jpg","imgLarge":"https://spoonacular.com/recipeImages/527567-636x393.jpg","usedIngredients":["bananas","oranges"],"missedIngredients":["pineapple"],"isLiked":false,"doRender":true,"steps":["Pulse all ingredients together in a blender until smooth.","Pour into popsicle molds and freeze until firm."]},{"id":968522,"title":"3-Ingredient Orange Cream Smoothie","imgSmall":"https://spoonacular.com/recipeImages/968522-312x231.jpg","imgLarge":"https://spoonacular.com/recipeImages/968522-636x393.jpg","usedIngredients":["bananas","orange"],"missedIngredients":["almond milk"],"isLiked":false,"doRender":true,"steps":["Place all ingredients in your blender in the order listed and process until smooth.","Serve and enjoy!"]},{"id":449758,"title":"Sherbet Dessert","imgSmall":"https://spoonacular.com/recipeImages/449758-312x231.jpg","imgLarge":"https://spoonacular.com/recipeImages/449758-636x393.jpg","usedIngredients":["bananas","orange"],"missedIngredients":["raspberries"],"isLiked":false,"doRender":true,"steps":["Place the sherbet in a large bowl; stir in raspberries and bananas. Freeze until firm."]},{"id":596249,"title":"Banana Orange and Curly Parsley Green Smoothie","imgSmall":"https://spoonacular.com/recipeImages/596249-312x231.jpg","imgLarge":"https://spoonacular.com/recipeImages/596249-636x393.jpg","usedIngredients":["banana","orange"],"missedIngredients":["curly parsley"],"isLiked":false,"doRender":false},{"id":601309,"title":"Coconut Pineapple Orange Smoothie","imgSmall":"https://spoonacular.com/recipeImages/601309-312x231.jpeg","imgLarge":"https://spoonacular.com/recipeImages/601309-636x393.jpeg","usedIngredients":["banana","oranges"],"missedIngredients":["yogurt"],"isLiked":false,"doRender":true,"steps":["Blend until smooth. Sprinkle with coconut and/or orange zest."]},{"id":626323,"title":"C Punch Vitamin C Green Smoothie","imgSmall":"https://spoonacular.com/recipeImages/626323-312x231.jpg","imgLarge":"https://spoonacular.com/recipeImages/626323-636x393.jpg","usedIngredients":["banana","orange"],"missedIngredients":["mango","spinach"],"isLiked":false,"doRender":true,"steps":["Add ingredients to the jar and secure lid. Blend until smooth.For Blendtec: Press the SMOOTHIE Button","For Vitamix: Select VARIABLE, speed #","Turn on machine and quickly increase speed to #10; then to HIGH. Run for 45 seconds or until smooth.","Transfer to a glass and serve immediately.To store, pour into a glass container and keep in the fridge for 1-2 days. Alternatively, pour into a plastic container and freeze for up to 1 month."]},{"id":80847,"title":"Vibrant Orange Juice Frosty","imgSmall":"https://spoonacular.com/recipeImages/80847-312x231.jpg","imgLarge":"https://spoonacular.com/recipeImages/80847-636x393.jpg","usedIngredients":["banana","oranges"],"missedIngredients":["peaches","pineapple"],"isLiked":false,"doRender":false},{"id":527715,"title":"Pineapple, Orange & Banana Smoothie","imgSmall":"https://spoonacular.com/recipeImages/527715-312x231.jpg","imgLarge":"https://spoonacular.com/recipeImages/527715-636x393.jpg","usedIngredients":["bananas","orange"],"missedIngredients":["ground flax seed","pineapple chunks"],"isLiked":false,"doRender":true,"steps":["In a blender, combine all ingredients. Blend until smooth, then serve immediately. (If your blender has trouble getting going, you may need to add in a few tablespoons of water or juice to get it started.)"]},{"id":801053,"title":"Kale & Orange Smoothie","imgSmall":"https://spoonacular.com/recipeImages/801053-312x231.jpg","imgLarge":"https://spoonacular.com/recipeImages/801053-636x393.jpg","usedIngredients":["banana","orange"],"missedIngredients":["almond milk","kale"],"isLiked":false,"doRender":true,"steps":["Add all ingredients to the blender and pulse until smooth.","Add ice cubes, if desired.Enjoy!"]},{"id":212224,"title":"Citrus-Banana Parfait","imgSmall":"https://spoonacular.com/recipeImages/212224-312x231.jpg","imgLarge":"https://spoonacular.com/recipeImages/212224-636x393.jpg","usedIngredients":["banana"],"missedIngredients":["grapefruit","navel orange"],"isLiked":false,"doRender":true,"steps":["Peel grapefruit and orange; divide both into segments. Slice banana. Layer citrus segments with banana slices in 4 tall glasses. Sprinkle each parfait with 1/8 tsp. cinnamon if desired."]}]
+*/

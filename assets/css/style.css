@@ -117,23 +117,44 @@ img {
     cursor: pointer;
   }
 
-.favorite__list > *{
-    display: flex;
-    margin-bottom: 1em;
+.icon-cook {
+    width: 1em;
+    height: 1em;
+    stroke: #fff;
+    fill: #fff;
+    margin-bottom: 2px;
+  }
+#icon-close {
+    transform: skewX(10deg);
 }
+
+.recipe__detail--ingredient{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+/********************************/
+/*      Favorite recipes        */
+/*******************************/
 .favorite__img{
     min-width: 5em;
     height: 5em;
     margin-right: 1em;
 }
+.favorite__list > *{
+    display: flex;
+    margin-bottom: 1em;
+}
 .favorite__title{
     margin: 0;
 }
-/* .collapsible{
+
+.collapsible{
     box-shadow: none;
     -webkit-box-shadow: none;
     margin: 0;
-} */
+}
 #modal-alert{
     max-width: 30em;
 }
