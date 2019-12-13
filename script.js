@@ -242,6 +242,7 @@ $('document').ready(function () {
 
         }
     }
+
     // render recipe image larger
     $(document).ready(function () {
         $('.materialboxed').materialbox();
@@ -264,11 +265,13 @@ $('document').ready(function () {
                                 <div class="recipe card" data-recipe="${i}">
                                     <h2>
                                         ${obj.title}
+
                                         <span class="favoriteIcon">
                                             <svg class="icon">
                                                 <use xlink:href="./assets/icons/sprite.svg#icon-heart-${obj.isLiked ? 'minus' : 'plus'}" class="iconImg"></use>
                                             </svg>
                                         </span>
+
                                     </h2>
 
                                     <div class="card-image">
@@ -278,6 +281,7 @@ $('document').ready(function () {
                                     </div>
                                     
                                     <div class="recipe__detail card-content" data-recipe__detail="recipe__detail${i}">
+
                                         <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
                                         <ul class="ingredients--missed" data-ingredients--missed="ingredients--missed${i}"></ul>
                                         <ul class="instructions" hidden="hidden" data-instructions="instructions${i}">${li}</ul>
@@ -435,12 +439,6 @@ $('document').ready(function () {
     // ====================================
     // ffortizn
 
-    // document.addEventListener('DOMContentLoaded', function() {
-    // var elems = document.querySelectorAll('.modal');
-    // var instances = M.Modal.init(elems, {});
-    //   });
-
-
     // PASS 2: Validate against preparation steps (note empty)
     // if not empty then populate preparation steps on object
     async function getInstructionsByRecipeId(recipeId, k) {
@@ -484,20 +482,6 @@ $('document').ready(function () {
 
 
     /********************** end **************************/
-})
-// Todo
-    // ajax : getting data - done
-    // duplicated ingredient element deleting function - done
-    // image: data[i].image, data **312x231 => change to https://spoonacular.com/recipeImages/{ID}-636x393.{TYPE} - done
-    // render to DOM - done
-    // render used ingredients and missing ingredients to DOM - done
-    // render input list to DOM - done
-    // Add an instruction property to each recipe {}. format: [step1,step2,step3...] - Francisco - done
-
-    // used & missed ingredients accuracy matter : chocolate !== semi-sweet chocolate, dark chocolate candy bars... 
-
-    // recipe validator (*Pass only when it has instructions, less than 10 missing ingredient?)
-    // change alert to modal
-    // loader animation
+});
 
 
