@@ -381,7 +381,6 @@ $('document').ready(function () {
 
             for (var i = 0; i < l; i++) {
                 list = list + `<li>${arr[i]}</li>`;
-                console.log(list)
             }
 
             $(`${addTo}`).eq(order).append(list);
