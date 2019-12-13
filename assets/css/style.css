@@ -7,26 +7,26 @@ font:
 highlights:
     vermillion (pop): #DD3506
     pale gold (muted): #EDC08D
+
+Fonts:
+font-family: 'Montserrat', sans-serif;
+font-family: 'Pacifico', cursive; 
 */
 
-
-* {
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-/* || General Styles */
-
-h1 {
-    margin: 0px 0px 20px 0px;
-}
-
 body {
-    
     background: url("../images/background-board.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover; 
+    font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -45,8 +45,6 @@ body {
    
     
 }
-
-
 
 
 
@@ -77,10 +75,9 @@ h5 {
 
 .brand-logo {
     color: #F9FBFA;
-    /* text: ; */
-    text-emphasis: bold;
+    font-family: 'Pacifico', cursive; 
+    font-size: 60px;
 }
-
 
 /* || Favorites */
 
@@ -107,24 +104,30 @@ h5 {
     border-radius: 10px;
 }
 
-input:invalid+span:after {
+input:invalid+span::after,
+input:valid+span::after{
     position: absolute;
-    content: '✖';
     padding-left: 5px;
+    transform: translate(-2em,.7em);
+    color: #fff;
+}
+
+input:invalid+span::after {
+    content: '✖';
 }
   
-input:valid+span:after {
-    position: absolute;
+input:valid+span::after {
     content: '✓';
-    padding-left: 5px;
+    font-weight: bolder;
 }
 
 #addBtn{
     display: none;
 }
 
-/* header, main, footer {
-  } */
+header {
+    padding-left: 0px;
+  }
 
 @media only screen and (min-width : 993px) {
     header, footer {
@@ -133,8 +136,8 @@ input:valid+span:after {
 }
 
 @media only screen and (max-width : 992px) {
-    header, main, footer {
-      padding-left: 0;
+    body {
+        padding-left: 300px;
     }
 
     .tarjeta {
@@ -201,6 +204,52 @@ input:valid+span:after {
     cursor: pointer;
   }
 
+.icon-cook {
+    width: 1em;
+    height: 1em;
+    stroke: #fff;
+    fill: #fff;
+    margin-bottom: 2px;
+  }
+#icon-close {
+    transform: skewX(10deg);
+}
+
+.recipe__detail--ingredient{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+/********************************/
+/*      Favorite recipes        */
+/*******************************/
+.favorite__img{
+    min-width: 5em;
+    height: 5em;
+    margin-right: 1em;
+}
+.favorite__list > *{
+    display: flex;
+    margin-bottom: 1em;
+}
+.favorite__title{
+    margin: 0;
+}
+
+.collapsible{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    margin: 0;
+}
+#modal-alert{
+    max-width: 30em;
+}
+
+#recipes {
+    height: auto;
+    min-height: 800px;
+}
 .ingredients--used {
     list-style-type: none;
 }
@@ -208,11 +257,12 @@ input:valid+span:after {
 .ingredients--missed {
     list-style-type: none;
 }
-
 /* || Footer */
 
 
 
 /* || Social Media */
 
-
+.card .card-image img {
+    border-radius: 10px 10px 0px 0px;
+}
