@@ -313,8 +313,12 @@ $('document').ready(function () {
 
         }
     }
+
+    
+
+
     function renderRecipe(obj, i = 0) {
- 
+        //! [For Test] part to comment out when saving API calls
         // check for 'complete' recipe meaning: recipe with preparation steps 
         if (obj.doRender === false) return;
 
@@ -328,7 +332,7 @@ $('document').ready(function () {
                                 
                                 <div class="recipe card" data-recipe="${i}">
                                     <div class="card-image">
-                                        <img class="recipe__image" src="${obj.imgLarge}" data-recipe__image="recipe__image${i}">
+                                        <img class="recipe__image materialboxed" width="650" src="${obj.imgLarge}" data-recipe__image="recipe__image${i}">
                                         <a class="activator btn-floating halfway-fab waves-effect waves-light green">
                                             <i class="activator material-icons">
                                                 <svg class="activator icon icon-cook">
@@ -428,6 +432,9 @@ $('document').ready(function () {
 
         // Initiate all Materialize components
         M.AutoInit();
+
+        // render recipe image larger
+        $('.materialboxed').materialbox();
 
         // Load from local storage
         importFromLocalStorage('ingredients', 'searchIngredients');
