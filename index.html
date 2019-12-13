@@ -31,7 +31,7 @@
   </header>
 
   <!-- turning ingredient list into fixed nav on large screens, slideout on small -->  
-  <div class="annoyme">
+  <nav>
     <ul id="slide-out" class="sidenav sidenav-fixed">
       <div class="row sidenav-close">
         <li>
@@ -55,13 +55,13 @@
           <use xlink:href="./assets/icons/sprite.svg#icon-heart"></use>
         </svg></a>
       </li>
-      <!-- <li><a href="#!"><i class="material-icons">Heart</i>Favorites</a></li> -->  
+
       <li><div class="divider"></div></li>
       <ul>
         <li class="collection">
           <form id="search-card" class="input-field col s6">
             <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="Type ingredient">
-            <span class="validity"></span>
+            <span class="validity" hidden></span>
             <button id="addBtn">add</button>
             <ul id="searchList"></ul>
             <button id="searchBtn" href="#search">Search</button>
@@ -72,9 +72,8 @@
     <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">chevron_right</i></a>
   </div>
 
-  <div class="tarjeta" id="recipes">
+  <main class="tarjeta" id="recipes">
     <h2> Recipe Results: </h2>
-
 
     <div class="row">
       <div class="col s12 m12">
@@ -126,8 +125,25 @@
       </div>
     </div>
 
+  </main>
 
-  </div>
+  <!-- Materialize Modal for error alert & favorite popup -->
+  <div id="modal-alert" class="modal">
+    <div class="modal-content">
+      <h4>Oops!</h4>
+      <p id="modal-message"></p>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-close waves-effect waves-green btn-flat">OK</a>
+    </div>
+</div>
+
+<div id="modal-favorite" class="modal">
+    <div class="modal-content">
+      <h4>My Favorite</h4>
+      <ul id="modal-list"></ul>
+    </div>
+</div>
 
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
