@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  
+
   <!-- Import Google Iconns and Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat|Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -26,7 +26,7 @@
 
 
 <body>
-  
+
   <!-- navbar -->
   <header>
     <nav class="nav-wrapper navbar-fixed z-depth-1">
@@ -34,29 +34,63 @@
         <div class="brand-logo section">Eclectic Kitchen</div>
       </div>
     </nav>
-  </header >
+  </header>
 
   <!-- page layout -->
   <div class="row">
     <!-- navigation panel -->
-    <div class="col s3 m4 z-depth-1">
-      <div class="section center">
-        <img class="responsive-img" src="https://images.pexels.com/photos/2802527/pexels-photo-2802527.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="spices">
+    <div class="col s3 m4 z-depth-1 white">
+      <div class="section center ">
+        <img class="responsive-img"
+          src="https://images.pexels.com/photos/2802527/pexels-photo-2802527.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+          alt="spices">
         <h4 class="">What's in your Kitchen?</h4>
-        <button id="favorites-btn" class="btn waves-effect waves-light">Favorites<i class="material"></i></button>      
+        <button id="favorites-btn" class="btn waves-effect waves-light">Favorites<i class="material"></i></button>
       </div>
       <div class="divider"></div>
       <div class="section center">
         <button class="btn waves-effect waves-light">Show me Deliciousness!</button>
       </div>
     </div>
-      </nav>
-      
+    </nav>
+
 
     <!-- page content -->
-    <div class="col s9 m8 z-depth-1 deep-orange darken-4">
-      <h4 class="section white-text">Let's Get Cooking!</h4></div>
-    </div>  
+    <div class="col s9 m8 z-depth-1 deep-orange darken-4 tarjeta" id="recipes">
+      <h4 class="section white-text">Let's Get Cooking!</h4>
+      <div class="card">
+        <div class="card-image">
+          <img src="assets/images/-U4wBbx6u0Q.jpg">
+          <span class="card-title">Card Title</span>
+          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
+        </div>
+        <div class="card-content">
+          <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I
+            require little markup to use effectively.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <!-- Materialize Modal for error alert & favorite popup -->
+  <div id="modal-alert" class="modal">
+    <div class="modal-content">
+      <h4>Oops!</h4>
+      <p id="modal-message"></p>
+    </div>
+    <div class="modal-footer">
+      <a class="modal-close waves-effect waves-green btn-flat">OK</a>
+    </div>
+
+
+    <div id="modal-favorite" class="modal">
+      <div class="modal-content">
+        <h4>My Favorite</h4>
+        <ul id="modal-list"></ul>
+      </div>
+    </div>
+
+  </div>
 
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
