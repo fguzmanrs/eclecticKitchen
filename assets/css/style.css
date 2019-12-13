@@ -1,24 +1,13 @@
-/*Color codes:
+/*Materialize color codes:
 main:
-    dollar green: #8CC65B
-    snow: #F9FBFA
-font: 
-    dark jungle green: #0F2422 
-highlights:
-    vermillion (pop): #DD3506
-    pale gold (muted): #EDC08D
-
-Materialize color codes:
-main:
-    green accent-4: #00c853
+    light-green: #8bc34a
     light-green lighten-5: #f1f8e9
 font:
-    black: #000000
-    white: #ffffff
+    black: #000
+    white: #fff
 accents: 
     deep-orange accent-4: #dd2c00
-    
-
+    orange lighten-3: #ffcc80
 
 Fonts:
 font-family: 'Montserrat', sans-serif;
