@@ -42,7 +42,7 @@ $('document').ready(function () {
             // 3. Save input data to local storage
             saveToLocalStorage('ingredients', state.searchIngredients);
         }
-
+       
         // 4. Clear input text
         $('#inputIng').val("");
 
@@ -87,7 +87,7 @@ $('document').ready(function () {
             for (var i = 0; i < l; i++) {
 
                 var like = state.likes[i];
-
+              
                 list += `<li class="favorite__list">
                             <a href="#${i}">
                                 <img src="${like.imgSmall}" class="favorite__img">
@@ -118,7 +118,6 @@ $('document').ready(function () {
 
             var index = e.target.closest('a').getAttribute('href').slice(1);
             console.log('likes arr index: ', index);
-
             renderRecipe(state.likes[index]);
             state.currentModal.close();
         }
@@ -158,7 +157,6 @@ $('document').ready(function () {
                 })
 
                 state.likes.splice(index, 1); console.log('updated like obj after deleting: ', state.likes);
-
             }
 
             // 5. Save likes to local storage
@@ -290,6 +288,7 @@ $('document').ready(function () {
         renderIngredients('.ingredients--used', i, obj.usedIngredients);
         renderIngredients('.ingredients--missed', i, obj.missedIngredients);
 
+
     }
     function renderIngredients(addTo, order, arr) {
 
@@ -350,6 +349,7 @@ $('document').ready(function () {
 
         if (l > 0) {
             for (var i = 0; i < l; i++) {
+
                 renderSearchList(state.searchIngredients[i]);
             }
         }
@@ -357,6 +357,7 @@ $('document').ready(function () {
         //![For Test] Inserted for Temperary code to save API call 
         //![For Test] Inserted for Temperary code to save API call 
         //![For Test] Inserted for Temperary code to save API call 
+
         // var loadedData = localStorage.getItem('tempRecipes');
         // console.log('loadedData: ', loadedData)
         // if(loadedData){
@@ -389,7 +390,16 @@ $('document').ready(function () {
         var index = likedIds.indexOf(obj.id);
 
         return index === -1 ? false : true;
+    }
+    function isLikedOrNot(obj){
 
+        var likedIds = state.likes.map(function(el){ return el.id });
+
+        // If obj has the same id of likedIds obj, return true
+        var index = likedIds.indexOf(obj.id);
+        
+        return index === -1 ? false : true;
+        
     }
     /**********************************/
     /*              UTILITY           */
@@ -439,7 +449,6 @@ $('document').ready(function () {
     // var elems = document.querySelectorAll('.modal');
     // var instances = M.Modal.init(elems, {});
     //   });
-
 
     // PASS 2: Validate against preparation steps (note empty)
     // if not empty then populate preparation steps on object
@@ -499,5 +508,4 @@ $('document').ready(function () {
     // recipe validator (*Pass only when it has instructions, less than 10 missing ingredient?)
     // change alert to modal
     // loader animation
-
 
