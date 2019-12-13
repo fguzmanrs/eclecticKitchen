@@ -12,12 +12,13 @@ var state = {
 
 $('document').ready(function () {
     // var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
-    //var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
+    // var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
     // var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
-    //var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
+    // var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
     // var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
     // var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
-    var apiKey = "0421115dd3974c7f9338166f3e907824"; // Emily2
+    // var apiKey = "0421115dd3974c7f9338166f3e907824"; // Emily2
+
 
     /**********************************/
     /*           EVENT HANDLER        */
@@ -57,18 +58,6 @@ $('document').ready(function () {
 
             // Take only necessary info from raw data and create each recipe {}. Then add all recipes {}s to one [].
             createRecipesArr();
-
-            // animation for waiting
-
-            $('#recipes').empty();
-            var waiting = `<div class="row">
-                            <br><br><br><br>
-                            <div class="progress">
-                               <div class="indeterminate"></div>
-                            </div>
-                        </div>`
-
-            $('#recipes').append(waiting);
 
             // PASS2: validate/populate preparation steps into object
             for (var i = 0; i < state.recipes.length; ++i)
@@ -254,39 +243,45 @@ $('document').ready(function () {
 
         }
     }
-    function renderRecipe(obj,i=0){
-//! [For Test] part to comment out when saving API calls
-            // check for 'complete' recipe meaning: recipe with preparation steps 
-            if (obj.doRender === false) return;
 
-            // create preparation steps HTML
-            var li = "";
-            for (let j = 0; j < obj.steps.length; ++j)
-                li += "<li>" + obj.steps[j] + "</li>"
-//! ******************************************************/
-      
-            var recipe = `<div class="row">
+    // render recipe image larger
+    $(document).ready(function () {
+        $('.materialboxed').materialbox();
+    });
+
+    function renderRecipe(obj, i = 0) {
+        //! [For Test] part to comment out when saving API calls
+        // check for 'complete' recipe meaning: recipe with preparation steps 
+        if (obj.doRender === false) return;
+
+        // create preparation steps HTML
+        var li = "";
+        for (let j = 0; j < obj.steps.length; ++j)
+            li += "<li>" + obj.steps[j] + "</li>"
+        //! ******************************************************/
+
+        var recipe = `<div class="row">
                             <div class="col s12 m12">
                                 
                                 <div class="recipe card" data-recipe="${i}">
-                                    
+                                    <h2>
+                                        ${obj.title}
 
-                                    <div class="card-image">
-                                        <img class="recipe__image" src="${obj.imgSmall}" data-recipe__image="recipe__image${i}">
-                                        <span class="card-title">${obj.title}</span>
-                                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
-                                    </div>
-                                    
-                                    <div class="recipe__detail card-content" data-recipe__detail="recipe__detail${i}">
-
-                                    <h5>
-                                        <!-- ${obj.title} -->
                                         <span class="favoriteIcon">
                                             <svg class="icon">
                                                 <use xlink:href="./assets/icons/sprite.svg#icon-heart-${obj.isLiked ? 'minus' : 'plus'}" class="iconImg"></use>
                                             </svg>
                                         </span>
-                                    </h5>
+
+                                    </h2>
+
+                                    <div class="card-image">
+                                        <img class="recipe__image materialboxed" width="650"" src="${obj.imgSmall}" data-recipe__image="recipe__image${i}">
+                                        <span class="card-title"></span>
+                                        <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
+                                    </div>
+                                    
+                                    <div class="recipe__detail card-content" data-recipe__detail="recipe__detail${i}">
 
                                         <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
                                         <ul class="ingredients--missed" data-ingredients--missed="ingredients--missed${i}"></ul>
@@ -294,7 +289,7 @@ $('document').ready(function () {
                                     </div>
                                 </div>
                             </div>
-                        `
+                        </div>`
 
         $('#recipes').append(recipe);
         renderIngredients('.ingredients--used', i, obj.usedIngredients);
@@ -365,12 +360,16 @@ $('document').ready(function () {
         }
 
         //![For Test] Inserted for Temperary code to save API call 
+        //![For Test] Inserted for Temperary code to save API call 
+        //![For Test] Inserted for Temperary code to save API call 
         // var loadedData = localStorage.getItem('tempRecipes');
         // console.log('loadedData: ', loadedData)
         // if(loadedData){
         //     state.recipes = JSON.parse(loadedData);
         //     renderRecipesList();
         // }
+        //! ***********************************************************        
+        //! ***********************************************************        
         //! ***********************************************************        
     }
     function importFromLocalStorage(item, addTo) {
@@ -432,6 +431,11 @@ $('document').ready(function () {
 
     // Each recipe's favorite button
     $('#recipes').click(favoriteIconHandler);
+
+    // Recipe image enlarges
+    $(document).ready(function () {
+        $('.materialboxed').materialbox();
+    });
 
     // ====================================
     // ffortizn
