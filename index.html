@@ -22,27 +22,42 @@
     <nav>
       <div class="nav-wrapper">
         <h1><a href="#" class="brand-logo center">Welcome to the Eclectic Kitchen</a></h1><ul id="nav-mobile" class="left hide-on-med-and-down">
-          <!-- <div class="sharethis-inline-share-buttons"></div> -->
-          </li><a id="favoriteMenu" class="btn modal-trigger" href="#modal-favorite">My Favorites
-            <svg class="icon icon-heart">
-              <use xlink:href="./assets/icons/sprite.svg#icon-heart"></use>
-            </svg></a>
-          </li>
-        </ul>
       </div>
     </nav>
   </header>
 
-  <div class="tarjeta" id="left-card">
-    <h2>What's in Your Kitchen?</h2>
-
-    <form id="search-card" class="input-field col s6">
-      <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="Type ingredient">
-      <span class="validity"></span>
-      <button id="addBtn">add</button>
-      <ul id="searchList"></ul>
-      <button id="searchBtn" href="#search">Search</button>
-    </form>
+  <!-- turning ingredient list into fixed nav on large screens, slideout on small -->  
+  <div>
+    <ul id="slide-out" class="sidenav sidenav-fixed">
+      <li>
+        <div class="user-view">
+          <h3>What's in Your Kitchen?</h3>
+          <div class="background">
+            <img src="assets\images\photo-1478144592103-25e218a04891.jpeg">
+          </div>
+        </div>
+      </li>
+      <!-- <div class="sharethis-inline-share-buttons"></div> -->
+      </li><a id="favoriteMenu" class="btn modal-trigger" href="#modal-favorite">My Favorites
+        <svg class="icon icon-heart">
+          <use xlink:href="./assets/icons/sprite.svg#icon-heart"></use>
+        </svg></a>
+      </li>
+      <!-- <li><a href="#!"><i class="material-icons">Heart</i>Favorites</a></li> -->  
+      <li><div class="divider"></div></li>
+      <ul>
+        <li class="collection">
+          <form id="search-card" class="input-field col s6">
+            <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="Type ingredient">
+            <span class="validity"></span>
+            <button id="addBtn">add</button>
+            <ul id="searchList"></ul>
+            <button id="searchBtn" href="#search">Search</button>
+          </form>
+        </li>
+      </ul>
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
   </div>
 
   <div class="tarjeta" id="recipes">
