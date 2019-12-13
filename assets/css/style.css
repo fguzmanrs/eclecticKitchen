@@ -27,7 +27,6 @@ body {
 
 .tarjeta {
     height: 800px;
-
     width: 40%;
     background-color: #F9FBFA;
     color: #0F2422;
@@ -37,20 +36,6 @@ body {
     box-shadow: 1px 1px 2px 0px;
     /* margin: 10px 100px; */
 }
-
-
-.main-card {
-    height: 800px;
-    width: 64%;
-    background-color: #fafafa;
-    float: left;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 2px 0px;
-    overflow: hidden;
-}
-
-
 
 h5 {
     margin-top: 10px;
