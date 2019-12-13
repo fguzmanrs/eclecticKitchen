@@ -16,8 +16,12 @@ highlights:
 
 /* || General Styles */
 
+h1 {
+    margin: 0px 0px 20px 0px;
+}
+
 body {
-    /* background-color: #81c14b; */
+    
     background: url("../images/background-board.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -25,30 +29,24 @@ body {
     background-size: cover; 
 }
 
+
 .tarjeta {
     height: 800px;
-
     width: 40%;
     background-color: #F9FBFA;
     color: #0F2422;
-    float: left;
-    margin: 10px;
+    /* float: left; */
+    margin-left: 35%;
+    margin-right: 25%;
+    margin-top: 20px;
     border-radius: 10px;
     box-shadow: 1px 1px 2px 0px;
-    /* margin: 10px 100px; */
+    position: relative;
+   
+    
 }
 
 
-.main-card {
-    height: 800px;
-    width: 64%;
-    background-color: #fafafa;
-    float: left;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 2px 0px;
-    overflow: hidden;
-}
 
 
 
@@ -57,13 +55,6 @@ h5 {
     margin-bottom: 10px;
 }
 
-/* li {
-
-}
-
-a {
-
-} */
 
 .btn {
     background-color: #EDC08D;
@@ -75,11 +66,11 @@ a {
 
 /* || Header and Main Navigation */
 
-.nav-wrapper {
-    /* padding:; 
-    margin:;
-    border:;
-    border-color: ; */
+.nav-bar {
+    text-align: center;
+    color: white;
+    width: 100%;
+    margin: 0px 0px 20px 0px; 
     background-color: #8CC65B;
     
 }
@@ -135,19 +126,42 @@ input:valid+span:after {
 /* header, main, footer {
   } */
 
+@media only screen and (min-width : 993px) {
+    header, footer {
+        padding-left: 300px;
+    }
+}
+
 @media only screen and (max-width : 992px) {
     header, main, footer {
       padding-left: 0;
     }
+
+    .tarjeta {
+        width: 68%;
+        margin-left: 16%;
+        margin-right: 16%;
+    }
 }
+
+@media only screen and (max-width : 600px){
+    .tarjeta {
+        width: 75%;
+        margin-left: 12.5%;
+        margin-right: 12.5%;
+    }
+
+}
+
 
 /* || Recipe Results */
 
 #recipes {
     padding: 20px;
     height: auto;
-    height: auto;
+    margin-top: 20px;
     min-height: 800px;
+    
 }
 
 /* .recipe {
