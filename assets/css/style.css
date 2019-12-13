@@ -20,7 +20,17 @@ font-family: 'Pacifico', cursive;
     padding: 0;
     box-sizing: border-box;
 }
+ /* || General */
 
+h1, h4 {
+    color: white;
+}
+
+button {
+    background-color: #8bc34a;
+    color: white;
+    position: center;
+ }
 
 
 /* || Typography */
@@ -29,139 +39,12 @@ font-family: 'Pacifico', cursive;
 
 /* || Header and Main Navigation */
 
-.nav {
-    /* padding:; 
-    margin:;
-    border:;
-    border-color: ; */
-    background-color: #8bc34a;
-}
-
-.brand-logo {
-    color: #F9FBFA;
-    font-family: 'Pacifico', cursive; 
-    font-size: 60px;
-}
 
 /* || Favorites */
 
-.favorite__title{
-    margin: 0;
-}
-
-.favorite__list > *{
-    display: flex;
-    margin-bottom: 1em;
-}
-.favorite__img{
-    min-width: 5em;
-    height: 5em;
-    margin-right: 1em;
-}
 
 /* || Recipe Generator */
 
-#search-card {
-    width: 80%;
-    height: 450px;
-    margin-left: 50px;
-    border-radius: 10px;
-}
-
-input:invalid+span::after,
-input:valid+span::after{
-    position: absolute;
-    padding-left: 5px;
-    transform: translate(-2em,.7em);
-    color: #fff;
-}
-
-input:invalid+span::after {
-    content: '✖';
-}
-  
-input:valid+span::after {
-    content: '✓';
-    font-weight: bolder;
-}
-
-#addBtn{
-    display: none;
-}
-
-header {
-    padding-left: 0px;
-  }
-
-@media only screen and (max-width : 992px) {
-    body {
-        padding-left: 300px;
-    }
-  }
-
-/* || Recipe Results */
-
-#recipes {
-    padding: 20px;
-    height: auto;
-    height: auto;
-    min-height: 800px;
-}
-
-/* .recipe {
-    text-align: center;
-    height: 400px;
-    width: 85%;
-    background-color: #ecba82; 
-    border-radius: 10px;
-    margin: 40px;
-    background-image: url(./images/-U4wBbx6u0Q.jpg);
-    background-size: cover;
-} */
-
-.card .card-image img {
-    border-radius: 10px 10px 0px 0px;
-}
-
-.card {
-    border-radius: 10px;
-}
-/*.card-image {
-     height: 400px; 
- } */
- 
- img {
-     max-height: 400px; 
- }
-
- .icon {
-    display: inline-block;
-    transform: translateY(6px);
-    width: 1.3em;
-    height: 1.3em;
-    stroke-width: 0;
-    stroke: none;
-    fill: #DD3506;
-    cursor: pointer;
-  }
-
-.icon-cook {
-    width: 1em;
-    height: 1em;
-    stroke: #fff;
-    fill: #fff;
-    margin-bottom: 2px;
-  }
-#icon-close {
-    transform: skewX(10deg);
-}
-
-.recipe__detail--ingredient{
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2em;
-}
 /********************************/
 /*      Favorite recipes        */
 /*******************************/

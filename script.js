@@ -441,11 +441,6 @@ $('document').ready(function () {
         // render recipe image larger
         $('.materialboxed').materialbox();
 
-        $('.sidenav').sidenav();
-        var instance = M.Sidenav.getInstance(elem);
-        instance.open();
-        instance.close();
-
         // Load from local storage
         importFromLocalStorage('ingredients', 'searchIngredients');
         importFromLocalStorage('likes', 'likes');
