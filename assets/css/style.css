@@ -21,42 +21,7 @@ font-family: 'Pacifico', cursive;
     box-sizing: border-box;
 }
 
-body {
-    background: url("../images/background-board.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover; 
-    font-family: 'Montserrat', sans-serif;
-}
 
-.tarjeta {
-    height: 800px;
-    width: 40%;
-    background-color: #F9FBFA;
-    color: #0F2422;
-    float: left;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 2px 0px;
-}
-
-h5 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-/* li {
-
-}
-
-a {
-
-} */
-
-.btn {
-    background-color: #EDC08D;
-}
 
 /* || Typography */
 
@@ -64,13 +29,12 @@ a {
 
 /* || Header and Main Navigation */
 
-.nav-wrapper {
+.nav {
     /* padding:; 
     margin:;
     border:;
     border-color: ; */
-    background-color: #8CC65B;
-    
+    background-color: #8bc34a;
 }
 
 .brand-logo {
