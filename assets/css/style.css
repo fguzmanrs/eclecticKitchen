@@ -1,20 +1,20 @@
 /*Color codes:
-main:
-    dollar green: #8CC65B
-    snow: #F9FBFA
-font: 
-    dark jungle green: #0F2422 
-highlights:
-    vermillion (pop): #DD3506
-    pale gold (muted): #EDC08D
-*/
-
-
-* {
+    main:
+        dollar green: #8CC65B
+        snow: #F9FBFA
+    font: 
+        dark jungle green: 
+    highlights:
+        vermillion (pop): #DD3506
+        pale gold (muted): #EDC08D
+ */
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
-
-/* || General Styles */
 
 body {
     /* background-color: #81c14b; */
@@ -116,16 +116,21 @@ a {
     border-radius: 10px;
 }
 
-input:invalid+span:after {
+input:invalid+span::after,
+input:valid+span::after{
     position: absolute;
-    content: '✖';
     padding-left: 5px;
+    transform: translate(-2em,.7em);
+    color: #fff;
+}
+
+input:invalid+span::after {
+    content: '✖';
 }
   
-input:valid+span:after {
-    position: absolute;
+input:valid+span::after {
     content: '✓';
-    padding-left: 5px;
+    font-weight: bolder;
 }
 
 #addBtn{
@@ -187,6 +192,52 @@ input:valid+span:after {
     cursor: pointer;
   }
 
+.icon-cook {
+    width: 1em;
+    height: 1em;
+    stroke: #fff;
+    fill: #fff;
+    margin-bottom: 2px;
+  }
+#icon-close {
+    transform: skewX(10deg);
+}
+
+.recipe__detail--ingredient{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+/********************************/
+/*      Favorite recipes        */
+/*******************************/
+.favorite__img{
+    min-width: 5em;
+    height: 5em;
+    margin-right: 1em;
+}
+.favorite__list > *{
+    display: flex;
+    margin-bottom: 1em;
+}
+.favorite__title{
+    margin: 0;
+}
+
+.collapsible{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    margin: 0;
+}
+#modal-alert{
+    max-width: 30em;
+}
+
+#recipes {
+    height: auto;
+    min-height: 800px;
+}
 .ingredients--used {
     list-style-type: none;
 }
@@ -194,7 +245,6 @@ input:valid+span:after {
 .ingredients--missed {
     list-style-type: none;
 }
-
 /* || Footer */
 
 
@@ -202,3 +252,6 @@ input:valid+span:after {
 /* || Social Media */
 
 
+.card .card-image img {
+    border-radius: 10px 10px 0px 0px;
+}
