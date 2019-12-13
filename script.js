@@ -42,7 +42,7 @@ $('document').ready(function () {
             // 3. Save input data to local storage
             saveToLocalStorage('ingredients', state.searchIngredients);
         }
-       
+
         // 4. Clear input text
         $('#inputIng').val("");
 
@@ -87,7 +87,7 @@ $('document').ready(function () {
             for (var i = 0; i < l; i++) {
 
                 var like = state.likes[i];
-              
+
                 list += `<li class="favorite__list">
                             <a href="#${i}">
                                 <img src="${like.imgSmall}" class="favorite__img">
@@ -118,6 +118,7 @@ $('document').ready(function () {
 
             var index = e.target.closest('a').getAttribute('href').slice(1);
             console.log('likes arr index: ', index);
+
             renderRecipe(state.likes[index]);
             state.currentModal.close();
         }
@@ -157,6 +158,7 @@ $('document').ready(function () {
                 })
 
                 state.likes.splice(index, 1); console.log('updated like obj after deleting: ', state.likes);
+
             }
 
             // 5. Save likes to local storage
@@ -240,6 +242,7 @@ $('document').ready(function () {
 
         }
     }
+
     // render recipe image larger
     $(document).ready(function () {
         $('.materialboxed').materialbox();
@@ -262,11 +265,13 @@ $('document').ready(function () {
                                 <div class="recipe card" data-recipe="${i}">
                                     <h2>
                                         ${obj.title}
+
                                         <span class="favoriteIcon">
                                             <svg class="icon">
                                                 <use xlink:href="./assets/icons/sprite.svg#icon-heart-${obj.isLiked ? 'minus' : 'plus'}" class="iconImg"></use>
                                             </svg>
                                         </span>
+
                                     </h2>
 
                                     <div class="card-image">
@@ -276,6 +281,7 @@ $('document').ready(function () {
                                     </div>
                                     
                                     <div class="recipe__detail card-content" data-recipe__detail="recipe__detail${i}">
+
                                         <ul class="ingredients--used" data-ingredients--used="ingredients--used${i}"></ul>
                                         <ul class="ingredients--missed" data-ingredients--missed="ingredients--missed${i}"></ul>
                                         <ul class="instructions" hidden="hidden" data-instructions="instructions${i}">${li}</ul>
@@ -287,7 +293,6 @@ $('document').ready(function () {
         $('#recipes').append(recipe);
         renderIngredients('.ingredients--used', i, obj.usedIngredients);
         renderIngredients('.ingredients--missed', i, obj.missedIngredients);
-
 
     }
     function renderIngredients(addTo, order, arr) {
@@ -349,7 +354,6 @@ $('document').ready(function () {
 
         if (l > 0) {
             for (var i = 0; i < l; i++) {
-
                 renderSearchList(state.searchIngredients[i]);
             }
         }
@@ -357,7 +361,6 @@ $('document').ready(function () {
         //![For Test] Inserted for Temperary code to save API call 
         //![For Test] Inserted for Temperary code to save API call 
         //![For Test] Inserted for Temperary code to save API call 
-
         // var loadedData = localStorage.getItem('tempRecipes');
         // console.log('loadedData: ', loadedData)
         // if(loadedData){
@@ -390,16 +393,7 @@ $('document').ready(function () {
         var index = likedIds.indexOf(obj.id);
 
         return index === -1 ? false : true;
-    }
-    function isLikedOrNot(obj){
 
-        var likedIds = state.likes.map(function(el){ return el.id });
-
-        // If obj has the same id of likedIds obj, return true
-        var index = likedIds.indexOf(obj.id);
-        
-        return index === -1 ? false : true;
-        
     }
     /**********************************/
     /*              UTILITY           */
@@ -445,11 +439,6 @@ $('document').ready(function () {
     // ====================================
     // ffortizn
 
-    // document.addEventListener('DOMContentLoaded', function() {
-    // var elems = document.querySelectorAll('.modal');
-    // var instances = M.Modal.init(elems, {});
-    //   });
-
     // PASS 2: Validate against preparation steps (note empty)
     // if not empty then populate preparation steps on object
     async function getInstructionsByRecipeId(recipeId, k) {
@@ -493,19 +482,5 @@ $('document').ready(function () {
 
 
     /********************** end **************************/
-})
-// Todo
-    // ajax : getting data - done
-    // duplicated ingredient element deleting function - done
-    // image: data[i].image, data **312x231 => change to https://spoonacular.com/recipeImages/{ID}-636x393.{TYPE} - done
-    // render to DOM - done
-    // render used ingredients and missing ingredients to DOM - done
-    // render input list to DOM - done
-    // Add an instruction property to each recipe {}. format: [step1,step2,step3...] - Francisco - done
-
-    // used & missed ingredients accuracy matter : chocolate !== semi-sweet chocolate, dark chocolate candy bars... 
-
-    // recipe validator (*Pass only when it has instructions, less than 10 missing ingredient?)
-    // change alert to modal
-    // loader animation
+});
 
