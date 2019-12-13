@@ -351,18 +351,7 @@ $('document').ready(function () {
                                             
                                             <div><h6>Missed Ingredients</h6><ul class="ingredients--missed"></ul></div>
                                         </div>
-                                        <div>
-                                            <ul class="instructions collapsible" data-instructions=${i}>
-                                                <li>
-                                                    <div class="collapsible-header">
-                                                        <h6>Preparation<h6>
-                                                    </div>
-                                                    <div class="collapsible-body">
-                                                        <p>${li}</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        
                                     </div> 
                                     <div class="card-reveal">
                                         <span class="card-title grey-text text-darken-4">How to cook<i class="material-icons right" id="icon-close">x</i></span>
@@ -376,9 +365,7 @@ $('document').ready(function () {
         $('#recipes').append(recipe);
         renderIngredients('.ingredients--used', i, obj.usedIngredients);
         renderIngredients('.ingredients--missed', i, obj.missedIngredients);
-
-        // Materialize Collapsible init
-        $('.collapsible').collapsible();
+        
     }
     function renderIngredients(addTo, order, arr) {
 
@@ -390,6 +377,7 @@ $('document').ready(function () {
 
             for (var i = 0; i < l; i++) {
                 list = list + `<li>${arr[i]}</li>`;
+                console.log(list)
             }
 
             $(`${addTo}`).eq(order).append(list);
