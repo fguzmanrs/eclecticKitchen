@@ -55,6 +55,8 @@ $('document').ready(function () {
         // 4. Clear input text
         $('#inputIng').val("");
 
+        // 5. Hide validity symbol
+        $('.validity').attr('hidden', 'hidden');
     }
     async function searchBtnHandler(e) {
 
