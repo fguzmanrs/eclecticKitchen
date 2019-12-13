@@ -119,14 +119,15 @@ input:valid+span:after {
     display: none;
 }
 
-/* header, main, footer {
-  } */
+header {
+    padding-left: 0px;
+  }
 
 @media only screen and (max-width : 992px) {
-    header, main, footer {
-      padding-left: 0;
+    body {
+        padding-left: 300px;
     }
-}
+  }
 
 /* || Recipe Results */
 
