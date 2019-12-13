@@ -28,6 +28,18 @@ nav {
     text-align: center;
 }
 
+body {
+    background: url("../images/background-board.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    font-family: 'Montserrat', sans-serif;
+}
+
+section {
+    text-align: center;
+}
 h1 {
     color: white;
 }
@@ -51,22 +63,6 @@ button {
 
 /* || Recipe Generator */
 
-/********************************/
-/*      Favorite recipes        */
-/*******************************/
-.favorite__img{
-    min-width: 5em;
-    height: 5em;
-    margin-right: 1em;
-}
-.favorite__list > *{
-    display: flex;
-    margin-bottom: 1em;
-}
-.favorite__title{
-    margin: 0;
-}
-
 .collapsible{
     box-shadow: none;
     -webkit-box-shadow: none;
@@ -86,6 +82,22 @@ button {
 
 .ingredients--missed {
     list-style-type: none;
+}
+
+/********************************/
+/*      Favorite recipes        */
+/*******************************/
+.favorite__img{
+    min-width: 5em;
+    height: 5em;
+    margin-right: 1em;
+}
+.favorite__list > *{
+    display: flex;
+    margin-bottom: 1em;
+}
+.favorite__title{
+    margin: 0;
 }
 /* || Footer */
 
