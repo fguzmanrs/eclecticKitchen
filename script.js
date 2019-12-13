@@ -12,12 +12,12 @@ var state = {
 
 $('document').ready(function () {
     // var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
-    //var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
+    // var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
     // var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
-    //var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
+    // var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
     // var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
     // var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
-    var apiKey = "0421115dd3974c7f9338166f3e907824"; // Emily2
+    // var apiKey = "0421115dd3974c7f9338166f3e907824"; // Emily2
 
     /**********************************/
     /*           EVENT HANDLER        */
@@ -57,18 +57,6 @@ $('document').ready(function () {
 
             // Take only necessary info from raw data and create each recipe {}. Then add all recipes {}s to one [].
             createRecipesArr();
-
-            // animation for waiting
-
-            $('#recipes').empty();
-            var waiting = `<div class="row">
-                            <br><br><br><br>
-                            <div class="progress">
-                               <div class="indeterminate"></div>
-                            </div>
-                        </div>`
-
-            $('#recipes').append(waiting);
 
             // PASS2: validate/populate preparation steps into object
             for (var i = 0; i < state.recipes.length; ++i)
@@ -254,18 +242,23 @@ $('document').ready(function () {
 
         }
     }
-    function renderRecipe(obj,i=0){
-//! [For Test] part to comment out when saving API calls
-            // check for 'complete' recipe meaning: recipe with preparation steps 
-            if (obj.doRender === false) return;
+    // render recipe image larger
+    $(document).ready(function () {
+        $('.materialboxed').materialbox();
+    });
 
-            // create preparation steps HTML
-            var li = "";
-            for (let j = 0; j < obj.steps.length; ++j)
-                li += "<li>" + obj.steps[j] + "</li>"
-//! ******************************************************/
-      
-            var recipe = `<div class="row">
+    function renderRecipe(obj, i = 0) {
+        //! [For Test] part to comment out when saving API calls
+        // check for 'complete' recipe meaning: recipe with preparation steps 
+        if (obj.doRender === false) return;
+
+        // create preparation steps HTML
+        var li = "";
+        for (let j = 0; j < obj.steps.length; ++j)
+            li += "<li>" + obj.steps[j] + "</li>"
+        //! ******************************************************/
+
+        var recipe = `<div class="row">
                             <div class="col s12 m12">
                                 
                                 <div class="recipe card" data-recipe="${i}">
@@ -294,7 +287,7 @@ $('document').ready(function () {
                                     </div>
                                 </div>
                             </div>
-                        `
+                        </div>`
 
         $('#recipes').append(recipe);
         renderIngredients('.ingredients--used', i, obj.usedIngredients);
@@ -365,12 +358,16 @@ $('document').ready(function () {
         }
 
         //![For Test] Inserted for Temperary code to save API call 
+        //![For Test] Inserted for Temperary code to save API call 
+        //![For Test] Inserted for Temperary code to save API call 
         // var loadedData = localStorage.getItem('tempRecipes');
         // console.log('loadedData: ', loadedData)
         // if(loadedData){
         //     state.recipes = JSON.parse(loadedData);
         //     renderRecipesList();
         // }
+        //! ***********************************************************        
+        //! ***********************************************************        
         //! ***********************************************************        
     }
     function importFromLocalStorage(item, addTo) {
@@ -433,8 +430,19 @@ $('document').ready(function () {
     // Each recipe's favorite button
     $('#recipes').click(favoriteIconHandler);
 
+    // Recipe image enlarges
+    $(document).ready(function () {
+        $('.materialboxed').materialbox();
+    });
+
     // ====================================
     // ffortizn
+
+    // document.addEventListener('DOMContentLoaded', function() {
+    // var elems = document.querySelectorAll('.modal');
+    // var instances = M.Modal.init(elems, {});
+    //   });
+
 
     // PASS 2: Validate against preparation steps (note empty)
     // if not empty then populate preparation steps on object
@@ -479,6 +487,20 @@ $('document').ready(function () {
 
 
     /********************** end **************************/
-});
+})
+// Todo
+    // ajax : getting data - done
+    // duplicated ingredient element deleting function - done
+    // image: data[i].image, data **312x231 => change to https://spoonacular.com/recipeImages/{ID}-636x393.{TYPE} - done
+    // render to DOM - done
+    // render used ingredients and missing ingredients to DOM - done
+    // render input list to DOM - done
+    // Add an instruction property to each recipe {}. format: [step1,step2,step3...] - Francisco - done
+
+    // used & missed ingredients accuracy matter : chocolate !== semi-sweet chocolate, dark chocolate candy bars... 
+
+    // recipe validator (*Pass only when it has instructions, less than 10 missing ingredient?)
+    // change alert to modal
+    // loader animation
 
 
