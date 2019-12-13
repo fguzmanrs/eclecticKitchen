@@ -10,18 +10,22 @@
  */
 
 body {
-    background-color: #81c14b;
+    /* background-color: #81c14b; */
+    background: url("../images/background-board.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
 }
 
 .tarjeta {
     height: 800px;
-    width: 32%;
+    width: 35%;
     background-color: #fafafa;
-    float: left;
-    margin: 10px;
+    float: left; 
     border-radius: 10px;
     box-shadow: 1px 1px 2px 0px;
-    /* display: none; */
+    /* margin: 10px 100px; */
 }
 
 /* .main-card {
@@ -60,9 +64,14 @@ input:valid+span:after {
     padding-left: 5px;
 }
 
+#left-card {
+    margin: 10px 2.5% 10px 12.5%;
+}
+
 #recipes {
     padding: 20px;
     height: auto;
+    margin: 10px 12.5% 10px 2.5%;
 }
 
 /* .recipe {
