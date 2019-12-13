@@ -7,6 +7,10 @@ font:
 highlights:
     vermillion (pop): #DD3506
     pale gold (muted): #EDC08D
+
+Fonts:
+font-family: 'Montserrat', sans-serif;
+font-family: 'Pacifico', cursive; 
 */
 
 
@@ -17,17 +21,16 @@ highlights:
 /* || General Styles */
 
 body {
-    /* background-color: #81c14b; */
     background: url("../images/background-board.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover; 
+    font-family: 'Montserrat', sans-serif;
 }
 
 .tarjeta {
     height: 800px;
-
     width: 40%;
     background-color: #F9FBFA;
     color: #0F2422;
@@ -35,7 +38,6 @@ body {
     margin: 10px;
     border-radius: 10px;
     box-shadow: 1px 1px 2px 0px;
-    /* margin: 10px 100px; */
 }
 
 h5 {
@@ -72,10 +74,9 @@ a {
 
 .brand-logo {
     color: #F9FBFA;
-    /* text: ; */
-    text-emphasis: bold;
+    font-family: 'Pacifico', cursive; 
+    font-size: 60px;
 }
-
 
 /* || Favorites */
 
