@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
 
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <!-- Social share buttons -->
   <script type="text/javascript"
     src="https://platform-api.sharethis.com/js/sharethis.js#property=5df06909b6d3970012ea51a3&product=inline-share-buttons"
@@ -20,8 +24,8 @@
 <body>
   <header>
     <nav>
-      <div class="nav-wrapper">
-        <h1><a href="#" class="brand-logo center">Welcome to the Eclectic Kitchen</a></h1><ul id="nav-mobile" class="left hide-on-med-and-down">
+      <div class="nav-wrapper navbar-fixed">
+        <a href="#" class="brand-logo center">Welcome to the Eclectic Kitchen</a><ul id="nav-mobile" class="left hide-on-med-and-down">
       </div>
     </nav>
   </header>
@@ -29,6 +33,14 @@
   <!-- turning ingredient list into fixed nav on large screens, slideout on small -->  
   <nav>
     <ul id="slide-out" class="sidenav sidenav-fixed">
+      <div class="row sidenav-close">
+        <li>
+          <a>
+            <i class="material-icons left" href="#!">chevron_left</i>
+          </a>
+        </li>
+
+      </div>
       <li>
         <div class="user-view">
           <h3>What's in Your Kitchen?</h3>
@@ -57,8 +69,8 @@
         </li>
       </ul>
     </ul>
-    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-  </nav>
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">chevron_right</i></a>
+  </div>
 
   <main class="tarjeta" id="recipes">
     <h2> Recipe Results: </h2>

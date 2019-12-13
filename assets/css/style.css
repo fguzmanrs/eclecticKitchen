@@ -1,14 +1,18 @@
 /*Color codes:
-    main:
-        dollar green: #8CC65B
-        snow: #F9FBFA
-    font: 
-        dark jungle green: 
-    highlights:
-        vermillion (pop): #DD3506
-        pale gold (muted): #EDC08D
- */
-*,
+main:
+    dollar green: #8CC65B
+    snow: #F9FBFA
+font: 
+    dark jungle green: #0F2422 
+highlights:
+    vermillion (pop): #DD3506
+    pale gold (muted): #EDC08D
+
+Fonts:
+font-family: 'Montserrat', sans-serif;
+font-family: 'Pacifico', cursive; 
+*/
+
 *::before,
 *::after{
     margin: 0;
@@ -17,17 +21,16 @@
 }
 
 body {
-    /* background-color: #81c14b; */
     background: url("../images/background-board.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover; 
+    font-family: 'Montserrat', sans-serif;
 }
 
 .tarjeta {
     height: 800px;
-
     width: 40%;
     background-color: #F9FBFA;
     color: #0F2422;
@@ -35,22 +38,7 @@ body {
     margin: 10px;
     border-radius: 10px;
     box-shadow: 1px 1px 2px 0px;
-    /* margin: 10px 100px; */
 }
-
-
-.main-card {
-    height: 800px;
-    width: 64%;
-    background-color: #fafafa;
-    float: left;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 2px 0px;
-    overflow: hidden;
-}
-
-
 
 h5 {
     margin-top: 10px;
@@ -86,10 +74,9 @@ a {
 
 .brand-logo {
     color: #F9FBFA;
-    /* text: ; */
-    text-emphasis: bold;
+    font-family: 'Pacifico', cursive; 
+    font-size: 60px;
 }
-
 
 /* || Favorites */
 
@@ -137,14 +124,15 @@ input:valid+span::after {
     display: none;
 }
 
-/* header, main, footer {
-  } */
+header {
+    padding-left: 0px;
+  }
 
 @media only screen and (max-width : 992px) {
-    header, main, footer {
-      padding-left: 0;
+    body {
+        padding-left: 300px;
     }
-}
+  }
 
 /* || Recipe Results */
 
@@ -250,7 +238,6 @@ input:valid+span::after {
 
 
 /* || Social Media */
-
 
 .card .card-image img {
     border-radius: 10px 10px 0px 0px;
