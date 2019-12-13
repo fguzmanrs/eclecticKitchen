@@ -43,7 +43,7 @@
           <use xlink:href="./assets/icons/sprite.svg#icon-heart"></use>
         </svg></a>
       </li>
-      <!-- <li><a href="#!"><i class="material-icons">Heart</i>Favorites</a></li> -->  
+
       <li><div class="divider"></div></li>
       <ul>
         <li class="collection">
@@ -113,17 +113,25 @@
       </div>
     </div>
 
-    <div id="modal-alert" class="modal">
-        <div class="modal-content">
-          <h4>Oops!</h4>
-          <p id="modal-message"></p>
-        </div>
-        <div class="modal-footer">
-            <a class="modal-close waves-effect waves-green btn-flat">OK</a>
-        </div>
-    </div>
-
   </main>
+
+  <!-- Materialize Modal for error alert & favorite popup -->
+  <div id="modal-alert" class="modal">
+    <div class="modal-content">
+      <h4>Oops!</h4>
+      <p id="modal-message"></p>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-close waves-effect waves-green btn-flat">OK</a>
+    </div>
+</div>
+
+<div id="modal-favorite" class="modal">
+    <div class="modal-content">
+      <h4>My Favorite</h4>
+      <ul id="modal-list"></ul>
+    </div>
+</div>
 
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
