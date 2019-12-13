@@ -25,6 +25,10 @@ body {
     background-size: cover; 
 }
 
+main{
+    display:flex;
+    justify-content: right;
+}
 .tarjeta {
     height: 800px;
 
