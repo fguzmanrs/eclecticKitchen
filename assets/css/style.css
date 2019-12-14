@@ -1,19 +1,3 @@
-/*Materialize color codes:
-main:
-    light-green: #8bc34a
-    light-green lighten-5: #f1f8e9
-font:
-    black: #000
-    white: #fff
-accents: 
-    deep-orange accent-4: #dd2c00
-    orange lighten-3: #ffcc80
-
-Fonts:
-font-family: 'Montserrat', sans-serif;
-font-family: 'Pacifico', cursive; 
-*/
-
 *::before,
 *::after{
     margin: 0;
@@ -21,20 +5,6 @@ font-family: 'Pacifico', cursive;
     box-sizing: border-box;
 }
  /* || General */
-
-nav {
-    background-color: #8bc34a;
-    color: white;
-    padding: 20px;
-    
-}
-
-nav .brand-logo {
-    position: fixed;
-    font-family: 'Pacifico', cursive;
-    font-size: 50px;
-    
-}
 
 header {
     padding: 10px;
@@ -50,12 +20,25 @@ body {
     -o-background-size: cover;
     background-size: cover; 
     font-family: 'Montserrat', sans-serif;
+    width:100%;
+}
+
+#sidepanel {
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 2px 2px 10px 0px;
+    float: left;
 }
 
 h1 {
     color: white;
     margin: 0px;
     position: relative;
+    font-family: 'Pacifico', cursive;
+}
+
+h4 {
+    color: white;
+    position: center;
     font-family: 'Pacifico', cursive;
 }
 
@@ -71,31 +54,61 @@ h5 {
     position: center;
  }
 
-
 /* || Typography */
 
+/* Recipe Generator */
 
+/* .cover {
+    object-fit: cover;
+}
 
-/* || Header and Main Navigation */
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+} */
 
+input:invalid+span::after,
+input:valid+span::after{
+    position: absolute;
+    padding-left: 5px;
+    transform: translate(-2em,.7em);
+    color: #fff;
+}
 
-/* || Favorites */
-
-i.icon-red {
+input:invalid+span::after {
     color: red;
-    float: right;
+    content: '✖';
+}
+  
+input:valid+span::after {
+    color: #8bc34a;
+    content: '✓';
+    font-weight: bolder;
 }
 
-/* || Recipe Generator */
+/* Favorites */
 
-.col {
-    margin-left: 10%;
+.favorite__img{
+    min-width: 5em;
+    height: 5em;
+    margin-right: 1em;
 }
+.favorite__list > *{
+    display: flex;
+    margin-bottom: 1em;
+}
+.favorite__title{
+    margin: 0;
+}
+
+
+/* Recipes */
 
 .recipe {
     border-radius: 10px 10px 10px 10px;
     box-shadow: 2px 2px 10px 0px;
-    max-width: 90%;
+    max-width: 100%;
 }
 
 .icon-heart{
@@ -126,18 +139,7 @@ i.icon-red {
 /********************************/
 /*      Favorite recipes        */
 /*******************************/
-.favorite__img{
-    min-width: 5em;
-    height: 5em;
-    margin-right: 1em;
-}
-.favorite__list > *{
-    display: flex;
-    margin-bottom: 1em;
-}
-.favorite__title{
-    margin: 0;
-}
+
 /* || Footer */
 
 
@@ -146,6 +148,10 @@ i.icon-red {
 
 .card .card-image img {
     border-radius: 10px 10px 0px 0px;
+}
+
+.card .large{
+    height: 1000px;
 }
 
 /* Media Queries ///////////////////////////*/
@@ -176,3 +182,6 @@ i.icon-red {
         font-size: 30px;
     }
 }
+
+
+
