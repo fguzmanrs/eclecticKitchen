@@ -25,13 +25,22 @@ font-family: 'Pacifico', cursive;
 nav {
     background-color: #8bc34a;
     color: white;
-    text-align: center;
+    padding: 20px;
+    
 }
 
 nav .brand-logo {
-    position: relative;
+    position: fixed;
     font-family: 'Pacifico', cursive;
     font-size: 50px;
+    
+}
+
+header {
+    padding: 10px;
+    width: 100%;
+    background-color: #8bc34a;
+    text-align: center;
 }
 
 body {
@@ -45,6 +54,9 @@ body {
 
 h1 {
     color: white;
+    margin: 0px;
+    position: relative;
+    font-family: 'Pacifico', cursive;
 }
 
 h5 {
@@ -134,4 +146,33 @@ i.icon-red {
 
 .card .card-image img {
     border-radius: 10px 10px 0px 0px;
+}
+
+/* Media Queries ///////////////////////////*/
+
+@media only screen and (min-width: 1900px) {
+    .recipe{
+        width: 100%;
+    }
+
+    .col {
+        width: 1000px;
+    }
+}
+
+@media only screen and (min-width: 1700px) {
+    .recipe{
+        width: 100%;
+    }
+
+    .col {
+        width: 800px;
+    }
+}
+
+
+@media only screen and (max-width: 417px) {
+    h1 {
+        font-size: 30px;
+    }
 }
