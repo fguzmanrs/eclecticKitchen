@@ -5,13 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Import Google Iconns and Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat|Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
-
-  <!-- Fonts and icons -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat|Pacifico&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- Social share buttons -->
   <script type="text/javascript"
@@ -21,62 +22,62 @@
   <title>Eclectic Kitchen</title>
 </head>
 
+
+<!-- navbar -->
+<header>
+  <nav class="nav-wrapper navbar-fixed z-depth-2">
+    <div class="container">
+      <div class="brand-logo center section">Welcome to the Eclectic Kitchen</div>
+    </div>
+  </nav>
+</header>
+
 <body>
-  <header>
-    <nav>
-      <div class="nav-wrapper navbar-fixed">
-        <a href="#" class="brand-logo center">Welcome to the Eclectic Kitchen</a><ul id="nav-mobile" class="left hide-on-med-and-down">
-      </div>
-    </nav>
-  </header>
 
-  <!-- turning ingredient list into fixed nav on large screens, slideout on small -->  
-  <nav>
-    <ul id="slide-out" class="sidenav sidenav-fixed">
-      <div class="row sidenav-close">
-        <li>
-          <a>
-            <i class="material-icons left" href="#!">chevron_left</i>
+  <!-- page layout -->
+  <div class="row">
+    <!-- Ingredient Panel -->
+    <div class="col s4" id="side-panel">
+      <div class="card center">
+
+        <div class="card-image">
+          <img class="responsive-img"
+            src="https://images.pexels.com/photos/2802527/pexels-photo-2802527.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260">
+          <span class="card-title">
+            <h4>Your Kitchen</h4>
+          </span>
+          <a id="favoriteMenu" class="favorite_list btn modal-trigger waves-effect waves-light" href="#modal-favorite">Favorites
+            <svg class="icon icon-heart">
+              <use xlink:href="./assets/icons/sprite.svg#icon-heart"></use>
+            </svg>
           </a>
-        </li>
-
-      </div>
-      <li>
-        <div class="user-view">
-          <h3>What's in Your Kitchen?</h3>
-          <div class="background">
-            <img src="assets\images\photo-1478144592103-25e218a04891.jpeg">
-          </div>
         </div>
-      </li>
-      <!-- <div class="sharethis-inline-share-buttons"></div> -->
-      </li><a id="favoriteMenu" class="btn modal-trigger" href="#modal-favorite">My Favorites
-        <svg class="icon icon-heart">
-          <use xlink:href="./assets/icons/sprite.svg#icon-heart"></use>
-        </svg></a>
-      </li>
 
-      <li><div class="divider"></div></li>
-      <ul>
-        <li class="collection">
-          <form id="search-card" class="input-field col s6">
-            <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="Type ingredient">
-            <span class="validity" hidden></span>
-            <button id="addBtn">add</button>
-            <ul id="searchList"></ul>
-            <button id="searchBtn" href="#search">Search</button>
+        <div class="card-content collection">
+          <form id="search-card" class="input-field">
+
+              <div>
+                  <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="Type ingredient and press enter">
+                  <span class="validity" hidden></span>
+              </div>
+              <button id="addBtn" class="">add</button>
+
+              <ul id="searchList"></ul>
+              <button class="btn waves-effect waves-light" id="searchBtn" href="#search">Show me Deliciousness!</button>
+
           </form>
-        </li>
-      </ul>
-    </ul>
-    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">chevron_right</i></a>
-  </div>
+        </div>
+      </div>
+    </div>
 
-  <main class="tarjeta" id="recipes">
-    <h2> Recipe Results: </h2>
+    <!-- main content -->
+    <div class="col s8 z-depth-1" id="recipes">
 
-    <div class="row">
-      <div class="col s12 m12">
+      <div class="deep-orange darken-4 tarjeta">
+        <h4 class="section white-text center">Let's Get Cooking!</h4>
+      </div>
+
+      <div class="recipe-body">
         <div class="card">
           <div class="card-image">
             <img src="assets/images/-U4wBbx6u0Q.jpg">
@@ -84,73 +85,58 @@
             <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
           </div>
           <div class="card-content">
-            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I
-              require little markup to use effectively.</p>
+            <p>I am a very simple card.</p>
           </div>
         </div>
-      </div>
-    </div>
 
-
-    <div class="row">
-      <div class="col s12 m12">
         <div class="card">
           <div class="card-image">
-            <img src="assets/images/awj7sRviVXo.jpg">
+            <img src="assets/images/-U4wBbx6u0Q.jpg">
             <span class="card-title">Card Title</span>
             <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
           </div>
           <div class="card-content">
-            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I
-              require little markup to use effectively.</p>
+            <p>I am a very simple card.</p>
           </div>
         </div>
-      </div>
-    </div>
 
-
-    <div class="row">
-      <div class="col s12 m12">
         <div class="card">
           <div class="card-image">
-            <img src="assets/images/jsgJtBOR6jY.jpg">
+            <img src="assets/images/-U4wBbx6u0Q.jpg">
             <span class="card-title">Card Title</span>
             <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
           </div>
           <div class="card-content">
-            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I
-              require little markup to use effectively.</p>
+            <p>I am a very simple card.</p>
           </div>
         </div>
       </div>
     </div>
-
-  </main>
+  </div>
 
   <!-- Materialize Modal for error alert & favorite popup -->
   <div id="modal-alert" class="modal">
     <div class="modal-content">
-      <h4>Oops!</h4>
+      <h4 class="modal-title">Oops!</h4>
       <p id="modal-message"></p>
     </div>
     <div class="modal-footer">
-        <a class="modal-close waves-effect waves-green btn-flat">OK</a>
+      <a class="modal-close waves-effect waves-green btn-flat">OK</a>
     </div>
-</div>
+  </div>
 
-<div id="modal-favorite" class="modal">
+  <div id="modal-favorite" class="modal">
     <div class="modal-content">
-      <h4>My Favorite</h4>
+      <h4 class="modal-title">My Favorite</h4>
       <ul id="modal-list"></ul>
     </div>
-</div>
+  </div>
 
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
   <script src="./script.js"></script>
 
 </body>
