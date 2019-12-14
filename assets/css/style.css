@@ -22,7 +22,7 @@ font-family: 'Pacifico', cursive;
 }
  /* || General */
 
-nav {
+ nav {
     background-color: #8bc34a;
     color: white;
     text-align: center;
@@ -37,8 +37,10 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-h1 {
+h4 {
     color: white;
+    position: center;
+
 }
 
 .btn, #addBtn {
@@ -47,22 +49,37 @@ h1 {
     position: center;
  }
 
-
 /* || Typography */
 
+/* Recipe Generator */
+
+.cover {
+    object-fit: cover;
+}
 
 
-/* || Header and Main Navigation */
-
-
-/* || Favorites */
+/* Favorites */
 
 i.icon-red {
     color: red;
     float: right;
 }
 
-/* || Recipe Generator */
+.favorite__img{
+    min-width: 5em;
+    height: 5em;
+    margin-right: 1em;
+}
+.favorite__list > *{
+    display: flex;
+    margin-bottom: 1em;
+}
+.favorite__title{
+    margin: 0;
+}
+
+
+/* Recipes */
 
 .collapsible{
     box-shadow: none;
@@ -88,18 +105,7 @@ i.icon-red {
 /********************************/
 /*      Favorite recipes        */
 /*******************************/
-.favorite__img{
-    min-width: 5em;
-    height: 5em;
-    margin-right: 1em;
-}
-.favorite__list > *{
-    display: flex;
-    margin-bottom: 1em;
-}
-.favorite__title{
-    margin: 0;
-}
+
 /* || Footer */
 
 
