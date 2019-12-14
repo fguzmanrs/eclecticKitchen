@@ -28,6 +28,12 @@ font-family: 'Pacifico', cursive;
     text-align: center;
 }
 
+nav .brand-logo {
+    position: relative;
+    font-family: 'Pacifico', cursive;
+    font-size: 50px;
+}
+
 body {
     background: url("../images/background-board.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -40,6 +46,12 @@ body {
 h4 {
     color: white;
     position: center;
+
+}
+
+h5 {
+    margin-top: 0px;
+    font-family: 'Pacifico', cursive;
 
 }
 
@@ -80,6 +92,20 @@ i.icon-red {
 
 
 /* Recipes */
+
+.col {
+    margin-left: 10%;
+}
+
+.recipe {
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 2px 2px 10px 0px;
+    max-width: 90%;
+}
+
+.icon-heart{
+    display: none;
+}
 
 .collapsible{
     box-shadow: none;
