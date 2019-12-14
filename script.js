@@ -18,9 +18,10 @@ $('document').ready(function () {
     // var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
     // var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
     // var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
-    var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
+    // var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
     // var apiKey = "0421115dd3974c7f9338166f3e907824"; //Emily2
-
+    var apiKey = "955dde8ee0c24570ab9a568cc96a11e5"; //telein.com
+     
     /**********************************/
     /*           EVENT HANDLER        */
     /**********************************/
