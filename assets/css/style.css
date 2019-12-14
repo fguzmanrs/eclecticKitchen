@@ -41,7 +41,7 @@ h1 {
     color: white;
 }
 
-button {
+.btn, #addBtn {
     background-color: #8bc34a;
     color: white;
     position: center;
@@ -57,6 +57,10 @@ button {
 
 /* || Favorites */
 
+i.icon-red {
+    color: red;
+    float: right;
+}
 
 /* || Recipe Generator */
 
