@@ -49,15 +49,17 @@
           <a id="favoriteMenu" class="favorite_list btn modal-trigger waves-effect waves-light" href="#modal-favorite">Favorites
             <svg class="icon icon-heart">
               <use xlink:href="./assets/icons/sprite.svg#icon-heart"></use>
-            </svg></a>
+            </svg>
           </a>
         </div>
 
         <div class="card-content collection">
           <form id="search-card" class="input-field">
 
-              <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="Type ingredient">
-              <span class="validity" hidden></span>
+              <div>
+                  <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="Type ingredient and press enter">
+                  <span class="validity" hidden></span>
+              </div>
               <button id="addBtn" class="">add</button>
 
               <ul id="searchList"></ul>
@@ -115,20 +117,19 @@
   <!-- Materialize Modal for error alert & favorite popup -->
   <div id="modal-alert" class="modal">
     <div class="modal-content">
-      <h4>Oops!</h4>
+      <h4 class="modal-title">Oops!</h4>
       <p id="modal-message"></p>
     </div>
     <div class="modal-footer">
       <a class="modal-close waves-effect waves-green btn-flat">OK</a>
     </div>
+  </div>
 
-    <div id="modal-favorite" class="modal">
-      <div class="modal-content">
-        <h4>My Favorite</h4>
-        <ul id="modal-list"></ul>
-      </div>
+  <div id="modal-favorite" class="modal">
+    <div class="modal-content">
+      <h4 class="modal-title">My Favorite</h4>
+      <ul id="modal-list"></ul>
     </div>
-
   </div>
 
   <!-- jQuery library -->

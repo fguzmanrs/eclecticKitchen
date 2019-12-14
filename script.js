@@ -15,8 +15,8 @@ $('document').ready(function () {
 
     // var apiKey = "d0aef524cfc14d6ba3f35bc68ab620b9"; //FGuzman
     // var apiKey = "06238180649d43e0bffc9f3ac6536dc3"; //HCross
-    var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
-    // var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
+    // var apiKey = "5aac1a10cd874816809acc6f2d2fa006"; //FOrtiz
+    var apiKey = "bb5452cb4b074d1a899410830c863f29"; //Emily
     // var apiKey = "d453036a9eeb46a1b474c7043973a767"; //xapienx.com
     // var apiKey = "f4abc8a8916747b3a3976addc1321ab0"; //birulaplanet.com
     // var apiKey = "0421115dd3974c7f9338166f3e907824"; //Emily2
@@ -88,7 +88,7 @@ $('document').ready(function () {
             renderRecipesList();
 
             //! [For Test] Insert for render test when API keys run out.(saving search result)
-            localStorage.setItem('tempRecipes', JSON.stringify(state.recipes));
+            // localStorage.setItem('tempRecipes', JSON.stringify(state.recipes));
             //! **********************************************************
         }
         else {
@@ -101,6 +101,7 @@ $('document').ready(function () {
     }
     function favoriteMenuHandler() {
 
+        console.log('menu clicked')
         var l = state.likes.length;
 
         $('#modal-list').empty();
@@ -324,7 +325,7 @@ $('document').ready(function () {
         }
     }
     function renderRecipe(obj, i = 0) {
-        //! [For Test] part to comment out when saving API calls
+       
         // check for 'complete' recipe meaning: recipe with preparation steps 
         if (obj.doRender === false) return;
 
@@ -364,7 +365,7 @@ $('document').ready(function () {
                                         
                                     </div> 
                                     <div class="card-reveal">
-                                        <span class="card-title grey-text text-darken-4">How to cook<i class="material-icons right" id="icon-close">x</i></span>
+                                        <span class="card-title grey-text text-darken-4">How to cook<i class="right" id="icon-close">x</i></span>
                                         <p>${li}</p>
                                     </div>
                                 </div>
@@ -424,15 +425,15 @@ $('document').ready(function () {
     function init() {
 
         //![For Test] Insert for render test when API keys run out.(saving search result)
-        $('#modal-list').empty();
-        localStorage.removeItem('likes');
+        // $('#modal-list').empty();
+        // localStorage.removeItem('likes');
 
-        var loadedData = localStorage.getItem('tempRecipes');
+        // var loadedData = localStorage.getItem('tempRecipes');
 
-        if(loadedData){
-            state.recipes = JSON.parse(loadedData);
-            renderRecipesList();
-        }
+        // if(loadedData){
+        //     state.recipes = JSON.parse(loadedData);
+        //     renderRecipesList();
+        // }
         //! ***********************************************************    
 
         // Initiate all Materialize components

@@ -80,39 +80,7 @@ h5 {
     width: auto;
 }
 
-input:invalid+span::after,
-input:valid+span::after{
-    position: absolute;
-    padding-left: 5px;
-    transform: translate(-2em,.7em);
-    color: #fff;
-}
 
-input:invalid+span::after {
-    color: red;
-    content: '✖';
-}
-  
-input:valid+span::after {
-    color: #8bc34a;
-    content: '✓';
-    font-weight: bolder;
-}
-
-/* Favorites */
-
-.favorite__img{
-    min-width: 5em;
-    height: 5em;
-    margin-right: 1em;
-}
-.favorite__list > *{
-    display: flex;
-    margin-bottom: 1em;
-}
-.favorite__title{
-    margin: 0;
-}
 
 
 /* Recipes */
@@ -127,18 +95,9 @@ input:valid+span::after {
     max-width: 90%;
 }
 
-.icon-heart{
+/* .icon-heart{
     display: none;
-}
-
-.collapsible{
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    margin: 0;
-}
-#modal-alert{
-    max-width: 30em;
-}
+} */
 
 #recipes {
     height: auto;
@@ -164,4 +123,76 @@ input:valid+span::after {
 
 .card .card-image img {
     border-radius: 10px 10px 0px 0px;
+}
+/********************************/
+/*      Input Validity Mark     */
+/*******************************/
+
+input:invalid+span::before,
+input:valid+span::before{
+    position: absolute;
+    transform: translate(-1em,1em);
+}
+
+input:invalid+span::before {
+    color: red;
+    content: '✖';
+}
+  
+input:valid+span::before {
+    color: #8bc34a;
+    content: '✓';
+    font-weight: bolder;
+}
+
+/********************************/
+/*    Favorite & Alert Modal    */
+/*******************************/
+
+.favorite__img{
+    min-width: 5em;
+    height: 5em;
+    margin-right: 1em;
+}
+.favorite__list > *{
+    display: flex;
+    margin-bottom: 1em;
+}
+.favorite__title{
+    margin: 0;
+}
+#modal-alert{
+    max-width: 30em;
+}
+.modal-title {
+    color: #8bc34a;
+    margin-bottom: 1em;
+}
+/********************************/
+/* Favorite & Card Reveal icons */
+/*******************************/
+
+.icon {
+    display: inline-block;
+    transform: translateY(6px);
+    width: 1.3em;
+    height: 1.3em;
+    stroke-width: 0;
+    stroke: none;
+    fill: #DD3506;
+    cursor: pointer;
+  }
+
+.icon-cook {
+    width: 1em;
+    height: 1em;
+    stroke: #fff;
+    fill: #fff;
+    margin-bottom: 5px;
+  }
+#icon-close {
+    transform: skewX(15deg);
+    width: 1em;
+    height: 1em;
+    color: black !important;
 }
