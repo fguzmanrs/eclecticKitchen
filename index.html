@@ -25,91 +25,76 @@
 
 <!-- navbar -->
 <header>
-  <nav class="nav-wrapper navbar-fixed z-depth-1">
-    <div class="container">
-      <div class="brand-logo center section">The Eclectic Kitchen</div>
-    </div>
+  <nav class="nav-wrapper z-depth-1">
+    <div class="brand-logo center section">The Eclectic Kitchen</div>
   </nav>
 </header>
 
-<body>
+<body class="row">
 
-  <!-- page layout -->
-  <div class="row">
-    <!-- Ingredient Panel -->
-    <div class="col s4" id="side-panel">
-      <div class="card center">
+  <!-- Ingredient Panel -->
+  <div id="side-panel" class="s12 m6 left">
+    <div class="card large">
 
-        <div class="card-image">
-          <img class="responsive-img"
-            src="https://images.pexels.com/photos/2802527/pexels-photo-2802527.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260">          
-        </div>
-        <div class="card-content collection">
-          <span class="card-title"><h5>Your Kitchen</h5></span>
-          <form id="search-card" class="input-field">
-
-            <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="Type ingredient">
-            <span class="validity" hidden></span>
-            <button id="addBtn" class="">add</button>
-
-            <ul id="searchList"></ul>
-            <button class="btn waves-effect waves-light" id="searchBtn" href="#search">Show me Deliciousness!</button>
-            <a id="favoriteMenu" class="favorite_list btn modal-trigger waves-effect waves-light"
-              href="#modal-favorite">Favorites
-              <svg class="icon icon-heart">
-                <use xlink:href="./assets/icons/sprite.svg#icon-heart"></use>
-              </svg></a>
-          </form>
-        </div>
+      <div class="card-image">
+        <img class="responsive-img"
+          src="assets/images/variety-of-spices-on-spoons-3233275.jpg">
       </div>
-    </div>
 
-    <!-- main content -->
-    <div class="col s8 z-depth-1" id="recipes">
+      <div class="card-content collection">
 
-      <div class="recipe-body">
-        <div class="card">
-          <div class="card-image">
-            <img src="assets/images/-U4wBbx6u0Q.jpg">
-            <span class="card-title">Card Title</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
-          </div>
-          <div class="card-content">
-            <p>I am a very simple card.</p>
-          </div>
-        </div>
+        <span class="card-title"><h5>Your Kitchen</h5></span>
 
-        <div class="card">
-          <div class="card-image">
-            <img src="assets/images/-U4wBbx6u0Q.jpg">
-            <span class="card-title">Card Title</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
-          </div>
-          <div class="card-content">
-            <p>I am a very simple card.</p>
-          </div>
-        </div>
+        <form id="search-card" class="input-field">
 
-        <div class="card">
-          <div class="card-image">
-            <img src="assets/images/-U4wBbx6u0Q.jpg">
-            <span class="card-title">Card Title</span>
-            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
-          </div>
-          <div class="card-content">
-            <p>I am a very simple card.</p>
-          </div>
-        </div>
+          <input type="text" id="inputIng" pattern="[a-zA-Z\s]{2,20}" required placeholder="Type ingredient">
+          <span class="validity" hidden></span>
+          <button id="addBtn" class="">add</button>
+
+          <ul id="searchList"></ul>
+          <button class="btn waves-effect waves-light" id="searchBtn" href="#search">Show me Deliciousness!</button>
+          <a id="favoriteMenu" class="favorite_list btn modal-trigger waves-effect waves-light"
+            href="#modal-favorite">Favorites
+            <svg class="icon icon-heart">
+              <use xlink:href="./assets/icons/sprite.svg#icon-heart"></use>
+            </svg>
+          </a>
+        </form>
       </div>
     </div>
   </div>
 
+  <!-- main content -->
+  <div id="recipes" class="s12 m6 right">
+
+    <div class="recipe-body">
+
+      <div class="card large">
+
+        <div class="card-image">
+          <img src="assets/images/-U4wBbx6u0Q.jpg">
+          <span class="card-title">Card Title</span>
+          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">+</i></a>
+        </div>
+
+        <div class="card-content">
+          <p>I am a very simple card.</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
   <!-- Materialize Modal for error alert & favorite popup -->
   <div id="modal-alert" class="modal">
+
     <div class="modal-content">
       <h4>Oops!</h4>
       <p id="modal-message"></p>
     </div>
+
     <div class="modal-footer">
       <a class="modal-close waves-effect waves-green btn-flat">OK</a>
     </div>

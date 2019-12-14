@@ -29,7 +29,6 @@ nav {
 }
 
 nav .brand-logo {
-    position: relative;
     font-family: 'Pacifico', cursive;
     font-size: 50px;
 }
@@ -46,6 +45,7 @@ body {
 #sidepanel {
     border-radius: 10px 10px 10px 10px;
     box-shadow: 2px 2px 10px 0px;
+    float: left;
 }
 
 h4 {
@@ -70,7 +70,7 @@ h5 {
 
 /* Recipe Generator */
 
-.cover {
+/* .cover {
     object-fit: cover;
 }
 
@@ -78,7 +78,7 @@ h5 {
     max-width: 100%;
     height: auto;
     width: auto;
-}
+} */
 
 input:invalid+span::after,
 input:valid+span::after{
@@ -124,7 +124,7 @@ input:valid+span::after {
 .recipe {
     border-radius: 10px 10px 10px 10px;
     box-shadow: 2px 2px 10px 0px;
-    max-width: 90%;
+    max-width: %;
 }
 
 .icon-heart{
