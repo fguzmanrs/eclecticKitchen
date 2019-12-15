@@ -1,7 +1,7 @@
 # Project 1 - eclecticKitchen: Food App Utilizing APIs.
 Team: Meet The IncrEDIBLES:
 
-* ![picture](assets/images/system/eclecticKitchen.png)
+* ![picture](eclecticKitchen.png)
 
 ## Project Description
 The **eclecticKitchen** App will be for the aspiring cook that needs some help combining ingredients.
