@@ -45,5 +45,5 @@ N/A - Not applicable - No installation required.
 ## Authors
 * **Emily Yu** - *Backend, Core App Concept* - [bluerainmango](https://github.com/bluerainmango)
 * **Fabiola Guzman** - *Froentend, Team Lead* - [fguzmanrs](https://github.com/fguzmanrs)
-* **Francisco Ortiz** - *Backend, QA * - [ffortizn](https://github.com/ffortizn)
+* **Francisco Ortiz** - *Backend, QA* - [ffortizn](https://github.com/ffortizn)
 * **Hayden Cross** - *Frontend, Features Concepts* - [HCross28](https://github.com/HCross28)
